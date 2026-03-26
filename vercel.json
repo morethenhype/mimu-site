@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
-  "routes": [
-    { "src": "/bio", "dest": "/bio-scan-select.html" }
+  "rewrites": [
+    {
+      "source": "/bio",
+      "destination": "/bio-scan-select"
+    }
   ]
 }
