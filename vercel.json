@@ -7,3 +7,7 @@
     }
   ]
 }
+{
+  "source": "/legends",
+  "destination": "/mimu-legends-gallery"
+}
