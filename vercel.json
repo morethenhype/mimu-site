@@ -4,10 +4,10 @@
     {
       "source": "/bio",
       "destination": "/bio-scan-select"
+    },
+    {
+      "source": "/legends",
+      "destination": "/mimu-legends-gallery"
     }
   ]
-}
-{
-  "source": "/legends",
-  "destination": "/mimu-legends-gallery"
 }
