@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MIMU // Bio Scan Select</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg-0:       #060e0a;
+        --bg-panel:   #0a1812;
+        --bg-card:    #0d1f16;
+        --green:      #4aff9a;
+        --green-head: #3de08a;
+        --green-dim:  #2a9962;
+        --text:       #9fd4b8;
+        --text-dim:   #5d957a;
+        --border:     #1a3d2a;
+        --border-hi:  #1f4a32;
+        --font:       'Share Tech Mono', monospace;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--font);
+        background: var(--bg-0);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* scanlines */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent, transparent 3px,
+          rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px
+        );
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.45;
+      }
+
+      /* ── top nav ── */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 28px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-0);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--text-dim);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+      }
+
+      .brand-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 8px var(--green);
+        animation: blink 2.5s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+
+      @keyframes blink {
+        0%,100% { opacity: 1; }
+        50%      { opacity: 0.3; }
+      }
+
+      .back-link {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        color: var(--text-dim);
+        text-decoration: none;
+        border: 1px solid var(--border-hi);
+        padding: 7px 16px;
+        transition: color 0.2s, border-color 0.2s;
+      }
+
+      .back-link:hover { color: var(--green); border-color: var(--green-dim); }
+
+      /* ── page wrapper ── */
+      .page {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 24px 64px;
+      }
+
+      /* ── shared section block ── */
+      .section {
+        border: 1px solid var(--border);
+        background: var(--bg-panel);
+        margin-top: 20px;
+        padding: 28px 28px 32px;
+      }
+
+      .section-eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--text-dim);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        font-size: 20px;
+        letter-spacing: 0.18em;
+        color: var(--green-head);
+        margin-bottom: 22px;
+        text-transform: uppercase;
+      }
+
+      /* ── standard card ── */
+      .card {
+        border: 1px solid var(--border-hi);
+        background: var(--bg-card);
+        padding: 18px 20px;
+        margin-bottom: 8px;
+      }
+      .card:last-child { margin-bottom: 0; }
+
+      .card-title {
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        color: var(--green);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .card-body {
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--text);
+      }
+
+      /* ── lore prose ── */
+      .lore-intro {
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--text);
+        margin-bottom: 16px;
+      }
+
+      /* ── roadmap phases ── */
+      .phase-row {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        border: 1px solid var(--border-hi);
+        background: var(--bg-card);
+        margin-bottom: 8px;
+      }
+      .phase-row:last-child { margin-bottom: 0; }
+
+      .phase-label {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        color: var(--text-dim);
+        padding: 18px 16px;
+        border-right: 1px solid var(--border-hi);
+        display: flex;
+        align-items: flex-start;
+        white-space: nowrap;
+        text-transform: uppercase;
+      }
+
+      .phase-content { padding: 18px 20px; }
+
+      .phase-title {
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        color: var(--green);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .phase-desc {
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--text);
+      }
+
+      /* ── 3-col grid ── */
+      .col3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      /* ── team cards ── */
+      .team-card {
+        border: 1px solid var(--border-hi);
+        background: var(--bg-card);
+        padding: 18px 20px;
+      }
+
+      .team-role {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--text-dim);
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+
+      .team-name {
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        color: var(--green);
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+
+      .team-handle {
+        font-size: 12px;
+        color: var(--text-dim);
+        margin-bottom: 10px;
+        letter-spacing: 0.06em;
+        display: block;
+      }
+
+      .team-bio {
+        font-size: 12px;
+        line-height: 1.65;
+        color: var(--text);
+      }
+
+      /* ── mint detail cards ── */
+      .mint-card {
+        border: 1px solid var(--border-hi);
+        background: var(--bg-card);
+        padding: 18px 20px;
+      }
+
+      .mint-key {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--text-dim);
+        margin-bottom: 7px;
+        text-transform: uppercase;
+      }
+
+      .mint-val {
+        font-size: 13px;
+        line-height: 1.65;
+        color: var(--text);
+      }
+
+      .mint-val strong {
+        color: var(--green);
+        font-weight: normal;
+      }
+
+      /* ── responsive ── */
+      @media (max-width: 760px) {
+        .col3 { grid-template-columns: 1fr; }
+        .phase-row { grid-template-columns: 1fr; }
+        .phase-label { border-right: none; border-bottom: 1px solid var(--border-hi); }
+        .section { padding: 20px 16px 24px; }
+        .topbar { padding: 12px 16px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav class="topbar">
+      <a href="index.html" class="brand">
+        <span class="brand-dot"></span>
+        MIMU // BIO SCAN SELECT
+      </a>
+      <a href="index.html" class="back-link">← HOME</a>
+    </nav>
+
+    <div class="page">
+
+      <!-- ══ LORE ══ -->
+      <div class="section">
+        <div class="section-eyebrow">ARCHIVE FILE // LORE</div>
+        <div class="section-title">SIGNAL ORIGIN</div>
+
+        <p class="lore-intro">MIMU began as a dormant bio-signal hidden behind fragmented transmissions, sealed inside an encrypted egg chamber and buried inside a corrupted control system. Every unlock sequence, trace command, and genome fragment reveals another layer of a living intelligence waking up inside the network.</p>
+        <p class="lore-intro">Born as translucent beings, MIMUs enter existence as blank echoes of potential — soft, glowing silhouettes drifting between dimensions. They have no fixed identity, no set form, no predetermined fate. But that changes the moment they begin to explore. Every interaction leaves a mark. Every environment writes a piece of who they become. No two MIMUs are ever the same.</p>
+
+        <div class="card">
+          <div class="card-title">THE CHAMBER</div>
+          <div class="card-body">A sealed incubation node where the first MIMU signal was detected. Only verified users can push the chamber beyond standby mode.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">THE SIGNAL</div>
+          <div class="card-body">A repeating anomaly that appears as biological data wrapped in machine code, suggesting MIMU is both lifeform and protocol.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">THE AWAKENING</div>
+          <div class="card-body">Each community action unlocks another sequence, bringing the chamber closer to fracture, reveal, and full chain activation.</div>
+        </div>
+      </div>
+
+      <!-- ══ ROADMAP ══ -->
+      <div class="section">
+        <div class="section-eyebrow">MISSION LOG // ROADMAP</div>
+        <div class="section-title">ACTIVATION TIMELINE</div>
+
+        <div class="phase-row">
+          <div class="phase-label">PHASE 01</div>
+          <div class="phase-content">
+            <div class="phase-title">SIGNAL DISCOVERY</div>
+            <div class="phase-desc">Launch teaser drops, ARG clues, access terminal rollout, and GTD hunt activation across community channels.</div>
+          </div>
+        </div>
+
+        <div class="phase-row">
+          <div class="phase-label">PHASE 02</div>
+          <div class="phase-content">
+            <div class="phase-title">GENOME DECRYPT</div>
+            <div class="phase-desc">Reveal deeper lore, unlock egg-stage interactions, expand puzzles, and activate whitelist or GTD verification logic.</div>
+          </div>
+        </div>
+
+        <div class="phase-row">
+          <div class="phase-label">PHASE 03</div>
+          <div class="phase-content">
+            <div class="phase-title">MINT INITIATION</div>
+            <div class="phase-desc">Open mint access, connect wallets, verify allocations, and transform the terminal from discovery mode into mint mode.</div>
+          </div>
+        </div>
+
+        <div class="phase-row">
+          <div class="phase-label">PHASE 04</div>
+          <div class="phase-content">
+            <div class="phase-title">POST-MINT EXPANSION</div>
+            <div class="phase-desc">Progress into reveal experiences, faction systems, holder-only access, missions, and future ecosystem layers.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ FAQ ══ -->
+      <div class="section">
+        <div class="section-eyebrow">SYSTEM QUERIES // FAQ</div>
+        <div class="section-title">FREQUENTLY ASKED QUESTIONS</div>
+
+        <div class="card">
+          <div class="card-title">WHAT IS MIMU?</div>
+          <div class="card-body">MIMU is a lore-driven collectible experience wrapped in an ARG-style terminal interface with staged unlocks, hidden signals, and a mint reveal sequence.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">HOW DO I ACCESS MINT?</div>
+          <div class="card-body">You will need to connect the wallet associated to your GTD spot to unlock mint phase.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">WHAT IS THE MINT DATE?</div>
+          <div class="card-body">April 13, 2026 at 11:00 AM ET. GTD holders receive priority allocation access.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">WHAT TYPE OF WALLET CAN BE USED?</div>
+          <div class="card-body">This mint will be EVM and on APE. You will need $APE to be able to pay for gas fees.</div>
+        </div>
+      </div>
+
+      <!-- ══ TEAM ══ -->
+      <div class="section">
+        <div class="section-eyebrow">OPERATOR INDEX // TEAM</div>
+        <div class="section-title">CORE PERSONNEL</div>
+
+        <div class="col3">
+          <div class="team-card">
+            <div class="team-role">FOUNDER</div>
+            <div class="team-name">HYPE</div>
+            <span class="team-handle">@morethenhype</span>
+            <div class="team-bio">Architect of the MIMU brand with extensive experience in web3 as a founder for over 4 years.</div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-role">2D ARTIST</div>
+            <div class="team-name">JOUBREL</div>
+            <span class="team-handle">@iamMRJOUBREL</span>
+            <div class="team-bio">2D visual architect behind the MIMU aesthetic, creature design, and signal imagery.</div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-role">3D ARTIST</div>
+            <div class="team-name">DITTO</div>
+            <span class="team-handle">@dittxr</span>
+            <div class="team-bio">Responsible for the 3D MIMU creation. An extensive background in 3D modeling and producing various other collections in the ApeChain ecosystem.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ MINT DETAILS ══ -->
+      <div class="section">
+        <div class="section-eyebrow">CHAIN ACCESS // MINT</div>
+        <div class="section-title">MINT DETAILS</div>
+
+        <div class="col3">
+          <div class="mint-card">
+            <div class="mint-key">SUPPLY</div>
+            <div class="mint-val"><strong>5,555</strong> unique MIMU entities sealed in the egg chamber.</div>
+          </div>
+
+          <div class="mint-card">
+            <div class="mint-key">PRICE</div>
+            <div class="mint-val"><strong>Free Mint</strong> — GTD holders receive priority access to allocation.</div>
+          </div>
+
+          <div class="mint-card">
+            <div class="mint-key">CHAIN</div>
+            <div class="mint-val"><strong>ApeChain.</strong> Wallet connect integration ready to activate.</div>
+          </div>
+        </div>
+
+        <div style="height:8px;"></div>
+
+        <div class="col3">
+          <div class="mint-card">
+            <div class="mint-key">START DATE</div>
+            <div class="mint-val"><strong>April 13, 2026</strong></div>
+          </div>
+
+          <div class="mint-card">
+            <div class="mint-key">START TIME</div>
+            <div class="mint-val"><strong>11:00 AM ET</strong></div>
+          </div>
+
+          <div class="mint-card">
+            <div class="mint-key">STATUS</div>
+            <div class="mint-val"><strong>PENDING ACTIVATION</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
