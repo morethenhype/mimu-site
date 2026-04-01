@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MIMU // Countdown Gateway</title>
+    <title>MIMU // Legends — 1 of 1 Collection</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -20,7 +20,6 @@
         --muted-hi: rgba(211, 255, 232, 0.72);
         --line: rgba(120, 255, 191, 0.13);
         --line-hi: rgba(120, 255, 191, 0.22);
-        --panel: rgba(4, 14, 10, 0.85);
         --font-mono: 'Share Tech Mono', monospace;
         --font-display: 'Bebas Neue', sans-serif;
         --font-body: 'DM Sans', sans-serif;
@@ -37,24 +36,16 @@
         overflow-x: hidden;
       }
 
-      /* ── Scanlines overlay ── */
       body::after {
         content: "";
         position: fixed;
         inset: 0;
-        background: repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 3px,
-          rgba(0,0,0,0.18) 3px,
-          rgba(0,0,0,0.18) 4px
-        );
+        background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.18) 3px, rgba(0,0,0,0.18) 4px);
         pointer-events: none;
         z-index: 1000;
         opacity: 0.45;
       }
 
-      /* ── Noise grain ── */
       body::before {
         content: "";
         position: fixed;
@@ -69,25 +60,24 @@
       }
 
       @keyframes grain {
-        0%   { transform: translate(0, 0); }
-        10%  { transform: translate(-3%, -4%); }
-        20%  { transform: translate(-6%, 2%); }
-        30%  { transform: translate(3%, -1%); }
-        40%  { transform: translate(-1%, 5%); }
-        50%  { transform: translate(-5%, 1%); }
-        60%  { transform: translate(2%, -4%); }
-        70%  { transform: translate(-2%, 6%); }
-        80%  { transform: translate(4%, 3%); }
-        90%  { transform: translate(-3%, -3%); }
-        100% { transform: translate(0, 0); }
+        0%   { transform: translate(0,0); }
+        10%  { transform: translate(-3%,-4%); }
+        20%  { transform: translate(-6%,2%); }
+        30%  { transform: translate(3%,-1%); }
+        40%  { transform: translate(-1%,5%); }
+        50%  { transform: translate(-5%,1%); }
+        60%  { transform: translate(2%,-4%); }
+        70%  { transform: translate(-2%,6%); }
+        80%  { transform: translate(4%,3%); }
+        90%  { transform: translate(-3%,-3%); }
+        100% { transform: translate(0,0); }
       }
 
-      /* ── Page wrapper ── */
       .page {
         min-height: 100vh;
         padding: 20px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         background:
           radial-gradient(ellipse 60% 40% at 50% -10%, rgba(120,255,191,0.09) 0%, transparent 70%),
@@ -96,17 +86,11 @@
           linear-gradient(170deg, var(--bg-3) 0%, var(--bg-2) 35%, var(--bg-1) 70%, var(--bg-0) 100%);
       }
 
-      /* ── Shell ── */
       .shell {
         width: min(1340px, 100%);
-        min-height: calc(100vh - 40px);
         border-radius: 24px;
         border: 1px solid var(--line);
-        background: linear-gradient(170deg,
-          rgba(5, 18, 12, 0.97) 0%,
-          rgba(2, 9, 6, 0.96) 50%,
-          rgba(1, 5, 3, 0.97) 100%
-        );
+        background: linear-gradient(170deg, rgba(5,18,12,0.97) 0%, rgba(2,9,6,0.96) 50%, rgba(1,5,3,0.97) 100%);
         overflow: hidden;
         position: relative;
         display: flex;
@@ -119,7 +103,6 @@
         to   { opacity: 1; transform: none; }
       }
 
-      /* inner bevel */
       .shell::before {
         content: "";
         position: absolute;
@@ -130,7 +113,6 @@
         z-index: 1;
       }
 
-      /* corner glows */
       .shell::after {
         content: "";
         position: absolute;
@@ -141,7 +123,6 @@
         z-index: 0;
       }
 
-      /* ── Grid background ── */
       .grid-bg {
         position: absolute;
         inset: 0;
@@ -164,7 +145,7 @@
         gap: 16px;
         padding: 18px 28px;
         border-bottom: 1px solid var(--line);
-        background: rgba(2, 10, 6, 0.7);
+        background: rgba(2,10,6,0.7);
         backdrop-filter: blur(6px);
         animation: barIn 0.8s 0.2s ease both;
       }
@@ -211,8 +192,8 @@
       }
 
       @keyframes pulse {
-        0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(120,255,191,0.9), 0 0 20px rgba(120,255,191,0.4); }
-        50%       { opacity: 0.5; box-shadow: 0 0 4px rgba(120,255,191,0.4); }
+        0%,100% { opacity: 1; box-shadow: 0 0 10px rgba(120,255,191,0.9), 0 0 20px rgba(120,255,191,0.4); }
+        50%      { opacity: 0.5; box-shadow: 0 0 4px rgba(120,255,191,0.4); }
       }
 
       .status-tag {
@@ -229,45 +210,46 @@
       .status-tag::before {
         content: "";
         display: block;
-        width: 5px;
-        height: 5px;
+        width: 5px; height: 5px;
         border-radius: 50%;
         background: var(--green-dim);
         box-shadow: 0 0 6px var(--green-dim);
         animation: pulse 3s 1s ease-in-out infinite;
       }
 
-      /* ── Hero ── */
-      .hero {
-        flex: 1;
-        display: grid;
-        place-items: center;
-        padding: 40px 24px 48px;
+      /* ── HUD corners ── */
+      .hud-corner { position: absolute; width: 24px; height: 24px; z-index: 5; opacity: 0.5; }
+      .hud-corner svg { width: 100%; height: 100%; }
+      .hud-tl { top: 80px; left: 16px; }
+      .hud-tr { top: 80px; right: 16px; transform: scaleX(-1); }
+      .hud-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+      .hud-br { bottom: 16px; right: 16px; transform: scale(-1); }
+
+      /* ── Gallery section ── */
+      .gallery-section {
         position: relative;
         z-index: 2;
+        padding: 52px 36px 64px;
+        flex: 1;
       }
 
-      .center {
-        width: min(960px, 100%);
+      .section-header {
         text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
+        margin-bottom: 44px;
       }
 
-      /* ── Eyebrow ── */
       .eyebrow {
         font-family: var(--font-mono);
         font-size: 10.5px;
         letter-spacing: 0.36em;
         text-transform: uppercase;
         color: var(--muted);
-        margin-bottom: 20px;
-        animation: fadeUp 0.7s 0.5s ease both;
+        margin-bottom: 16px;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 12px;
+        animation: fadeUp 0.7s 0.4s ease both;
       }
 
       .eyebrow::before, .eyebrow::after {
@@ -277,498 +259,2294 @@
         width: 40px;
         background: linear-gradient(90deg, transparent, var(--line-hi));
       }
-      .eyebrow::after {
-        background: linear-gradient(270deg, transparent, var(--line-hi));
-      }
+      .eyebrow::after { background: linear-gradient(270deg, transparent, var(--line-hi)); }
 
       @keyframes fadeUp {
         from { opacity: 0; transform: translateY(16px); }
         to   { opacity: 1; transform: none; }
       }
 
-      /* ── Title ── */
-      .hero-title {
+      .section-title {
         font-family: var(--font-display);
-        font-size: clamp(5.5rem, 14vw, 11.5rem);
+        font-size: clamp(3.5rem, 8vw, 7rem);
         line-height: 0.88;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         margin-bottom: 10px;
-        position: relative;
-        animation: titleIn 0.9s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
         background: linear-gradient(170deg, #fff 0%, var(--green-soft) 40%, var(--green) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        filter: drop-shadow(0 0 28px rgba(120,255,191,0.18));
+        filter: drop-shadow(0 0 24px rgba(120,255,191,0.18));
+        animation: titleIn 0.9s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
       }
 
       @keyframes titleIn {
-        from { opacity: 0; transform: translateY(32px) scaleY(0.92); }
+        from { opacity: 0; transform: translateY(28px) scaleY(0.9); }
         to   { opacity: 1; transform: none; }
       }
 
-      .hero-subtitle {
+      .section-sub {
         font-family: var(--font-display);
-        font-size: clamp(1.4rem, 3.2vw, 2.6rem);
-        letter-spacing: 0.28em;
+        font-size: clamp(1rem, 2.2vw, 1.8rem);
+        letter-spacing: 0.32em;
         color: var(--green-dim);
         text-transform: uppercase;
-        margin-bottom: 36px;
-        animation: fadeUp 0.7s 0.8s ease both;
-        text-shadow: 0 0 16px rgba(61,204,136,0.4);
+        text-shadow: 0 0 14px rgba(61,204,136,0.4);
+        animation: fadeUp 0.7s 0.75s ease both;
       }
 
-      /* ── Divider ── */
       .divider {
         width: 100%;
-        max-width: 560px;
+        max-width: 500px;
         height: 1px;
         background: linear-gradient(90deg, transparent, var(--line-hi) 20%, var(--green) 50%, var(--line-hi) 80%, transparent);
-        margin-bottom: 32px;
+        margin: 22px auto 0;
         animation: fadeUp 0.6s 0.9s ease both;
       }
 
-      /* ── Countdown ── */
-      .countdown-wrap {
-        width: min(860px, 100%);
-        margin-bottom: 32px;
-        padding: 28px 28px 24px;
-        border-radius: 20px;
-        border: 1px solid var(--line-hi);
-        background: linear-gradient(160deg,
-          rgba(10, 28, 20, 0.9) 0%,
-          rgba(4, 14, 10, 0.88) 100%
-        );
-        position: relative;
-        overflow: hidden;
-        animation: fadeUp 0.8s 1s ease both;
+      /* ── Stats row ── */
+      .stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.6s 1s ease both;
       }
 
-      /* corner accent */
-      .countdown-wrap::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0;
-        width: 80px; height: 80px;
-        background: radial-gradient(circle at top left, rgba(120,255,191,0.08), transparent 70%);
-        pointer-events: none;
-      }
-      .countdown-wrap::after {
-        content: "";
-        position: absolute;
-        bottom: 0; right: 0;
-        width: 80px; height: 80px;
-        background: radial-gradient(circle at bottom right, rgba(120,255,191,0.06), transparent 70%);
-        pointer-events: none;
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 12px 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(6,18,12,0.7);
+        min-width: 90px;
       }
 
-      .countdown-label {
+      .stat-val {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        letter-spacing: 0.06em;
+        background: linear-gradient(160deg, #fff 0%, var(--green) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-lbl {
         font-family: var(--font-mono);
-        font-size: 10px;
-        letter-spacing: 0.32em;
+        font-size: 8.5px;
+        letter-spacing: 0.26em;
         text-transform: uppercase;
         color: var(--muted);
-        margin-bottom: 20px;
+      }
+
+      /* ── Filter bar ── */
+      .filter-bar {
         display: flex;
-        align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.6s 1.05s ease both;
       }
 
-      .countdown-label::before, .countdown-label::after {
-        content: "";
-        display: block;
-        height: 1px;
-        width: 28px;
-        background: var(--line-hi);
+      .filter-btn {
+        appearance: none;
+        border: 1px solid var(--line-hi);
+        border-radius: 999px;
+        padding: 8px 20px;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: rgba(6,18,12,0.7);
+        cursor: pointer;
+        transition: all 0.2s ease;
       }
 
-      .countdown {
+      .filter-btn:hover, .filter-btn.active {
+        border-color: rgba(120,255,191,0.4);
+        color: var(--green-soft);
+        background: rgba(14,40,26,0.85);
+        box-shadow: 0 0 18px rgba(120,255,191,0.08);
+      }
+
+      .filter-btn.active {
+        box-shadow: 0 0 22px rgba(120,255,191,0.13), inset 0 0 10px rgba(120,255,191,0.04);
+      }
+
+      /* ── Gallery grid ── */
+      .gallery-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+        animation: fadeUp 0.7s 1.1s ease both;
       }
 
-      .time-box {
+      /* ── Card ── */
+      .card {
         border: 1px solid var(--line);
-        border-radius: 16px;
-        background: linear-gradient(160deg, rgba(8,24,16,0.7), rgba(2,10,6,0.8));
-        padding: 28px 10px 20px;
-        position: relative;
+        border-radius: 20px;
+        background: linear-gradient(160deg, rgba(6,20,13,0.92) 0%, rgba(2,8,5,0.95) 100%);
         overflow: hidden;
-        transition: border-color 0.3s;
+        position: relative;
+        cursor: pointer;
+        transition: border-color 0.3s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
       }
 
-      .time-box::before {
+      .card::before {
         content: "";
         position: absolute;
         top: 0; left: 10%; right: 10%;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(120,255,191,0.3), transparent);
+        background: linear-gradient(90deg, transparent, rgba(120,255,191,0.2), transparent);
+        pointer-events: none;
       }
 
-      .time-box:hover {
-        border-color: var(--line-hi);
+      .card:hover {
+        border-color: rgba(120,255,191,0.32);
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 32px rgba(120,255,191,0.07);
       }
 
-      .time-value {
-        font-family: var(--font-display);
-        font-size: clamp(2.8rem, 6vw, 5rem);
-        line-height: 1;
-        letter-spacing: 0.04em;
-        margin-bottom: 10px;
-        background: linear-gradient(170deg, #fff 0%, var(--green-soft) 60%, var(--green) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 12px rgba(120,255,191,0.25));
+      /* ── Image area ── */
+      .card-img {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background: #000;
+        overflow: hidden;
       }
 
-      .time-label {
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.55s ease, filter 0.4s ease;
+        filter: saturate(0.92) brightness(0.97);
+      }
+
+      .card:hover .card-img img {
+        transform: scale(1.05);
+        filter: saturate(1.06) brightness(1.02);
+      }
+
+      /* subtle vignette on image */
+      .card-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.35) 100%);
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .card:hover .card-img::after { opacity: 0.5; }
+
+      .edition-badge {
+        position: absolute;
+        top: 11px;
+        right: 11px;
         font-family: var(--font-mono);
-        font-size: 9.5px;
-        letter-spacing: 0.28em;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--green);
+        background: rgba(0,8,4,0.85);
+        border: 1px solid rgba(120,255,191,0.3);
+        border-radius: 999px;
+        padding: 4px 10px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 14px rgba(120,255,191,0.18);
+        z-index: 2;
+      }
+
+      .legend-badge {
+        position: absolute;
+        top: 11px;
+        left: 11px;
+        font-family: var(--font-mono);
+        font-size: 8px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255,220,100,0.9);
+        background: rgba(0,5,2,0.85);
+        border: 1px solid rgba(255,200,50,0.25);
+        border-radius: 999px;
+        padding: 4px 9px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 10px rgba(255,200,50,0.12);
+        z-index: 2;
+      }
+
+      /* ── Card body ── */
+      .card-body {
+        padding: 16px 17px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        flex: 1;
+      }
+
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .card-name {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        letter-spacing: 0.05em;
+        color: var(--green-soft);
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .card-id {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        color: var(--muted);
+        text-transform: uppercase;
+        white-space: nowrap;
+        padding-top: 3px;
+      }
+
+      .card-desc {
+        font-family: var(--font-body);
+        font-size: 11.5px;
+        line-height: 1.6;
+        color: rgba(211,255,232,0.48);
+        font-weight: 300;
+      }
+
+      .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .tag {
+        font-family: var(--font-mono);
+        font-size: 8.5px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--green-dim);
+        border: 1px solid rgba(61,204,136,0.18);
+        border-radius: 5px;
+        padding: 2px 7px;
+        background: rgba(61,204,136,0.04);
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+      }
+
+      .card-status {
+        font-family: var(--font-mono);
+        font-size: 8.5px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .card-status::before {
+        content: "";
+        display: block;
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: var(--green-dim);
+        box-shadow: 0 0 6px var(--green-dim);
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      .card-arrow {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        color: var(--green-dim);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s, gap 0.2s;
+        text-transform: uppercase;
+      }
+
+      .card:hover .card-arrow {
+        color: var(--green);
+        gap: 7px;
+      }
+
+      /* ── Lightbox ── */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(0,4,2,0.95);
+        backdrop-filter: blur(20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .lb-inner {
+        position: relative;
+        width: min(960px, 100%);
+        border: 1px solid var(--line-hi);
+        border-radius: 24px;
+        background: linear-gradient(160deg, rgba(5,16,10,0.99), rgba(1,5,3,0.99));
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        transform: scale(0.95) translateY(12px);
+        transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+        max-height: 88vh;
+      }
+
+      .lightbox.open .lb-inner { transform: none; }
+
+      .lb-img {
+        background: #000;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .lb-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .lb-info {
+        padding: 40px 36px 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        overflow-y: auto;
+      }
+
+      .lb-id {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.3em;
         text-transform: uppercase;
         color: var(--muted);
       }
 
-      /* ── Actions ── */
-      .actions {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 24px;
-        animation: fadeUp 0.7s 1.2s ease both;
+      .lb-legend-tag {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        color: rgba(255,210,80,0.85);
+        border: 1px solid rgba(255,200,50,0.22);
+        border-radius: 999px;
+        padding: 5px 14px;
+        display: inline-block;
+        background: rgba(255,200,50,0.04);
+        box-shadow: 0 0 12px rgba(255,200,50,0.08);
+        text-transform: uppercase;
       }
 
-      .btn {
-        appearance: none;
-        border-radius: 999px;
-        padding: 14px 30px;
-        font-family: var(--font-mono);
-        font-size: 11px;
-        letter-spacing: 0.2em;
+      .lb-name {
+        font-family: var(--font-display);
+        font-size: clamp(2.4rem, 4vw, 3.8rem);
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        position: relative;
+        line-height: 0.9;
+        background: linear-gradient(160deg, #fff 0%, var(--green-soft) 50%, var(--green) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .lb-edition {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        color: var(--green);
+        border: 1px solid rgba(120,255,191,0.25);
+        border-radius: 999px;
+        padding: 5px 14px;
+        display: inline-block;
+        box-shadow: 0 0 12px rgba(120,255,191,0.1);
+        text-transform: uppercase;
+      }
+
+      .lb-desc {
+        font-family: var(--font-body);
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--muted-hi);
+        font-weight: 300;
+      }
+
+      .lb-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(3,12,8,0.7);
         overflow: hidden;
       }
 
-      .btn::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(120deg, transparent 30%, rgba(120,255,191,0.08) 50%, transparent 70%);
-        transform: translateX(-100%);
-        transition: transform 0.5s ease;
+      .meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 11px 16px;
+        border-bottom: 1px solid var(--line);
       }
 
-      .btn:hover::after {
-        transform: translateX(100%);
-      }
+      .meta-row:last-child { border-bottom: none; }
 
-      .btn-primary {
-        border: 1px solid rgba(120,255,191,0.3);
-        background: linear-gradient(160deg,
-          rgba(30, 84, 58, 0.9) 0%,
-          rgba(14, 46, 30, 0.95) 100%
-        );
-        color: var(--green-soft);
-        box-shadow: 0 0 20px rgba(120,255,191,0.1), inset 0 1px 0 rgba(120,255,191,0.12);
-      }
-
-      .btn-primary:hover {
-        border-color: rgba(120,255,191,0.5);
-        box-shadow: 0 0 30px rgba(120,255,191,0.18), inset 0 1px 0 rgba(120,255,191,0.16);
-        transform: translateY(-1px);
-      }
-
-      .btn-secondary {
-        border: 1px solid var(--line-hi);
-        background: rgba(6, 18, 12, 0.8);
-        color: var(--muted-hi);
-      }
-
-      .btn-secondary:hover {
-        border-color: rgba(120,255,191,0.28);
-        color: var(--green-soft);
-        transform: translateY(-1px);
-      }
-
-      /* ── Status note ── */
-      .note {
+      .meta-k {
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        color: rgba(211,255,232,0.4);
-        animation: fadeUp 0.6s 1.4s ease both;
-        transition: color 0.4s;
+        color: var(--muted);
       }
 
-      .note.denied {
-        color: #ff4d63;
-        text-shadow: 0 0 10px rgba(255,77,99,0.4);
+      .meta-v {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: var(--green-soft);
       }
 
-      /* ── Corner HUD elements ── */
-      .hud-corner {
+      .lb-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .lb-close {
         position: absolute;
-        width: 24px;
-        height: 24px;
-        z-index: 5;
-        opacity: 0.5;
+        top: 14px; right: 14px;
+        width: 34px; height: 34px;
+        border: 1px solid var(--line-hi);
+        border-radius: 50%;
+        background: rgba(2,10,6,0.85);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        color: var(--muted);
+        font-size: 16px;
+        z-index: 10;
+        line-height: 1;
       }
 
-      .hud-corner svg { width: 100%; height: 100%; }
+      .lb-close:hover {
+        border-color: rgba(120,255,191,0.4);
+        color: var(--green-soft);
+        box-shadow: 0 0 14px rgba(120,255,191,0.1);
+      }
 
-      .hud-tl { top: 80px; left: 16px; }
-      .hud-tr { top: 80px; right: 16px; transform: scaleX(-1); }
-      .hud-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
-      .hud-br { bottom: 16px; right: 16px; transform: scale(-1); }
+      /* ── Footer ── */
+      .gallery-footer {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 15px 28px;
+        border-top: 1px solid var(--line);
+        background: rgba(2,10,6,0.7);
+        backdrop-filter: blur(6px);
+        flex-wrap: wrap;
+      }
+
+      .footer-text {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(211,255,232,0.3);
+      }
+
+      .footer-count {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        color: var(--muted);
+      }
 
       /* ── Responsive ── */
       @media (max-width: 860px) {
         .page { padding: 10px; }
-        .shell { min-height: calc(100vh - 20px); border-radius: 18px; }
+        .shell { border-radius: 18px; }
         .topbar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 20px; }
-        .countdown { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-        .hero { padding: 28px 16px 36px; }
-        .countdown-wrap { padding: 20px 16px; }
+        .gallery-section { padding: 28px 16px 40px; }
+        .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .lb-inner { grid-template-columns: 1fr; }
+        .lb-img { max-height: 300px; }
         .hud-corner { display: none; }
       }
 
       @media (max-width: 480px) {
-        .hero-title { letter-spacing: 0.04em; }
-        .hero-subtitle { letter-spacing: 0.18em; }
-        .btn { padding: 13px 22px; font-size: 10px; }
+        .gallery-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+        .lb-info { padding: 22px 18px; }
       }
 
-      /* ── Easter Egg Trigger ── */
-      .egg-trigger {
+      /* ═══════════════════════════════════════════
+         REVEAL SYSTEM
+      ═══════════════════════════════════════════ */
+
+      /* Unrevealed card overlay */
+      .card.locked .card-img img { filter: blur(18px) brightness(0.15) saturate(0); pointer-events: none; }
+      .card.locked .card-img::before {
+        content: "";
         position: absolute;
-        bottom: 22px;
-        right: 22px;
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-        z-index: 20;
-        opacity: 0.09;
-        transition: opacity 0.4s ease;
-        user-select: none;
-      }
-      .egg-trigger:hover {
-        opacity: 0.22;
-      }
-      .egg-trigger svg {
-        width: 100%;
-        height: 100%;
-      }
-      /* tiny pip that brightens as clicks accumulate */
-      .egg-trigger.warm-1 { opacity: 0.2; }
-      .egg-trigger.warm-2 { opacity: 0.32; }
-      .egg-trigger.warm-3 { opacity: 0.48; animation: eggPulse 0.8s ease-in-out infinite; }
-      .egg-trigger.warm-4 { opacity: 0.72; animation: eggPulse 0.4s ease-in-out infinite; }
-      @keyframes eggPulse {
-        0%,100% { filter: drop-shadow(0 0 4px rgba(120,255,191,0.4)); }
-        50%      { filter: drop-shadow(0 0 12px rgba(120,255,191,0.9)); }
-      }
-
-      /* ── Glitch unlock overlay ── */
-      .glitch-overlay {
-        display: none;
-        position: fixed;
         inset: 0;
-        background: #000a05;
-        z-index: 2000;
+        background: rgba(0,5,3,0.55);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .card.locked { cursor: default; }
+      .card.locked:hover { transform: none; box-shadow: none; border-color: var(--line); }
+      .card.locked .card-arrow { display: none; }
+
+      /* Lock overlay panel */
+      .lock-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        gap: 16px;
-        font-family: var(--font-mono);
-        color: var(--green);
+        gap: 8px;
+        pointer-events: none;
       }
-      .glitch-overlay.active { display: flex; }
-      .glitch-text {
-        font-size: clamp(1rem, 3vw, 1.6rem);
+
+      .lock-icon {
+        width: 36px; height: 36px;
+        opacity: 0.7;
+      }
+
+      .lock-label {
+        font-family: var(--font-mono);
+        font-size: 9px;
         letter-spacing: 0.3em;
         text-transform: uppercase;
-        animation: glitchFlicker 0.06s steps(1) infinite;
-      }
-      @keyframes glitchFlicker {
-        0%   { opacity: 1;   transform: translate(0,0) skewX(0deg); color: var(--green); }
-        15%  { opacity: 0.4; transform: translate(-3px, 1px) skewX(-1deg); color: #ff4d63; }
-        30%  { opacity: 1;   transform: translate(2px, -1px) skewX(0.5deg); color: var(--green); }
-        50%  { opacity: 0.7; transform: translate(-1px, 2px) skewX(1deg); color: #fff; }
-        70%  { opacity: 1;   transform: translate(0,0) skewX(0deg); color: var(--green); }
-        85%  { opacity: 0.3; transform: translate(3px, 0px) skewX(-0.5deg); color: #ff4d63; }
-        100% { opacity: 1;   transform: translate(0,0) skewX(0deg); color: var(--green); }
-      }
-      .glitch-bar {
-        width: min(300px, 80vw);
-        height: 2px;
-        background: var(--line);
-        border-radius: 2px;
-        overflow: hidden;
-        position: relative;
-      }
-      .glitch-bar-fill {
-        height: 100%;
-        width: 0%;
-        background: var(--green);
-        box-shadow: 0 0 10px rgba(120,255,191,0.8);
-        transition: width 0.05s linear;
+        color: rgba(120,255,191,0.55);
       }
 
-      /* ── Legendaries Page ── */
-      .legendaries-page {
-        display: none;
+      .lock-countdown {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+        color: var(--green);
+        text-shadow: 0 0 14px rgba(120,255,191,0.5);
+        line-height: 1;
+      }
+
+      .lock-sub {
+        font-family: var(--font-mono);
+        font-size: 8px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(120,255,191,0.35);
+      }
+
+      /* Blurred name/desc for locked cards */
+      .card.locked .card-name { filter: blur(5px); user-select: none; }
+      .card.locked .card-desc { filter: blur(4px); user-select: none; }
+      .card.locked .card-tags { filter: blur(3px); user-select: none; }
+      .card.locked .card-id   { filter: blur(4px); user-select: none; }
+
+      /* Reveal animation */
+      @keyframes revealFlash {
+        0%   { filter: blur(18px) brightness(0.15) saturate(0); }
+        30%  { filter: blur(8px) brightness(0.6) saturate(0.3); }
+        60%  { filter: blur(3px) brightness(1.1) saturate(0.8); }
+        100% { filter: blur(0px) brightness(1) saturate(1); }
+      }
+
+      .card.revealing .card-img img {
+        animation: revealFlash 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes revealGlow {
+        0%   { box-shadow: 0 0 0 rgba(120,255,191,0); border-color: var(--line); }
+        40%  { box-shadow: 0 0 60px rgba(120,255,191,0.4), 0 0 120px rgba(120,255,191,0.15); border-color: rgba(120,255,191,0.8); }
+        100% { box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(120,255,191,0.07); border-color: rgba(120,255,191,0.3); }
+      }
+
+      .card.revealing {
+        animation: revealGlow 1.8s ease forwards;
+      }
+
+      /* Wave banner */
+      .wave-banner {
         position: fixed;
-        inset: 0;
-        z-index: 1900;
-        background: var(--bg-0);
-        overflow-y: auto;
-        animation: legendIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
-      }
-      .legendaries-page.active { display: block; }
-      @keyframes legendIn {
-        from { opacity: 0; transform: translateY(40px); }
-        to   { opacity: 1; transform: none; }
-      }
-
-      .leg-shell {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 48px 24px 80px;
+        top: 0; left: 0; right: 0;
+        z-index: 3000;
+        padding: 14px 20px;
+        background: linear-gradient(90deg, rgba(0,8,4,0.96), rgba(4,20,12,0.98));
+        border-bottom: 1px solid rgba(120,255,191,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        transform: translateY(-100%);
+        transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
       }
 
-      .leg-back {
+      .wave-banner.visible { transform: translateY(0); }
+
+      .wave-text {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--green);
+        text-shadow: 0 0 12px rgba(120,255,191,0.5);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .wave-text::before {
+        content: "";
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 10px rgba(120,255,191,0.9);
+        animation: pulse 1.2s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+
+      .wave-close {
         appearance: none;
         border: 1px solid var(--line-hi);
-        background: rgba(6,18,12,0.8);
-        color: var(--muted-hi);
         border-radius: 999px;
-        padding: 10px 24px;
+        padding: 6px 16px;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: rgba(6,18,12,0.8);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .wave-close:hover { border-color: rgba(120,255,191,0.4); color: var(--green-soft); }
+
+      /* Next reveal strip */
+      .next-reveal-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 28px;
+        margin-bottom: 28px;
+        border: 1px solid var(--line-hi);
+        border-radius: 12px;
+        background: rgba(2, 10, 6, 0.6);
         font-family: var(--font-mono);
         font-size: 10px;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        cursor: pointer;
-        margin-bottom: 48px;
-        transition: all 0.25s;
-      }
-      .leg-back:hover {
-        border-color: rgba(120,255,191,0.3);
-        color: var(--green-soft);
-        transform: translateY(-1px);
-      }
-
-      .leg-eyebrow {
-        font-family: var(--font-mono);
-        font-size: 10px;
-        letter-spacing: 0.38em;
-        text-transform: uppercase;
         color: var(--muted);
-        text-align: center;
-        margin-bottom: 12px;
+        position: relative;
+        z-index: 10;
+        animation: fadeUp 0.6s 1s ease both;
       }
 
-      .leg-title {
+      .next-reveal-timer {
         font-family: var(--font-display);
-        font-size: clamp(3rem, 9vw, 7rem);
-        line-height: 0.9;
+        font-size: 1.3rem;
         letter-spacing: 0.08em;
+        color: var(--green);
+        text-shadow: 0 0 12px rgba(120,255,191,0.45);
+        line-height: 1;
+      }
+
+      .next-reveal-sep {
+        width: 1px; height: 14px;
+        background: var(--line-hi);
+      }
+
+
+      /* ═══════════════════════════════════════════
+         MEGA MIMU SECTION
+      ═══════════════════════════════════════════ */
+      .mega-section {
+        position: relative;
+        z-index: 2;
+        padding: 0 36px 64px;
+      }
+
+      .mega-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,180,0,0.18) 20%, rgba(255,200,50,0.45) 50%, rgba(255,180,0,0.18) 80%, transparent);
+        margin-bottom: 48px;
+      }
+
+      .mega-header {
         text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .mega-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.36em;
         text-transform: uppercase;
-        background: linear-gradient(170deg, #fff 0%, var(--green-soft) 40%, var(--green) 100%);
+        color: rgba(255,200,50,0.6);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        animation: fadeUp 0.7s 0.3s ease both;
+      }
+
+      .mega-eyebrow::before, .mega-eyebrow::after {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 40px;
+        background: linear-gradient(90deg, transparent, rgba(255,200,50,0.3));
+      }
+      .mega-eyebrow::after { background: linear-gradient(270deg, transparent, rgba(255,200,50,0.3)); }
+
+      .mega-title {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 7vw, 6.5rem);
+        line-height: 0.88;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        background: linear-gradient(160deg, #fff 0%, #ffe87a 40%, #ffb800 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        filter: drop-shadow(0 0 30px rgba(120,255,191,0.2));
-        margin-bottom: 20px;
+        filter: drop-shadow(0 0 28px rgba(255,180,0,0.25));
+        animation: titleIn 0.9s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
       }
 
-      .leg-divider {
+      .mega-sub {
+        font-family: var(--font-display);
+        font-size: clamp(1rem, 2vw, 1.6rem);
+        letter-spacing: 0.3em;
+        color: rgba(255,180,0,0.7);
+        text-transform: uppercase;
+        text-shadow: 0 0 16px rgba(255,180,0,0.3);
+        animation: fadeUp 0.7s 0.6s ease both;
+      }
+
+      .mega-divider-sm {
         width: 100%;
-        max-width: 480px;
+        max-width: 420px;
         height: 1px;
-        background: linear-gradient(90deg, transparent, var(--line-hi) 20%, var(--green) 50%, var(--line-hi) 80%, transparent);
-        margin: 0 auto 56px;
+        background: linear-gradient(90deg, transparent, rgba(255,200,50,0.2) 20%, rgba(255,200,50,0.5) 50%, rgba(255,200,50,0.2) 80%, transparent);
+        margin: 20px auto 0;
+        animation: fadeUp 0.6s 0.7s ease both;
       }
 
-      .leg-grid {
+      /* Mega stats row */
+      .mega-stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.6s 0.8s ease both;
+      }
+
+      .mega-stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 12px 22px;
+        border: 1px solid rgba(255,200,50,0.15);
+        border-radius: 12px;
+        background: rgba(255,180,0,0.04);
+        min-width: 90px;
+      }
+
+      .mega-stat-val {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        letter-spacing: 0.06em;
+        background: linear-gradient(160deg, #fff 0%, #ffb800 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .mega-stat-lbl {
+        font-family: var(--font-mono);
+        font-size: 8.5px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(255,200,50,0.45);
+      }
+
+      /* Next mega reveal bar */
+      .mega-reveal-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 9px 28px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(255,200,50,0.12);
+        border-radius: 12px;
+        background: rgba(255,180,0,0.03);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(255,200,50,0.5);
+        animation: fadeUp 0.6s 0.9s ease both;
+      }
+
+      .mega-reveal-timer {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        letter-spacing: 0.08em;
+        color: #ffb800;
+        text-shadow: 0 0 14px rgba(255,180,0,0.45);
+        line-height: 1;
+      }
+
+      .mega-reveal-sep { width: 1px; height: 14px; background: rgba(255,200,50,0.2); }
+
+      /* Mega grid — 3 cols max */
+      .mega-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 20px;
+        animation: fadeUp 0.7s 1s ease both;
       }
 
-      .leg-card {
-        border: 1px solid var(--line);
+      /* Mega card — gold accent theme */
+      .mega-card {
+        border: 1px solid rgba(255,180,0,0.18);
         border-radius: 20px;
-        background: linear-gradient(160deg, rgba(10,28,20,0.9), rgba(2,9,6,0.95));
-        padding: 32px 24px 28px;
-        position: relative;
+        background: linear-gradient(160deg, rgba(10,8,2,0.95) 0%, rgba(5,4,1,0.97) 100%);
         overflow: hidden;
-        transition: border-color 0.3s, transform 0.3s;
-        animation: fadeUp 0.5s ease both;
+        position: relative;
+        cursor: pointer;
+        transition: border-color 0.3s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
       }
-      .leg-card:hover {
-        border-color: rgba(120,255,191,0.28);
-        transform: translateY(-3px);
-      }
-      .leg-card::before {
+
+      .mega-card::before {
         content: "";
         position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 2px;
-        background: linear-gradient(90deg, transparent, var(--green), transparent);
-        opacity: 0.35;
-      }
-      .leg-card-tier {
-        font-family: var(--font-mono);
-        font-size: 9px;
-        letter-spacing: 0.36em;
-        text-transform: uppercase;
-        color: var(--green-dim);
-        margin-bottom: 8px;
-        text-shadow: 0 0 8px rgba(61,204,136,0.5);
-      }
-      .leg-card-name {
-        font-family: var(--font-display);
-        font-size: 2rem;
-        letter-spacing: 0.08em;
-        color: var(--green-soft);
-        line-height: 1;
-        margin-bottom: 10px;
-      }
-      .leg-card-desc {
-        font-family: var(--font-body);
-        font-size: 12.5px;
-        line-height: 1.6;
-        color: var(--muted);
-        font-weight: 300;
-      }
-      .leg-card-glyph {
-        position: absolute;
-        bottom: 16px;
-        right: 20px;
-        font-family: var(--font-mono);
-        font-size: 36px;
-        opacity: 0.06;
-        line-height: 1;
-        user-select: none;
+        top: 0; left: 10%; right: 10%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,200,50,0.2), transparent);
         pointer-events: none;
       }
 
-      .leg-card:nth-child(1) { animation-delay: 0.05s; }
-      .leg-card:nth-child(2) { animation-delay: 0.10s; }
-      .leg-card:nth-child(3) { animation-delay: 0.15s; }
-      .leg-card:nth-child(4) { animation-delay: 0.20s; }
-      .leg-card:nth-child(5) { animation-delay: 0.25s; }
-      .leg-card:nth-child(6) { animation-delay: 0.30s; }
+      .mega-card:hover {
+        border-color: rgba(255,180,0,0.4);
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 36px rgba(255,180,0,0.1);
+      }
+
+      .mega-card.locked { cursor: default; }
+      .mega-card.locked:hover { transform: none; box-shadow: none; border-color: rgba(255,180,0,0.1); }
+      .mega-card.locked .card-img img { filter: blur(18px) brightness(0.12) saturate(0); }
+      .mega-card.locked .card-img::before {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(5,3,0,0.6); z-index: 1; pointer-events: none;
+      }
+      .mega-card.locked .card-name,
+      .mega-card.locked .card-desc,
+      .mega-card.locked .card-tags,
+      .mega-card.locked .card-id { filter: blur(5px); user-select: none; }
+      .mega-card.locked .card-arrow { display: none; }
+
+      /* Gold lock overlay */
+      .mega-lock-overlay {
+        position: absolute; inset: 0; z-index: 3;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 8px; pointer-events: none;
+      }
+
+      .mega-lock-icon { width: 36px; height: 36px; opacity: 0.65; }
+
+      .mega-lock-label {
+        font-family: var(--font-mono);
+        font-size: 9px; letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255,200,50,0.55);
+      }
+
+      .mega-lock-countdown {
+        font-family: var(--font-display);
+        font-size: 1.2rem; letter-spacing: 0.1em;
+        color: #ffb800;
+        text-shadow: 0 0 14px rgba(255,180,0,0.55);
+        line-height: 1;
+      }
+
+      .mega-lock-sub {
+        font-family: var(--font-mono);
+        font-size: 8px; letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(255,200,50,0.32);
+      }
+
+      /* Mega edition badge */
+      .mega-edition-badge {
+        position: absolute; top: 11px; right: 11px;
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        color: #ffb800;
+        background: rgba(5,3,0,0.88);
+        border: 1px solid rgba(255,180,0,0.35);
+        border-radius: 999px; padding: 4px 10px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 14px rgba(255,180,0,0.2);
+        z-index: 2;
+      }
+
+      .mega-badge {
+        position: absolute; top: 11px; left: 11px;
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        color: #ffb800;
+        background: rgba(5,3,0,0.88);
+        border: 1px solid rgba(255,180,0,0.22);
+        border-radius: 999px; padding: 4px 9px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 10px rgba(255,180,0,0.12);
+        z-index: 2;
+      }
+
+      /* Mega card body — gold tones */
+      .mega-card .card-name { color: #ffe87a; }
+      .mega-card .card-desc { color: rgba(255,220,100,0.42); }
+      .mega-card .card-status { color: rgba(255,200,50,0.5); }
+      .mega-card .card-status::before { background: #ffb800; box-shadow: 0 0 6px #ffb800; }
+      .mega-card .card-footer { border-top-color: rgba(255,180,0,0.12); }
+      .mega-card .card-arrow { color: rgba(255,180,0,0.65); }
+      .mega-card:hover .card-arrow { color: #ffb800; }
+      .mega-card .tag {
+        color: #ffb800;
+        border-color: rgba(255,180,0,0.18);
+        background: rgba(255,180,0,0.04);
+      }
+
+      /* Mega reveal animation */
+      @keyframes megaRevealFlash {
+        0%   { filter: blur(18px) brightness(0.12) saturate(0); }
+        30%  { filter: blur(8px) brightness(0.7) saturate(0.3); }
+        60%  { filter: blur(2px) brightness(1.2) saturate(0.9); }
+        100% { filter: blur(0) brightness(1) saturate(1); }
+      }
+
+      @keyframes megaRevealGlow {
+        0%   { box-shadow: 0 0 0 rgba(255,180,0,0); border-color: rgba(255,180,0,0.1); }
+        40%  { box-shadow: 0 0 70px rgba(255,180,0,0.5), 0 0 140px rgba(255,180,0,0.2); border-color: rgba(255,180,0,0.9); }
+        100% { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 30px rgba(255,180,0,0.1); border-color: rgba(255,180,0,0.3); }
+      }
+
+      .mega-card.revealing .card-img img { animation: megaRevealFlash 1.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .mega-card.revealing { animation: megaRevealGlow 2s ease forwards; }
+
+      /* Mega lightbox gold accent */
+      .lb-mega-tag {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: #ffb800;
+        border: 1px solid rgba(255,180,0,0.25);
+        border-radius: 999px; padding: 5px 14px;
+        display: inline-block;
+        background: rgba(255,180,0,0.04);
+        box-shadow: 0 0 12px rgba(255,180,0,0.1);
+      }
+
+      @media (max-width: 860px) {
+        .mega-section { padding: 0 16px 44px; }
+        .mega-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+      }
+      @media (max-width: 480px) {
+        .mega-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      }
+
+
+      /* ═══════════════════════════════════════════
+         THE ANCIENT KEEPERS SECTION
+         Elemental theme: deep indigo / silver / rune glow
+      ═══════════════════════════════════════════ */
+
+      /* Section wrapper */
+      .keeper-section {
+        position: relative;
+        z-index: 2;
+        padding: 0 36px 72px;
+      }
+
+      /* Separator from Mega section */
+      .keeper-divider-top {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(140,80,255,0.15) 20%, rgba(160,100,255,0.4) 50%, rgba(140,80,255,0.15) 80%, transparent);
+        margin-bottom: 52px;
+      }
+
+      /* Header */
+      .keeper-header { text-align: center; margin-bottom: 40px; }
+
+      .keeper-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.38em;
+        text-transform: uppercase;
+        color: rgba(160,110,255,0.55);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        animation: fadeUp 0.7s 0.3s ease both;
+      }
+
+      .keeper-eyebrow::before, .keeper-eyebrow::after {
+        content: "";
+        display: block; height: 1px; width: 40px;
+        background: linear-gradient(90deg, transparent, rgba(160,110,255,0.28));
+      }
+      .keeper-eyebrow::after { background: linear-gradient(270deg, transparent, rgba(160,110,255,0.28)); }
+
+      .keeper-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.4rem, 6vw, 5.5rem);
+        line-height: 0.9;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        background: linear-gradient(160deg, #fff 0%, #d4b0ff 45%, #9b60ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 24px rgba(140,80,255,0.28));
+        animation: titleIn 0.9s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+      }
+
+      .keeper-sub {
+        font-family: var(--font-display);
+        font-size: clamp(0.9rem, 1.8vw, 1.5rem);
+        letter-spacing: 0.32em;
+        color: rgba(150,100,255,0.65);
+        text-transform: uppercase;
+        text-shadow: 0 0 16px rgba(140,80,255,0.3);
+        animation: fadeUp 0.7s 0.6s ease both;
+      }
+
+      .keeper-divider-sm {
+        width: 100%;
+        max-width: 380px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(160,110,255,0.18) 20%, rgba(160,110,255,0.45) 50%, rgba(160,110,255,0.18) 80%, transparent);
+        margin: 18px auto 0;
+        animation: fadeUp 0.6s 0.7s ease both;
+      }
+
+      /* Stats */
+      .keeper-stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.6s 0.8s ease both;
+      }
+
+      .keeper-stat {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 3px;
+        padding: 12px 22px;
+        border: 1px solid rgba(150,100,255,0.14);
+        border-radius: 12px;
+        background: rgba(140,80,255,0.04);
+        min-width: 90px;
+      }
+
+      .keeper-stat-val {
+        font-family: var(--font-display);
+        font-size: 1.9rem; letter-spacing: 0.06em;
+        background: linear-gradient(160deg, #fff 0%, #c09fff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .keeper-stat-lbl {
+        font-family: var(--font-mono);
+        font-size: 8.5px; letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(160,110,255,0.42);
+      }
+
+      /* Next reveal bar */
+      .keeper-reveal-bar {
+        display: flex; align-items: center;
+        justify-content: center; gap: 10px;
+        padding: 9px 28px; margin-bottom: 32px;
+        border: 1px solid rgba(150,100,255,0.12);
+        border-radius: 12px;
+        background: rgba(140,80,255,0.03);
+        font-family: var(--font-mono); font-size: 10px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: rgba(160,110,255,0.48);
+        animation: fadeUp 0.6s 0.9s ease both;
+      }
+
+      .keeper-reveal-timer {
+        font-family: var(--font-display);
+        font-size: 1.3rem; letter-spacing: 0.08em;
+        color: #b07fff;
+        text-shadow: 0 0 14px rgba(140,80,255,0.5);
+        line-height: 1;
+      }
+
+      .keeper-reveal-sep { width: 1px; height: 14px; background: rgba(160,110,255,0.18); }
+
+      /* Grid — 4 cols, or auto on smaller screens */
+      .keeper-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        animation: fadeUp 0.7s 1s ease both;
+      }
+
+      /* Card base */
+      .keeper-card {
+        border: 1px solid rgba(140,80,255,0.2);
+        border-radius: 20px;
+        background: linear-gradient(160deg, rgba(8,4,16,0.96) 0%, rgba(4,2,10,0.98) 100%);
+        overflow: hidden; position: relative;
+        cursor: pointer;
+        transition: border-color 0.3s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+        display: flex; flex-direction: column;
+      }
+
+      .keeper-card::before {
+        content: "";
+        position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(160,110,255,0.22), transparent);
+        pointer-events: none;
+      }
+
+      .keeper-card:hover {
+        border-color: rgba(160,110,255,0.45);
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 40px rgba(140,80,255,0.12);
+      }
+
+      /* Locked state */
+      .keeper-card.locked { cursor: default; }
+      .keeper-card.locked:hover { transform: none; box-shadow: none; border-color: rgba(140,80,255,0.1); }
+      .keeper-card.locked .card-img img { filter: blur(18px) brightness(0.1) saturate(0); }
+      .keeper-card.locked .card-img::before {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(3,1,8,0.65); z-index: 1; pointer-events: none;
+      }
+      .keeper-card.locked .card-name,
+      .keeper-card.locked .card-desc,
+      .keeper-card.locked .card-tags,
+      .keeper-card.locked .card-id { filter: blur(5px); user-select: none; }
+      .keeper-card.locked .card-arrow { display: none; }
+
+      /* Lock overlay */
+      .keeper-lock-overlay {
+        position: absolute; inset: 0; z-index: 3;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 8px; pointer-events: none;
+      }
+
+      .keeper-lock-icon { width: 34px; height: 34px; opacity: 0.6; }
+
+      .keeper-lock-label {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.3em; text-transform: uppercase;
+        color: rgba(180,130,255,0.55);
+      }
+
+      .keeper-lock-countdown {
+        font-family: var(--font-display); font-size: 1.15rem;
+        letter-spacing: 0.1em; color: #b07fff;
+        text-shadow: 0 0 14px rgba(140,80,255,0.6);
+        line-height: 1;
+      }
+
+      .keeper-lock-sub {
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: rgba(160,110,255,0.3);
+      }
+
+      /* Badges */
+      .keeper-edition-badge {
+        position: absolute; top: 11px; right: 11px;
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        color: #c09fff;
+        background: rgba(3,1,8,0.9);
+        border: 1px solid rgba(160,110,255,0.32);
+        border-radius: 999px; padding: 4px 10px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 14px rgba(140,80,255,0.22);
+        z-index: 2;
+      }
+
+      .keeper-badge {
+        position: absolute; top: 11px; left: 11px;
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        color: #c09fff;
+        background: rgba(3,1,8,0.9);
+        border: 1px solid rgba(160,110,255,0.2);
+        border-radius: 999px; padding: 4px 9px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 10px rgba(140,80,255,0.14);
+        z-index: 2;
+      }
+
+      /* Element pill on card body */
+      .element-pill {
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        padding: 3px 10px; border-radius: 999px;
+        display: inline-block; margin-bottom: 2px;
+      }
+
+      .element-pill.Fire   { color: #ff8c42; border: 1px solid rgba(255,120,30,0.28); background: rgba(255,100,0,0.06); }
+      .element-pill.Water  { color: #42b8ff; border: 1px solid rgba(50,160,255,0.28); background: rgba(0,120,255,0.06); }
+      .element-pill.Wind   { color: #a0ffb0; border: 1px solid rgba(100,255,130,0.28); background: rgba(50,220,80,0.06); }
+      .element-pill.Void   { color: #d4a0ff; border: 1px solid rgba(180,100,255,0.28); background: rgba(160,80,255,0.06); }
+
+      /* Card text overrides */
+      .keeper-card .card-name { color: #d4b0ff; }
+      .keeper-card .card-desc { color: rgba(200,160,255,0.4); }
+      .keeper-card .card-status { color: rgba(160,110,255,0.5); }
+      .keeper-card .card-status::before { background: #b07fff; box-shadow: 0 0 6px #b07fff; }
+      .keeper-card .card-footer { border-top-color: rgba(140,80,255,0.12); }
+      .keeper-card .card-arrow { color: rgba(160,110,255,0.65); }
+      .keeper-card:hover .card-arrow { color: #c09fff; }
+      .keeper-card .tag {
+        color: #b07fff;
+        border-color: rgba(160,110,255,0.18);
+        background: rgba(140,80,255,0.05);
+      }
+
+      /* Reveal animations */
+      @keyframes keeperRevealFlash {
+        0%   { filter: blur(18px) brightness(0.1) saturate(0); }
+        30%  { filter: blur(8px) brightness(0.7) saturate(0.4); }
+        60%  { filter: blur(2px) brightness(1.15) saturate(0.85); }
+        100% { filter: blur(0) brightness(1) saturate(1); }
+      }
+
+      @keyframes keeperRevealGlow {
+        0%   { box-shadow: 0 0 0 rgba(140,80,255,0); border-color: rgba(140,80,255,0.12); }
+        40%  { box-shadow: 0 0 80px rgba(140,80,255,0.55), 0 0 160px rgba(140,80,255,0.2); border-color: rgba(200,140,255,0.9); }
+        100% { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 30px rgba(140,80,255,0.1); border-color: rgba(140,80,255,0.3); }
+      }
+
+      .keeper-card.revealing .card-img img { animation: keeperRevealFlash 1.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .keeper-card.revealing { animation: keeperRevealGlow 2.2s ease forwards; }
+
+      /* Lightbox tag */
+      .lb-keeper-tag {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: #c09fff;
+        border: 1px solid rgba(160,110,255,0.25);
+        border-radius: 999px; padding: 5px 14px;
+        display: inline-block;
+        background: rgba(140,80,255,0.05);
+        box-shadow: 0 0 12px rgba(140,80,255,0.12);
+      }
+
+      @media (max-width: 960px) {
+        .keeper-grid { grid-template-columns: repeat(2, 1fr); }
+        .keeper-section { padding: 0 16px 48px; }
+      }
+      @media (max-width: 480px) {
+        .keeper-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      }
+
+
+      /* ═══════════════════════════════════════════
+         MIMU GODS SECTION
+         Duality theme: Sky (dawn gold/white) vs Underworld (lava/obsidian)
+         Shared section uses deep cosmic bg with twin accents
+      ═══════════════════════════════════════════ */
+
+      .gods-section {
+        position: relative;
+        z-index: 2;
+        padding: 0 36px 80px;
+      }
+
+      /* Top separator */
+      .gods-divider-top {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(255,200,80,0.12) 15%,
+          rgba(255,80,30,0.35) 35%,
+          rgba(255,255,255,0.5) 50%,
+          rgba(80,180,255,0.35) 65%,
+          rgba(120,200,255,0.12) 85%,
+          transparent
+        );
+        margin-bottom: 56px;
+      }
+
+      /* Header */
+      .gods-header { text-align: center; margin-bottom: 44px; }
+
+      .gods-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: rgba(255,240,200,0.45);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        animation: fadeUp 0.7s 0.3s ease both;
+      }
+
+      .gods-eyebrow::before, .gods-eyebrow::after {
+        content: "";
+        display: block; height: 1px; width: 48px;
+        background: linear-gradient(90deg, transparent, rgba(255,220,120,0.25));
+      }
+      .gods-eyebrow::after { background: linear-gradient(270deg, transparent, rgba(255,220,120,0.25)); }
+
+      .gods-title {
+        font-family: var(--font-display);
+        font-size: clamp(3.5rem, 8vw, 7.5rem);
+        line-height: 0.85;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        background: linear-gradient(170deg,
+          #fff 0%,
+          #ffe8a0 25%,
+          #ffffff 50%,
+          #ff9060 75%,
+          #ff4020 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 32px rgba(255,160,60,0.3));
+        animation: titleIn 1s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+      }
+
+      .gods-sub {
+        font-family: var(--font-display);
+        font-size: clamp(0.9rem, 2vw, 1.6rem);
+        letter-spacing: 0.35em;
+        color: rgba(255,220,150,0.6);
+        text-transform: uppercase;
+        text-shadow: 0 0 20px rgba(255,160,60,0.25);
+        animation: fadeUp 0.7s 0.65s ease both;
+      }
+
+      .gods-duality-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        animation: fadeUp 0.7s 0.8s ease both;
+      }
+
+      .duality-sky   { color: rgba(120,210,255,0.7); }
+      .duality-sep   { color: rgba(255,220,150,0.35); font-size: 14px; }
+      .duality-under { color: rgba(255,110,40,0.7); }
+
+      .gods-divider-sm {
+        width: 100%;
+        max-width: 320px;
+        height: 1px;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(80,180,255,0.2) 20%,
+          rgba(255,255,255,0.4) 50%,
+          rgba(255,100,30,0.2) 80%,
+          transparent
+        );
+        margin: 20px auto 0;
+        animation: fadeUp 0.6s 0.85s ease both;
+      }
+
+      /* Stats */
+      .gods-stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.6s 0.9s ease both;
+      }
+
+      .gods-stat {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 3px;
+        padding: 12px 26px;
+        border: 1px solid rgba(255,200,100,0.12);
+        border-radius: 12px;
+        background: rgba(255,160,60,0.03);
+        min-width: 90px;
+      }
+
+      .gods-stat-val {
+        font-family: var(--font-display);
+        font-size: 2rem; letter-spacing: 0.06em;
+        background: linear-gradient(160deg, #fff 0%, #ffd080 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .gods-stat-lbl {
+        font-family: var(--font-mono);
+        font-size: 8.5px; letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(255,200,100,0.38);
+      }
+
+      /* Next reveal bar */
+      .gods-reveal-bar {
+        display: flex; align-items: center;
+        justify-content: center; gap: 10px;
+        padding: 9px 28px; margin-bottom: 36px;
+        border: 1px solid rgba(255,200,80,0.1);
+        border-radius: 12px;
+        background: rgba(255,160,60,0.025);
+        font-family: var(--font-mono); font-size: 10px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: rgba(255,200,100,0.42);
+        animation: fadeUp 0.6s 1s ease both;
+      }
+
+      .gods-reveal-timer {
+        font-family: var(--font-display);
+        font-size: 1.3rem; letter-spacing: 0.08em;
+        color: #ffc060;
+        text-shadow: 0 0 16px rgba(255,160,60,0.5);
+        line-height: 1;
+      }
+
+      .gods-reveal-sep { width: 1px; height: 14px; background: rgba(255,200,80,0.16); }
+
+      /* Grid — 2 columns, large cards */
+      .gods-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        max-width: 900px;
+        margin: 0 auto;
+        animation: fadeUp 0.7s 1.05s ease both;
+      }
+
+      /* Individual card — themed per domain */
+      .god-card {
+        border-radius: 22px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s;
+        display: flex; flex-direction: column;
+      }
+
+      /* Sky God card */
+      .god-card.sky {
+        border: 1px solid rgba(120,210,255,0.22);
+        background: linear-gradient(170deg, rgba(4,12,22,0.97) 0%, rgba(2,8,18,0.99) 100%);
+      }
+
+      .god-card.sky::before {
+        content: "";
+        position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(120,210,255,0.3), transparent);
+        pointer-events: none;
+      }
+
+      .god-card.sky:hover {
+        border-color: rgba(120,210,255,0.5);
+        transform: translateY(-8px) scale(1.015);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 50px rgba(80,180,255,0.14);
+      }
+
+      /* Underworld God card */
+      .god-card.underworld {
+        border: 1px solid rgba(255,100,30,0.22);
+        background: linear-gradient(170deg, rgba(18,4,2,0.97) 0%, rgba(10,2,1,0.99) 100%);
+      }
+
+      .god-card.underworld::before {
+        content: "";
+        position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,120,40,0.3), transparent);
+        pointer-events: none;
+      }
+
+      .god-card.underworld:hover {
+        border-color: rgba(255,120,40,0.5);
+        transform: translateY(-8px) scale(1.015);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 50px rgba(255,80,20,0.14);
+      }
+
+      /* Locked state */
+      .god-card.locked { cursor: default; }
+      .god-card.locked:hover { transform: none !important; box-shadow: none !important; }
+      .god-card.locked.sky     { border-color: rgba(120,210,255,0.1) !important; }
+      .god-card.locked.underworld { border-color: rgba(255,100,30,0.1) !important; }
+      .god-card.locked .card-img img { filter: blur(20px) brightness(0.08) saturate(0); }
+      .god-card.locked .card-img::before {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(0,0,0,0.7); z-index: 1; pointer-events: none;
+      }
+      .god-card.locked .god-card-name,
+      .god-card.locked .god-card-desc,
+      .god-card.locked .god-card-tags,
+      .god-card.locked .god-card-id { filter: blur(5px); user-select: none; }
+      .god-card.locked .god-card-arrow { display: none; }
+
+      /* Image area — taller for gods */
+      .god-card .card-img {
+        aspect-ratio: 1 / 1;
+        background: #000;
+        overflow: hidden; position: relative;
+      }
+
+      .god-card .card-img img {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+        transition: transform 0.55s ease, filter 0.4s ease;
+        filter: saturate(0.95) brightness(0.98);
+      }
+
+      .god-card:hover .card-img img {
+        transform: scale(1.06);
+        filter: saturate(1.08) brightness(1.03);
+      }
+
+      /* Edition badges */
+      .god-edition-badge {
+        position: absolute; top: 12px; right: 12px;
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        background: rgba(0,0,0,0.88);
+        border-radius: 999px; padding: 4px 10px;
+        backdrop-filter: blur(8px); z-index: 2;
+      }
+
+      .god-card.sky     .god-edition-badge { color: #80d4ff; border: 1px solid rgba(100,200,255,0.32); box-shadow: 0 0 12px rgba(80,180,255,0.2); }
+      .god-card.underworld .god-edition-badge { color: #ff9060; border: 1px solid rgba(255,110,40,0.32); box-shadow: 0 0 12px rgba(255,80,20,0.2); }
+
+      .god-domain-badge {
+        position: absolute; top: 12px; left: 12px;
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.16em; text-transform: uppercase;
+        background: rgba(0,0,0,0.88);
+        border-radius: 999px; padding: 4px 10px;
+        backdrop-filter: blur(8px); z-index: 2;
+      }
+
+      .god-card.sky     .god-domain-badge { color: #80d4ff; border: 1px solid rgba(100,200,255,0.2); }
+      .god-card.underworld .god-domain-badge { color: #ff9060; border: 1px solid rgba(255,110,40,0.2); }
+
+      /* Lock overlay */
+      .god-lock-overlay {
+        position: absolute; inset: 0; z-index: 3;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 10px; pointer-events: none;
+      }
+
+      .god-lock-icon { width: 40px; height: 40px; opacity: 0.55; }
+
+      .god-lock-label {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.32em; text-transform: uppercase;
+      }
+
+      .god-lock-countdown {
+        font-family: var(--font-display); font-size: 1.4rem;
+        letter-spacing: 0.08em; line-height: 1;
+      }
+
+      .god-lock-sub {
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        opacity: 0.4;
+      }
+
+      .god-card.sky .god-lock-label     { color: rgba(120,210,255,0.6); }
+      .god-card.sky .god-lock-countdown { color: #80d4ff; text-shadow: 0 0 16px rgba(80,180,255,0.55); }
+      .god-card.sky .god-lock-icon path,
+      .god-card.sky .god-lock-icon rect,
+      .god-card.sky .god-lock-icon circle { stroke: rgba(100,200,255,0.55) !important; fill: rgba(100,200,255,0.55) !important; }
+
+      .god-card.underworld .god-lock-label     { color: rgba(255,120,40,0.6); }
+      .god-card.underworld .god-lock-countdown { color: #ff9060; text-shadow: 0 0 16px rgba(255,80,20,0.55); }
+
+      /* Card body */
+      .god-card-body {
+        padding: 20px 22px 22px;
+        display: flex; flex-direction: column; gap: 10px; flex: 1;
+      }
+
+      .god-card-top {
+        display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
+      }
+
+      .god-card-name {
+        font-family: var(--font-display);
+        font-size: 2rem; letter-spacing: 0.07em;
+        text-transform: uppercase; line-height: 1;
+      }
+
+      .god-card.sky         .god-card-name { color: #a8e4ff; }
+      .god-card.underworld  .god-card-name { color: #ffb880; }
+
+      .god-card-id {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        padding-top: 4px;
+      }
+
+      .god-card.sky         .god-card-id { color: rgba(120,210,255,0.45); }
+      .god-card.underworld  .god-card-id { color: rgba(255,130,60,0.45); }
+
+      .god-domain-label {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.28em; text-transform: uppercase;
+        padding: 3px 12px; border-radius: 999px; display: inline-block;
+      }
+
+      .god-card.sky        .god-domain-label { color: #80d4ff; border: 1px solid rgba(100,200,255,0.2); background: rgba(80,180,255,0.05); }
+      .god-card.underworld .god-domain-label { color: #ff9060; border: 1px solid rgba(255,110,40,0.2); background: rgba(255,80,20,0.05); }
+
+      .god-card-desc {
+        font-family: var(--font-body); font-size: 12.5px;
+        line-height: 1.7; font-weight: 300;
+      }
+
+      .god-card.sky        .god-card-desc { color: rgba(160,220,255,0.45); }
+      .god-card.underworld .god-card-desc { color: rgba(255,160,100,0.42); }
+
+      .god-card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+      .god-card.sky .tag        { color: #80d4ff; border-color: rgba(100,200,255,0.18); background: rgba(80,180,255,0.04); }
+      .god-card.underworld .tag { color: #ff9060; border-color: rgba(255,110,40,0.18); background: rgba(255,80,20,0.04); }
+
+      .god-card-footer {
+        display: flex; justify-content: space-between; align-items: center;
+        padding-top: 12px; margin-top: auto;
+      }
+
+      .god-card.sky        .god-card-footer { border-top: 1px solid rgba(100,200,255,0.1); }
+      .god-card.underworld .god-card-footer { border-top: 1px solid rgba(255,110,40,0.1); }
+
+      .god-card-status {
+        font-family: var(--font-mono); font-size: 8.5px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        display: flex; align-items: center; gap: 6px;
+      }
+
+      .god-card.sky .god-card-status { color: rgba(120,210,255,0.5); }
+      .god-card.sky .god-card-status::before {
+        content: ""; display: block; width: 5px; height: 5px;
+        border-radius: 50%; background: #80d4ff;
+        box-shadow: 0 0 6px #80d4ff; animation: pulse 3s ease-in-out infinite;
+      }
+
+      .god-card.underworld .god-card-status { color: rgba(255,130,60,0.5); }
+      .god-card.underworld .god-card-status::before {
+        content: ""; display: block; width: 5px; height: 5px;
+        border-radius: 50%; background: #ff9060;
+        box-shadow: 0 0 6px #ff9060; animation: pulse 3s ease-in-out infinite;
+      }
+
+      .god-card-arrow {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        display: flex; align-items: center; gap: 4px;
+        transition: gap 0.2s;
+      }
+
+      .god-card.sky        .god-card-arrow { color: rgba(100,200,255,0.6); }
+      .god-card.sky:hover  .god-card-arrow { color: #80d4ff; gap: 7px; }
+      .god-card.underworld .god-card-arrow { color: rgba(255,130,60,0.6); }
+      .god-card.underworld:hover .god-card-arrow { color: #ff9060; gap: 7px; }
+
+      /* Reveal animations */
+      @keyframes skyRevealFlash {
+        0%   { filter: blur(20px) brightness(0.08) saturate(0); }
+        25%  { filter: blur(10px) brightness(0.5) saturate(0.2); }
+        60%  { filter: blur(2px) brightness(1.3) saturate(0.9); }
+        100% { filter: blur(0) brightness(1) saturate(1); }
+      }
+
+      @keyframes skyRevealGlow {
+        0%   { box-shadow: none; border-color: rgba(120,210,255,0.1); }
+        35%  { box-shadow: 0 0 100px rgba(80,180,255,0.6), 0 0 200px rgba(80,180,255,0.2); border-color: rgba(180,230,255,0.9); }
+        100% { box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(80,180,255,0.1); border-color: rgba(120,210,255,0.3); }
+      }
+
+      @keyframes uwRevealFlash {
+        0%   { filter: blur(20px) brightness(0.08) saturate(0); }
+        25%  { filter: blur(10px) brightness(0.5) saturate(0.3); }
+        60%  { filter: blur(2px) brightness(1.3) saturate(1); }
+        100% { filter: blur(0) brightness(1) saturate(1); }
+      }
+
+      @keyframes uwRevealGlow {
+        0%   { box-shadow: none; border-color: rgba(255,100,30,0.1); }
+        35%  { box-shadow: 0 0 100px rgba(255,80,20,0.6), 0 0 200px rgba(255,80,20,0.2); border-color: rgba(255,180,80,0.9); }
+        100% { box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(255,80,20,0.1); border-color: rgba(255,100,30,0.3); }
+      }
+
+      .god-card.sky.revealing .card-img img         { animation: skyRevealFlash 2s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .god-card.sky.revealing                        { animation: skyRevealGlow 2.4s ease forwards; }
+      .god-card.underworld.revealing .card-img img  { animation: uwRevealFlash 2s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .god-card.underworld.revealing                 { animation: uwRevealGlow 2.4s ease forwards; }
+
+      /* Lightbox tags */
+      .lb-god-tag-sky {
+        font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em;
+        text-transform: uppercase; color: #80d4ff;
+        border: 1px solid rgba(100,200,255,0.28); border-radius: 999px;
+        padding: 5px 14px; display: inline-block;
+        background: rgba(80,180,255,0.05);
+        box-shadow: 0 0 14px rgba(80,180,255,0.15);
+      }
+
+      .lb-god-tag-uw {
+        font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em;
+        text-transform: uppercase; color: #ff9060;
+        border: 1px solid rgba(255,110,40,0.28); border-radius: 999px;
+        padding: 5px 14px; display: inline-block;
+        background: rgba(255,80,20,0.05);
+        box-shadow: 0 0 14px rgba(255,80,20,0.15);
+      }
+
+      @media (max-width: 680px) {
+        .gods-grid { grid-template-columns: 1fr; gap: 18px; }
+        .gods-section { padding: 0 16px 56px; }
+      }
+
+
+      /* ═══════════════════════════════════════════
+         CELESTIAL MIMU SECTION
+         Galaxy: deep space purple/magenta/cyan
+         Biome:  electric green / rainbow chaos
+         Shared: starfield shimmer, cosmic borders
+      ═══════════════════════════════════════════ */
+
+      .celestial-section {
+        position: relative;
+        z-index: 2;
+        padding: 0 36px 88px;
+      }
+
+      /* Separator */
+      .celestial-divider-top {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(120,40,200,0.12) 10%,
+          rgba(180,60,255,0.2) 30%,
+          rgba(255,255,255,0.55) 50%,
+          rgba(60,220,100,0.2) 70%,
+          rgba(40,180,80,0.12) 90%,
+          transparent
+        );
+        margin-bottom: 60px;
+      }
+
+      /* Header */
+      .celestial-header { text-align: center; margin-bottom: 44px; }
+
+      .celestial-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 10.5px; letter-spacing: 0.42em;
+        text-transform: uppercase;
+        color: rgba(200,160,255,0.45);
+        margin-bottom: 16px;
+        display: flex; align-items: center;
+        justify-content: center; gap: 12px;
+        animation: fadeUp 0.7s 0.3s ease both;
+      }
+
+      .celestial-eyebrow::before, .celestial-eyebrow::after {
+        content: ""; display: block; height: 1px; width: 48px;
+        background: linear-gradient(90deg, transparent, rgba(180,100,255,0.22));
+      }
+      .celestial-eyebrow::after { background: linear-gradient(270deg, transparent, rgba(180,100,255,0.22)); }
+
+      .celestial-title {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 7.5vw, 7rem);
+        line-height: 0.86; letter-spacing: 0.1em;
+        text-transform: uppercase; margin-bottom: 12px;
+        background: linear-gradient(150deg,
+          #c0f0ff 0%, #c060ff 30%, #ffffff 50%, #60ff90 70%, #ffee40 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 30px rgba(160,80,255,0.3));
+        animation: titleIn 1s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+      }
+
+      .celestial-sub {
+        font-family: var(--font-display);
+        font-size: clamp(0.9rem, 2vw, 1.55rem);
+        letter-spacing: 0.34em; text-transform: uppercase;
+        color: rgba(200,160,255,0.55);
+        text-shadow: 0 0 20px rgba(160,80,255,0.25);
+        animation: fadeUp 0.7s 0.65s ease both;
+      }
+
+      .celestial-duality-label {
+        font-family: var(--font-mono); font-size: 10px;
+        letter-spacing: 0.28em; text-transform: uppercase;
+        margin-top: 10px;
+        display: flex; align-items: center;
+        justify-content: center; gap: 14px;
+        animation: fadeUp 0.7s 0.8s ease both;
+      }
+
+      .duality-galaxy { color: rgba(180,100,255,0.7); }
+      .duality-csep   { color: rgba(200,200,200,0.3); font-size: 14px; }
+      .duality-biome  { color: rgba(80,220,100,0.7); }
+
+      .celestial-divider-sm {
+        width: 100%; max-width: 340px; height: 1px;
+        background: linear-gradient(90deg,
+          transparent, rgba(160,80,255,0.2) 20%,
+          rgba(255,255,255,0.35) 50%,
+          rgba(60,200,80,0.2) 80%, transparent
+        );
+        margin: 20px auto 0;
+        animation: fadeUp 0.6s 0.85s ease both;
+      }
+
+      /* Stats */
+      .celestial-stats-row {
+        display: flex; justify-content: center;
+        gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
+        animation: fadeUp 0.6s 0.9s ease both;
+      }
+
+      .celestial-stat {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 3px;
+        padding: 12px 26px;
+        border: 1px solid rgba(160,80,255,0.12);
+        border-radius: 12px;
+        background: rgba(140,60,255,0.03);
+        min-width: 90px;
+      }
+
+      .celestial-stat-val {
+        font-family: var(--font-display);
+        font-size: 2rem; letter-spacing: 0.06em;
+        background: linear-gradient(160deg, #fff 0%, #c060ff 50%, #60ff90 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .celestial-stat-lbl {
+        font-family: var(--font-mono); font-size: 8.5px;
+        letter-spacing: 0.26em; text-transform: uppercase;
+        color: rgba(180,100,255,0.38);
+      }
+
+      /* Next reveal bar */
+      .celestial-reveal-bar {
+        display: flex; align-items: center;
+        justify-content: center; gap: 10px;
+        padding: 9px 28px; margin-bottom: 36px;
+        border: 1px solid rgba(160,80,255,0.1);
+        border-radius: 12px; background: rgba(140,60,255,0.025);
+        font-family: var(--font-mono); font-size: 10px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: rgba(180,100,255,0.42);
+        animation: fadeUp 0.6s 1s ease both;
+      }
+
+      .celestial-reveal-timer {
+        font-family: var(--font-display); font-size: 1.3rem;
+        letter-spacing: 0.08em; color: #c060ff;
+        text-shadow: 0 0 16px rgba(160,60,255,0.55); line-height: 1;
+      }
+
+      .celestial-reveal-sep { width: 1px; height: 14px; background: rgba(160,80,255,0.16); }
+
+      /* Grid — 2 large cards */
+      .celestial-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px; max-width: 900px;
+        margin: 0 auto;
+        animation: fadeUp 0.7s 1.05s ease both;
+      }
+
+      /* Card base */
+      .celestial-card {
+        border-radius: 22px; overflow: hidden; position: relative;
+        cursor: pointer;
+        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s;
+        display: flex; flex-direction: column;
+      }
+
+      /* Galaxy card */
+      .celestial-card.galaxy {
+        border: 1px solid rgba(160,80,255,0.25);
+        background: linear-gradient(170deg, rgba(6,2,16,0.98) 0%, rgba(3,1,10,0.99) 100%);
+      }
+
+      .celestial-card.galaxy::before {
+        content: ""; position: absolute;
+        top: 0; left: 10%; right: 10%; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(180,80,255,0.35), transparent);
+        pointer-events: none;
+      }
+
+      /* Starfield shimmer on galaxy card */
+      .celestial-card.galaxy::after {
+        content: ""; position: absolute; inset: 0;
+        background-image:
+          radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+          radial-gradient(1px 1px at 75% 15%, rgba(180,120,255,0.7) 0%, transparent 100%),
+          radial-gradient(1px 1px at 50% 70%, rgba(100,200,255,0.5) 0%, transparent 100%),
+          radial-gradient(1px 1px at 85% 60%, rgba(255,100,255,0.5) 0%, transparent 100%),
+          radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.4) 0%, transparent 100%);
+        pointer-events: none; opacity: 0.4;
+        animation: starTwinkle 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes starTwinkle {
+        0%   { opacity: 0.3; }
+        50%  { opacity: 0.6; }
+        100% { opacity: 0.3; }
+      }
+
+      .celestial-card.galaxy:hover {
+        border-color: rgba(180,80,255,0.55);
+        transform: translateY(-8px) scale(1.015);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 60px rgba(160,60,255,0.18);
+      }
+
+      /* Biome card */
+      .celestial-card.biome {
+        border: 1px solid rgba(60,200,80,0.25);
+        background: linear-gradient(170deg, rgba(2,10,4,0.98) 0%, rgba(1,6,2,0.99) 100%);
+      }
+
+      .celestial-card.biome::before {
+        content: ""; position: absolute;
+        top: 0; left: 10%; right: 10%; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(60,220,80,0.35), transparent);
+        pointer-events: none;
+      }
+
+      .celestial-card.biome:hover {
+        border-color: rgba(60,220,80,0.55);
+        transform: translateY(-8px) scale(1.015);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 60px rgba(40,200,60,0.16);
+      }
+
+      /* Locked */
+      .celestial-card.locked { cursor: default; }
+      .celestial-card.locked:hover { transform: none !important; box-shadow: none !important; }
+      .celestial-card.galaxy.locked   { border-color: rgba(160,80,255,0.1) !important; }
+      .celestial-card.biome.locked    { border-color: rgba(60,200,80,0.1) !important; }
+      .celestial-card.locked .card-img img { filter: blur(20px) brightness(0.07) saturate(0); }
+      .celestial-card.locked .card-img::before {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(0,0,0,0.75); z-index: 1; pointer-events: none;
+      }
+      .celestial-card.locked .cel-card-name,
+      .celestial-card.locked .cel-card-desc,
+      .celestial-card.locked .cel-card-tags,
+      .celestial-card.locked .cel-card-id { filter: blur(6px); user-select: none; }
+      .celestial-card.locked .cel-card-arrow { display: none; }
+
+      /* Image */
+      .celestial-card .card-img {
+        aspect-ratio: 1 / 1; background: #000;
+        overflow: hidden; position: relative;
+      }
+
+      .celestial-card .card-img img {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+        transition: transform 0.55s ease, filter 0.4s ease;
+        filter: saturate(0.95);
+      }
+
+      .celestial-card:hover .card-img img {
+        transform: scale(1.06); filter: saturate(1.1) brightness(1.04);
+      }
+
+      /* Badges */
+      .cel-edition-badge {
+        position: absolute; top: 12px; right: 12px;
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        background: rgba(0,0,0,0.9); border-radius: 999px;
+        padding: 4px 10px; backdrop-filter: blur(8px); z-index: 2;
+      }
+
+      .celestial-card.galaxy  .cel-edition-badge { color: #c060ff; border: 1px solid rgba(180,80,255,0.32); box-shadow: 0 0 12px rgba(160,60,255,0.25); }
+      .celestial-card.biome   .cel-edition-badge { color: #60ee80; border: 1px solid rgba(60,200,80,0.32);  box-shadow: 0 0 12px rgba(40,200,60,0.22); }
+
+      .cel-type-badge {
+        position: absolute; top: 12px; left: 12px;
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.16em; text-transform: uppercase;
+        background: rgba(0,0,0,0.9); border-radius: 999px;
+        padding: 4px 10px; backdrop-filter: blur(8px); z-index: 2;
+      }
+
+      .celestial-card.galaxy .cel-type-badge { color: #c060ff; border: 1px solid rgba(160,80,255,0.2); }
+      .celestial-card.biome  .cel-type-badge { color: #60ee80; border: 1px solid rgba(60,200,80,0.2); }
+
+      /* Lock overlay */
+      .cel-lock-overlay {
+        position: absolute; inset: 0; z-index: 3;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 10px; pointer-events: none;
+      }
+
+      .cel-lock-icon { width: 40px; height: 40px; opacity: 0.55; }
+
+      .cel-lock-label {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.32em; text-transform: uppercase;
+      }
+
+      .cel-lock-countdown {
+        font-family: var(--font-display); font-size: 1.4rem;
+        letter-spacing: 0.08em; line-height: 1;
+      }
+
+      .cel-lock-sub {
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.38;
+      }
+
+      .celestial-card.galaxy .cel-lock-label     { color: rgba(180,100,255,0.6); }
+      .celestial-card.galaxy .cel-lock-countdown { color: #c060ff; text-shadow: 0 0 18px rgba(160,60,255,0.6); }
+      .celestial-card.galaxy .cel-lock-sub       { color: rgba(180,100,255,0.5); }
+
+      .celestial-card.biome  .cel-lock-label     { color: rgba(60,220,80,0.6); }
+      .celestial-card.biome  .cel-lock-countdown { color: #60ee80; text-shadow: 0 0 18px rgba(40,200,60,0.6); }
+      .celestial-card.biome  .cel-lock-sub       { color: rgba(60,200,80,0.5); }
+
+      /* Card body */
+      .cel-card-body {
+        padding: 20px 22px 22px;
+        display: flex; flex-direction: column; gap: 10px; flex: 1;
+      }
+
+      .cel-card-top {
+        display: flex; justify-content: space-between;
+        align-items: flex-start; gap: 8px;
+      }
+
+      .cel-card-name {
+        font-family: var(--font-display); font-size: 2rem;
+        letter-spacing: 0.07em; text-transform: uppercase; line-height: 1;
+      }
+
+      .celestial-card.galaxy .cel-card-name { color: #d090ff; }
+      .celestial-card.biome  .cel-card-name { color: #80ff9a; }
+
+      .cel-card-id {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.22em; text-transform: uppercase; padding-top: 4px;
+      }
+
+      .celestial-card.galaxy .cel-card-id { color: rgba(180,100,255,0.4); }
+      .celestial-card.biome  .cel-card-id { color: rgba(60,200,80,0.4); }
+
+      .cel-type-label {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.28em; text-transform: uppercase;
+        padding: 3px 12px; border-radius: 999px; display: inline-block;
+      }
+
+      .celestial-card.galaxy .cel-type-label { color: #c060ff; border: 1px solid rgba(160,80,255,0.2); background: rgba(140,60,255,0.05); }
+      .celestial-card.biome  .cel-type-label { color: #60ee80; border: 1px solid rgba(60,200,80,0.2);  background: rgba(40,180,60,0.05); }
+
+      .cel-card-desc {
+        font-family: var(--font-body); font-size: 12.5px;
+        line-height: 1.7; font-weight: 300;
+      }
+
+      .celestial-card.galaxy .cel-card-desc { color: rgba(200,150,255,0.42); }
+      .celestial-card.biome  .cel-card-desc { color: rgba(100,220,120,0.4); }
+
+      .cel-card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+      .celestial-card.galaxy .tag { color: #c060ff; border-color: rgba(160,80,255,0.18);  background: rgba(140,60,255,0.04); }
+      .celestial-card.biome  .tag { color: #60ee80; border-color: rgba(60,200,80,0.18);   background: rgba(40,180,60,0.04); }
+
+      .cel-card-footer {
+        display: flex; justify-content: space-between;
+        align-items: center; padding-top: 12px; margin-top: auto;
+      }
+
+      .celestial-card.galaxy .cel-card-footer { border-top: 1px solid rgba(160,80,255,0.1); }
+      .celestial-card.biome  .cel-card-footer { border-top: 1px solid rgba(60,200,80,0.1); }
+
+      .cel-card-status {
+        font-family: var(--font-mono); font-size: 8.5px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        display: flex; align-items: center; gap: 6px;
+      }
+
+      .celestial-card.galaxy .cel-card-status { color: rgba(180,100,255,0.5); }
+      .celestial-card.galaxy .cel-card-status::before {
+        content: ""; display: block; width: 5px; height: 5px; border-radius: 50%;
+        background: #c060ff; box-shadow: 0 0 6px #c060ff;
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      .celestial-card.biome .cel-card-status { color: rgba(60,200,80,0.5); }
+      .celestial-card.biome .cel-card-status::before {
+        content: ""; display: block; width: 5px; height: 5px; border-radius: 50%;
+        background: #60ee80; box-shadow: 0 0 6px #60ee80;
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      .cel-card-arrow {
+        font-family: var(--font-mono); font-size: 9px;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        display: flex; align-items: center; gap: 4px; transition: gap 0.2s;
+      }
+
+      .celestial-card.galaxy .cel-card-arrow { color: rgba(180,80,255,0.6); }
+      .celestial-card.galaxy:hover .cel-card-arrow { color: #c060ff; gap: 7px; }
+      .celestial-card.biome  .cel-card-arrow { color: rgba(60,200,80,0.6); }
+      .celestial-card.biome:hover  .cel-card-arrow { color: #60ee80; gap: 7px; }
+
+      /* Reveal animations */
+      @keyframes galaxyRevealFlash {
+        0%   { filter: blur(20px) brightness(0.07) saturate(0); }
+        20%  { filter: blur(12px) brightness(0.4) saturate(0.3); }
+        55%  { filter: blur(3px) brightness(1.4) saturate(0.85); }
+        100% { filter: blur(0) brightness(1) saturate(1); }
+      }
+
+      @keyframes galaxyRevealGlow {
+        0%   { box-shadow: none; border-color: rgba(160,80,255,0.1); }
+        35%  { box-shadow: 0 0 100px rgba(160,60,255,0.65), 0 0 200px rgba(180,80,255,0.25), 0 0 300px rgba(100,0,255,0.1); border-color: rgba(220,140,255,0.95); }
+        100% { box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 50px rgba(160,60,255,0.12); border-color: rgba(160,80,255,0.3); }
+      }
+
+      @keyframes biomeRevealFlash {
+        0%   { filter: blur(20px) brightness(0.07) saturate(0); }
+        20%  { filter: blur(12px) brightness(0.4) saturate(0.4); }
+        55%  { filter: blur(3px) brightness(1.4) saturate(1.1); }
+        100% { filter: blur(0) brightness(1) saturate(1); }
+      }
+
+      @keyframes biomeRevealGlow {
+        0%   { box-shadow: none; border-color: rgba(60,200,80,0.1); }
+        35%  { box-shadow: 0 0 100px rgba(40,200,60,0.6), 0 0 200px rgba(60,220,80,0.22); border-color: rgba(100,255,120,0.95); }
+        100% { box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 50px rgba(40,200,60,0.1); border-color: rgba(60,200,80,0.3); }
+      }
+
+      .celestial-card.galaxy.revealing .card-img img { animation: galaxyRevealFlash 2.2s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .celestial-card.galaxy.revealing               { animation: galaxyRevealGlow 2.6s ease forwards; }
+      .celestial-card.biome.revealing  .card-img img { animation: biomeRevealFlash 2.2s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .celestial-card.biome.revealing                { animation: biomeRevealGlow 2.6s ease forwards; }
+
+      /* Lightbox tags */
+      .lb-cel-tag-galaxy {
+        font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em;
+        text-transform: uppercase; color: #c060ff;
+        border: 1px solid rgba(160,80,255,0.28); border-radius: 999px;
+        padding: 5px 14px; display: inline-block;
+        background: rgba(140,60,255,0.05); box-shadow: 0 0 14px rgba(160,60,255,0.18);
+      }
+
+      .lb-cel-tag-biome {
+        font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em;
+        text-transform: uppercase; color: #60ee80;
+        border: 1px solid rgba(60,200,80,0.28); border-radius: 999px;
+        padding: 5px 14px; display: inline-block;
+        background: rgba(40,180,60,0.05); box-shadow: 0 0 14px rgba(40,200,60,0.16);
+      }
+
+      @media (max-width: 680px) {
+        .celestial-grid { grid-template-columns: 1fr; gap: 18px; }
+        .celestial-section { padding: 0 16px 60px; }
+      }
+
     </style>
   </head>
   <body>
@@ -776,242 +2554,1332 @@
       <section class="shell">
         <div class="grid-bg"></div>
 
-        <!-- HUD corners -->
-        <div class="hud-corner hud-tl">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
-        <div class="hud-corner hud-tr">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
-        <div class="hud-corner hud-bl">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
-        <div class="hud-corner hud-br">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
+        <div class="hud-corner hud-tl"><svg viewBox="0 0 24 24" fill="none"><path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/></svg></div>
+        <div class="hud-corner hud-tr"><svg viewBox="0 0 24 24" fill="none"><path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/></svg></div>
+        <div class="hud-corner hud-bl"><svg viewBox="0 0 24 24" fill="none"><path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/></svg></div>
+        <div class="hud-corner hud-br"><svg viewBox="0 0 24 24" fill="none"><path d="M0 12 L0 0 L12 0" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" fill="none"/></svg></div>
 
-        <!-- Top bar -->
         <header class="topbar">
           <div class="brand">
             <span class="brand-logo">MIMU</span>
             <span class="brand-sep"></span>
-            <span>MIMUONAPE.XYZ // Countdown Gateway</span>
+            <span>MIMUONAPE.XYZ // The 1 of 1 Editions</span>
           </div>
-          <div class="status-tag">Signal Active &nbsp;// Main Access Pending</div>
+          <div class="status-tag">
+            <span class="pulse-dot"></span>
+            All 14 Units Revealed
+          </div>
         </header>
 
-        <!-- Hero -->
-        <section class="hero">
-          <div class="center">
-            <div class="eyebrow">Transmission Incoming</div>
 
-            <h1 class="hero-title">MIMU<br />AWAKENS</h1>
-            <div class="hero-subtitle">Activation Sequence Initiated</div>
 
+        <section class="gallery-section">
+          <div class="section-header">
+            <div class="eyebrow">Restricted Archive // Series 01</div>
+            <h1 class="section-title">MIMU<br/>Legends</h1>
+            <div class="section-sub">1 of 1 &nbsp;//&nbsp; 14 Total Units</div>
             <div class="divider"></div>
-
-            <div class="countdown-wrap">
-              <div class="countdown-label">Countdown To Activation</div>
-              <div class="countdown" id="countdown">
-                <div class="time-box">
-                  <div class="time-value" id="days">00</div>
-                  <div class="time-label">Days</div>
-                </div>
-                <div class="time-box">
-                  <div class="time-value" id="hours">00</div>
-                  <div class="time-label">Hours</div>
-                </div>
-                <div class="time-box">
-                  <div class="time-value" id="minutes">00</div>
-                  <div class="time-label">Minutes</div>
-                </div>
-                <div class="time-box">
-                  <div class="time-value" id="seconds">00</div>
-                  <div class="time-label">Seconds</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn-primary" id="enterSiteBtn">Enter Access Terminal</button>
-              <button class="btn btn-secondary" id="bioScanBtn">Bio Scan Select</button>
-            </div>
-
-            <div class="note" id="statusNote">Countdown synced by visitor region. Terminal access remains restricted.</div>
           </div>
-        </section>
-        <!-- Easter Egg Trigger — hidden glyph in bottom-right -->
-        <div class="egg-trigger" id="eggTrigger" title="">
-          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 1 C5.5 1 2 4 2 8 C2 13 5.5 17 9 17 C12.5 17 16 13 16 8 C16 4 12.5 1 9 1Z" stroke="rgba(120,255,191,0.9)" stroke-width="1" fill="none"/>
-            <path d="M9 5 L9 9 L12 11" stroke="rgba(120,255,191,0.9)" stroke-width="1" stroke-linecap="round"/>
-            <circle cx="9" cy="9" r="1.2" fill="rgba(120,255,191,0.8)"/>
-          </svg>
-        </div>
 
+          <div class="stats-row">
+            <div class="stat">
+              <span class="stat-val">14</span>
+              <span class="stat-lbl">Total Units</span>
+            </div>
+            <div class="stat">
+              <span class="stat-val" id="visCount">14</span>
+              <span class="stat-lbl">Displayed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-val">1/1</span>
+              <span class="stat-lbl">Edition</span>
+            </div>
+            <div class="stat">
+              <span class="stat-val">0</span>
+              <span class="stat-lbl">Unrevealed</span>
+            </div>
+          </div>
+
+          <!-- Next reveal countdown bar -->
+          <div class="next-reveal-bar" id="nextRevealBar">
+            <span>Next Reveal In</span>
+            <span class="next-reveal-sep"></span>
+            <span class="next-reveal-timer" id="nextRevealTimer">--:--:--</span>
+            <span class="next-reveal-sep"></span>
+            <span id="nextRevealLabel">Loading...</span>
+          </div>
+
+          <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- ═══════════ MEGA MIMU SECTION ═══════════ -->
+        <section class="mega-section">
+          <div class="mega-divider"></div>
+
+          <div class="mega-header">
+            <div class="mega-eyebrow">Ultra Rare // Series 02</div>
+            <h2 class="mega-title">MEGA<br/>MIMU</h2>
+            <div class="mega-sub">1 of 1 &nbsp;//&nbsp; 6 Total Units</div>
+            <div class="mega-divider-sm"></div>
+          </div>
+
+          <div class="mega-stats-row">
+            <div class="mega-stat">
+              <span class="mega-stat-val">6</span>
+              <span class="mega-stat-lbl">Total Units</span>
+            </div>
+            <div class="mega-stat">
+              <span class="mega-stat-val" id="megaVisCount">0</span>
+              <span class="mega-stat-lbl">Revealed</span>
+            </div>
+            <div class="mega-stat">
+              <span class="mega-stat-val">1/1</span>
+              <span class="mega-stat-lbl">Edition</span>
+            </div>
+            <div class="mega-stat">
+              <span class="mega-stat-val" id="megaUnrevealedCount">6</span>
+              <span class="mega-stat-lbl">Unrevealed</span>
+            </div>
+          </div>
+
+          <div class="mega-reveal-bar" id="megaRevealBar">
+            <span>Next Mega Reveal In</span>
+            <span class="mega-reveal-sep"></span>
+            <span class="mega-reveal-timer" id="megaRevealTimer">--:--:--</span>
+            <span class="mega-reveal-sep"></span>
+            <span id="megaRevealLabel">Loading...</span>
+          </div>
+
+          <div class="mega-grid" id="megaGrid"></div>
+        </section>
+
+        <!-- ═══════════ THE ANCIENT KEEPERS SECTION ═══════════ -->
+        <section class="keeper-section">
+          <div class="keeper-divider-top"></div>
+
+          <div class="keeper-header">
+            <div class="keeper-eyebrow">Elemental Guardians // Series 03</div>
+            <h2 class="keeper-title">The Ancient<br/>Keepers</h2>
+            <div class="keeper-sub">1 of 1 &nbsp;//&nbsp; 4 Total Units</div>
+            <div class="keeper-divider-sm"></div>
+          </div>
+
+          <div class="keeper-stats-row">
+            <div class="keeper-stat">
+              <span class="keeper-stat-val">4</span>
+              <span class="keeper-stat-lbl">Total Units</span>
+            </div>
+            <div class="keeper-stat">
+              <span class="keeper-stat-val" id="keeperVisCount">0</span>
+              <span class="keeper-stat-lbl">Revealed</span>
+            </div>
+            <div class="keeper-stat">
+              <span class="keeper-stat-val">1/1</span>
+              <span class="keeper-stat-lbl">Edition</span>
+            </div>
+            <div class="keeper-stat">
+              <span class="keeper-stat-val" id="keeperUnrevealedCount">4</span>
+              <span class="keeper-stat-lbl">Unrevealed</span>
+            </div>
+          </div>
+
+          <div class="keeper-reveal-bar" id="keeperRevealBar">
+            <span>Next Keeper Reveal In</span>
+            <span class="keeper-reveal-sep"></span>
+            <span class="keeper-reveal-timer" id="keeperRevealTimer">--:--:--</span>
+            <span class="keeper-reveal-sep"></span>
+            <span id="keeperRevealLabel">Loading...</span>
+          </div>
+
+          <div class="keeper-grid" id="keeperGrid"></div>
+        </section>
+
+        <!-- ═══════════ MIMU GODS SECTION ═══════════ -->
+        <section class="gods-section">
+          <div class="gods-divider-top"></div>
+
+          <div class="gods-header">
+            <div class="gods-eyebrow">The Highest Order // Series 04</div>
+            <h2 class="gods-title">MIMU<br/>Gods</h2>
+            <div class="gods-sub">1 of 1 &nbsp;//&nbsp; 2 Total Units</div>
+            <div class="gods-duality-label">
+              <span class="duality-sky">☁ Sky God</span>
+              <span class="duality-sep">&nbsp;vs&nbsp;</span>
+              <span class="duality-under">🔥 Underworld God</span>
+            </div>
+            <div class="gods-divider-sm"></div>
+          </div>
+
+          <div class="gods-stats-row">
+            <div class="gods-stat">
+              <span class="gods-stat-val">2</span>
+              <span class="gods-stat-lbl">Total Units</span>
+            </div>
+            <div class="gods-stat">
+              <span class="gods-stat-val" id="godVisCount">0</span>
+              <span class="gods-stat-lbl">Revealed</span>
+            </div>
+            <div class="gods-stat">
+              <span class="gods-stat-val">1/1</span>
+              <span class="gods-stat-lbl">Edition</span>
+            </div>
+            <div class="gods-stat">
+              <span class="gods-stat-val" id="godUnrevealedCount">2</span>
+              <span class="gods-stat-lbl">Unrevealed</span>
+            </div>
+          </div>
+
+          <div class="gods-reveal-bar" id="godsRevealBar">
+            <span>Next God Descends In</span>
+            <span class="gods-reveal-sep"></span>
+            <span class="gods-reveal-timer" id="godsRevealTimer">--:--:--</span>
+            <span class="gods-reveal-sep"></span>
+            <span id="godsRevealLabel">Loading...</span>
+          </div>
+
+          <div class="gods-grid" id="godsGrid"></div>
+        </section>
+
+        <!-- ═══════════ CELESTIAL MIMU SECTION ═══════════ -->
+        <section class="celestial-section">
+          <div class="celestial-divider-top"></div>
+
+          <div class="celestial-header">
+            <div class="celestial-eyebrow">Beyond the Known // Series 05</div>
+            <h2 class="celestial-title">Celestial<br/>MIMU</h2>
+            <div class="celestial-sub">1 of 1 &nbsp;//&nbsp; 2 Total Units</div>
+            <div class="celestial-duality-label">
+              <span class="duality-galaxy">✦ Galaxy</span>
+              <span class="duality-csep">&nbsp;&amp;&nbsp;</span>
+              <span class="duality-biome">◈ Biome</span>
+            </div>
+            <div class="celestial-divider-sm"></div>
+          </div>
+
+          <div class="celestial-stats-row">
+            <div class="celestial-stat">
+              <span class="celestial-stat-val">2</span>
+              <span class="celestial-stat-lbl">Total Units</span>
+            </div>
+            <div class="celestial-stat">
+              <span class="celestial-stat-val" id="celVisCount">0</span>
+              <span class="celestial-stat-lbl">Revealed</span>
+            </div>
+            <div class="celestial-stat">
+              <span class="celestial-stat-val">1/1</span>
+              <span class="celestial-stat-lbl">Edition</span>
+            </div>
+            <div class="celestial-stat">
+              <span class="celestial-stat-val" id="celUnrevealedCount">2</span>
+              <span class="celestial-stat-lbl">Unrevealed</span>
+            </div>
+          </div>
+
+          <div class="celestial-reveal-bar" id="celestialRevealBar">
+            <span>Next Celestial Emerges In</span>
+            <span class="celestial-reveal-sep"></span>
+            <span class="celestial-reveal-timer" id="celestialRevealTimer">--:--:--</span>
+            <span class="celestial-reveal-sep"></span>
+            <span id="celestialRevealLabel">Loading...</span>
+          </div>
+
+          <div class="celestial-grid" id="celestialGrid"></div>
+        </section>
+
+
+        <footer class="gallery-footer">
+          <span class="footer-text">MIMU // The 1 of 1 Editions // © 2026 All Rights Reserved</span>
+          <span class="footer-count" id="footerCount">14 of 28 units revealed</span>
+        </footer>
       </section>
     </main>
 
-    <!-- Glitch Unlock Overlay -->
-    <div class="glitch-overlay" id="glitchOverlay">
-      <div class="glitch-text" id="glitchText">ACCESSING RESTRICTED ARCHIVE</div>
-      <div class="glitch-bar"><div class="glitch-bar-fill" id="glitchBarFill"></div></div>
+    <!-- Wave reveal banner -->
+    <div class="wave-banner" id="waveBanner">
+      <span class="wave-text" id="waveText">Transmission incoming…</span>
+      <button class="wave-close" id="waveBannerClose">Dismiss</button>
     </div>
 
-    <!-- Legendaries Page -->
-    <div class="legendaries-page" id="legPage">
-      <div class="leg-shell">
-        <button class="leg-back" id="legBack">← Return To Gateway</button>
-        <div class="leg-eyebrow">// Restricted Archive — Legendary Tier //</div>
-        <h1 class="leg-title">The<br/>Legendaries</h1>
-        <div class="leg-divider"></div>
-        <div class="leg-grid">
-
-          <div class="leg-card">
-            <div class="leg-card-tier">◈ Legendary Tier I</div>
-            <div class="leg-card-name">MIMU</div>
-            <div class="leg-card-desc">The origin signal. First transmission received. Classification beyond standard parameters.</div>
-            <div class="leg-card-glyph">◈</div>
-          </div>
-
-          <div class="leg-card">
-            <div class="leg-card-tier">◈ Legendary Tier I</div>
-            <div class="leg-card-name">VESPER</div>
-            <div class="leg-card-desc">Emerges only at dusk cycles. Frequency unmatched. Last recorded contact: unknown.</div>
-            <div class="leg-card-glyph">◐</div>
-          </div>
-
-          <div class="leg-card">
-            <div class="leg-card-tier">◈ Legendary Tier II</div>
-            <div class="leg-card-name">NOXIS</div>
-            <div class="leg-card-desc">Shadow-band entity. Absorbed three prior classifications before stable form was achieved.</div>
-            <div class="leg-card-glyph">◑</div>
-          </div>
-
-          <div class="leg-card">
-            <div class="leg-card-tier">◈ Legendary Tier II</div>
-            <div class="leg-card-name">AUREN</div>
-            <div class="leg-card-desc">Light-core resonance. Detected once during the 04-series activation window.</div>
-            <div class="leg-card-glyph">☀</div>
-          </div>
-
-          <div class="leg-card">
-            <div class="leg-card-tier">◈ Legendary Tier III</div>
-            <div class="leg-card-name">KETH</div>
-            <div class="leg-card-desc">Void-class signature. Defies standard bio-scan protocols. Handle with extreme caution.</div>
-            <div class="leg-card-glyph">◯</div>
-          </div>
-
-          <div class="leg-card">
-            <div class="leg-card-tier">◈ Legendary Tier III</div>
-            <div class="leg-card-name">SOLENNE</div>
-            <div class="leg-card-desc">Rarest confirmed sighting. Temporal drift suggests non-linear origin. Status: unresolved.</div>
-            <div class="leg-card-glyph">✦</div>
-          </div>
-
-        </div>
+    <div class="lightbox" id="lightbox">
+      <div class="lb-inner">
+        <button class="lb-close" id="lbClose">✕</button>
+        <div class="lb-img" id="lbImg"></div>
+        <div class="lb-info" id="lbInfo"></div>
       </div>
     </div>
 
     <script>
-      const targetDate = new Date('2026-04-06T16:00:00Z');
-      const daysEl    = document.getElementById('days');
-      const hoursEl   = document.getElementById('hours');
-      const minutesEl = document.getElementById('minutes');
-      const secondsEl = document.getElementById('seconds');
-      const note      = document.getElementById('statusNote');
+      const IMAGES = [
+  "/images/legend-freddy.png",
+  "/images/legend-dual-nature.png",
+  "/images/legend-jason.png",
+  "/images/legend-kaws.png",
+  "/images/legend-venom-stitch.png",
+  "/images/legend-omni-king.png",
+  "/images/legend-green-maw.png",
+  "/images/legend-night-king.png",
+  "/images/legend-minion-bob.png",
+  "/images/legend-toxic-wraith.png",
+  "/images/legend-chaos-form.png",
+  "/images/legend-shredder.png",
+  "/images/legend-void-reaper.png",
+  "/images/legend-holy-degen.png",
+  "/images/mega-ancient-one.png",
+  "/images/mega-melt-mode.png",
+  "/images/mega-the-watcher.png",
+  "/images/mega-static-surge.png",
+  "/images/mega-warlord-prime.png",
+  "/images/mega-brain-eater.png",
+  "/images/keeper-aethon.png",
+  "/images/keeper-zephyr.png",
+  "/images/keeper-ignis.png",
+  "/images/keeper-aqualis.png",
+  "/images/god-aetheria.png",
+  "/images/god-infernus.png",
+  "/images/celestial-galaxia.png",
+  "/images/celestial-biome.png"
+];];
 
-      function pad(n) { return String(n).padStart(2, '0'); }
 
-      function updateCountdown() {
-        const diff = targetDate - Date.now();
-        if (diff <= 0) {
-          [daysEl, hoursEl, minutesEl, secondsEl].forEach(el => el.textContent = '00');
-          return;
-        }
-        daysEl.textContent    = pad(Math.floor(diff / 86400000));
-        hoursEl.textContent   = pad(Math.floor(diff / 3600000) % 24);
-        minutesEl.textContent = pad(Math.floor(diff / 60000) % 60);
-        secondsEl.textContent = pad(Math.floor(diff / 1000) % 60);
-      }
-
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-
-      document.getElementById('enterSiteBtn').addEventListener('click', () => {
-        note.textContent = '[ ACCESS DENIED — CLEARANCE LEVEL INSUFFICIENT ]';
-        note.classList.add('denied');
-        setTimeout(() => {
-          note.textContent = 'Countdown synced by visitor region. Terminal access remains restricted.';
-          note.classList.remove('denied');
-        }, 3000);
-      });
-
-      document.getElementById('bioScanBtn').addEventListener('click', () => {
-        window.location.href = '/bio-scan-select.html';
-      });
-
-      // ── Easter Egg Logic ──
-      const eggTrigger   = document.getElementById('eggTrigger');
-      const glitchOverlay = document.getElementById('glitchOverlay');
-      const glitchText   = document.getElementById('glitchText');
-      const glitchFill   = document.getElementById('glitchBarFill');
-      const legPage      = document.getElementById('legPage');
-      const legBack      = document.getElementById('legBack');
-
-      const CLICKS_NEEDED = 5;
-      let clickCount = 0;
-
-      const warmClasses = ['', 'warm-1', 'warm-2', 'warm-3', 'warm-4'];
-      const glitchLines = [
-        'ACCESSING RESTRICTED ARCHIVE',
-        'DECRYPTING LEGENDARY DATA',
-        'CLEARANCE OVERRIDE ACCEPTED',
-        'BREACH SUCCESSFUL',
-        'LOADING THE LEGENDARIES...'
+      
+      const LEGENDS = [
+        { idx: 4,  id: "L-005", name: "Venom Stitch",    desc: "Half symbiote, half intergalactic experiment. Ohana means nobody escapes.",      tags: ["Dark", "Fusion", "Symbiote"] },
+        { idx: 11, id: "L-012", name: "The Shredder",    desc: "Ancient warlord in chibi form. The armor is real. The menace is realer.",          tags: ["Armored", "Villain", "Dark"] },
+        { idx: 0,  id: "L-001", name: "Freddy K",        desc: "Nightmare fuel in a fedora. The claws are sharp. The sweater is iconic.",          tags: ["Horror", "Dark", "Classic"] },
+        { idx: 9,  id: "L-010", name: "Toxic Wraith",    desc: "Corrosion made sentient. Dripping light, bound in gold — cursed and crowned.",     tags: ["Toxic", "Cursed", "Rare"] },
+        { idx: 7,  id: "L-008", name: "Night King",      desc: "Beyond the wall, beyond reason. Glacial stare that freezes everything.",           tags: ["Ice", "Armored", "Undead"] },
+        { idx: 3,  id: "L-004", name: "KAWS Dissected",  desc: "Inside the XX lies the anatomy. Holding a smaller version of its own grief.",     tags: ["Art", "Fusion", "Rare"] },
+        { idx: 10, id: "L-011", name: "Chaos Form",      desc: "Every color at once, every eye watching. A walking hallucination.",                tags: ["Rare", "Psychedelic", "Fusion"] },
+        { idx: 2,  id: "L-003", name: "Jason",           desc: "Camp Crystal Lake's favourite resident. Heart-shaped pupils. Still runs faster.",  tags: ["Horror", "Dark", "Classic"] },
+        { idx: 5,  id: "L-006", name: "Omni King",       desc: "Crowned with eyes that see all dimensions. Swirling cosmos inside its belly.",     tags: ["Rare", "Psychedelic", "King"] },
+        { idx: 8,  id: "L-009", name: "Minion Bob",      desc: "MIMU tagged overalls. One green eye, one red. Still carries the bear.",            tags: ["Pop", "Classic", "Fusion"] },
+        { idx: 1,  id: "L-002", name: "Dual Nature",     desc: "Split down the middle — two patterns, one MIMU. The zipper holds the secret.",    tags: ["Art", "Fusion", "Pop"] },
+        { idx: 6,  id: "L-007", name: "Green Maw",       desc: "Infectious smile, red eyes, something small living on its tongue.",               tags: ["Horror", "Dark", "Classic"] },
+        { idx: 12, id: "L-013", name: "Void Reaper", desc: "Cloaked in starless fabric, green flames eating through the void. Eyes that lock and never let go.", tags: ["Dark", "Cursed", "Rare"] },
+        { idx: 13, id: "L-014", name: "Holy Degen",  desc: "Tattooed head to toe — Bitcoin, MIMU, love, and crosses. Halo on. Hawaiian shirt. Laser eyes on.", tags: ["Pop", "Rare", "Fusion"] }
       ];
 
-      eggTrigger.addEventListener('click', () => {
-        clickCount++;
-        // remove old warm class
-        eggTrigger.classList.remove('warm-1','warm-2','warm-3','warm-4');
-        if (clickCount < CLICKS_NEEDED) {
-          eggTrigger.classList.add(warmClasses[clickCount]);
-        } else {
-          runGlitchSequence();
-        }
-      });
 
-      function runGlitchSequence() {
-        glitchOverlay.classList.add('active');
-        let step = 0;
-        const totalSteps = 60;
-        const interval = setInterval(() => {
-          step++;
-          const pct = (step / totalSteps) * 100;
-          glitchFill.style.width = pct + '%';
+      // ═══════════════════════════════════════════════════════════
+      //  MEGA MIMU COLLECTION — 6 total, 1 per wave (every 24 h)
+      // ═══════════════════════════════════════════════════════════
+      const MEGA_REVEAL_START_UTC   = new Date("2026-04-01T00:00:00Z").getTime(); // first Mega reveals here
+      const MEGA_REVEAL_INTERVAL_MS = 24 * 60 * 60 * 1000;
+      const MEGA_BATCH_SIZE         = 1; // 1 per day
 
-          // cycle through glitch lines
-          const lineIdx = Math.min(Math.floor((step / totalSteps) * glitchLines.length), glitchLines.length - 1);
-          glitchText.textContent = glitchLines[lineIdx];
+      const MEGA_MIMUS = [
+        { idx: 17, id: "M-004", name: "Static Surge",    desc: "Purple static electricity given form. Yellow face peering through the storm. Plugged into something infinite.",      tags: ["Electric", "Rare", "Dark"] },
+        { idx: 14, id: "M-001", name: "Ancient One",     desc: "Older than memory. Built from bark, moss, and firefly light. The skull at its feet was not always there.",           tags: ["Nature", "Cursed", "Rare"] },
+        { idx: 18, id: "M-005", name: "Warlord Prime",   desc: "Gold-trimmed armour, demon horns, red ember eyes. The cracks in its chest glow like a forge that never cools.",     tags: ["Armored", "Dark", "King"] },
+        { idx: 15, id: "M-002", name: "Melt Mode",       desc: "Every pigment in existence running at once. Spiral eyes, fangs out. Its smile is the last thing the canvas sees.",  tags: ["Psychedelic", "Rare", "Fusion"] },
+        { idx: 19, id: "M-006", name: "Brain Eater",     desc: "Skull-cap of exposed brain, ribcage showing, acid drool. Still hungry. Always hungry.",                             tags: ["Horror", "Dark", "Undead"] },
+        { idx: 16, id: "M-003", name: "The Watcher",     desc: "One enormous eye under a death-shroud. Orbs of light orbit its head. The beam never stops scanning.",              tags: ["Dark", "Cursed", "Psychedelic"] },
+      ];
 
-          if (step >= totalSteps) {
-            clearInterval(interval);
-            // redirect to the separate legendaries page
-            window.location.href = 'legends.html';
-          }
-        }, 40);
+      function getMegaRevealedCount() {
+        const now = Date.now();
+        if (now < MEGA_REVEAL_START_UTC) return 0;
+        const elapsed = now - MEGA_REVEAL_START_UTC;
+        const wavesCompleted = Math.floor(elapsed / MEGA_REVEAL_INTERVAL_MS) + 1;
+        return Math.min(wavesCompleted * MEGA_BATCH_SIZE, MEGA_MIMUS.length);
       }
 
-      legBack.addEventListener('click', () => {});
+      function msUntilNextMegaReveal() {
+        const now = Date.now();
+        if (now < MEGA_REVEAL_START_UTC) return MEGA_REVEAL_START_UTC - now;
+        const elapsed = now - MEGA_REVEAL_START_UTC;
+        const nextWave = (Math.floor(elapsed / MEGA_REVEAL_INTERVAL_MS) + 1) * MEGA_REVEAL_INTERVAL_MS;
+        return Math.max(0, MEGA_REVEAL_START_UTC + nextWave - now);
+      }
+
+      function msUntilMegaWave(cardIndex) {
+        const wave = Math.ceil((cardIndex + 1) / MEGA_BATCH_SIZE);
+        const waveTime = MEGA_REVEAL_START_UTC + (wave - 1) * MEGA_REVEAL_INTERVAL_MS;
+        return Math.max(0, waveTime - Date.now());
+      }
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  THE ANCIENT KEEPERS — 4 total, 1 per wave (every 24 h)
+      //  Elemental guardians: Void · Wind · Fire · Water
+      // ═══════════════════════════════════════════════════════════
+      const KEEPER_REVEAL_START_UTC   = new Date("2026-04-07T00:00:00Z").getTime();
+      const KEEPER_REVEAL_INTERVAL_MS = 24 * 60 * 60 * 1000;
+      const KEEPER_BATCH_SIZE         = 1;
+
+      const ANCIENT_KEEPERS = [
+        { idx: 22, id: "K-003", name: "Ignis",    element: "Fire",  desc: "The Keeper of Flame. One all-seeing eye burns inside the dark. Its robe is scorched earth. The fire medallion never cools.",         tags: ["Fire", "Elemental", "Rare"] },
+        { idx: 20, id: "K-001", name: "Aethon",   element: "Void",  desc: "The Keeper of the Void. Pink robe, blue orbs in orbit, MIMU medallion stamped in gold. Cyan eyes that see through dimensions.",     tags: ["Void", "Elemental", "Rare"] },
+        { idx: 23, id: "K-004", name: "Aqualis",  element: "Water", desc: "The Keeper of Tides. Dripping blue robes, ocean medallion, eyes like deep water. It is always raining where this one stands.",       tags: ["Water", "Elemental", "Rare"] },
+        { idx: 21, id: "K-002", name: "Zephyr",   element: "Wind",  desc: "The Keeper of Winds. Bright as a signal flare. Halo, angel wings, silver medallion. It moves before you know it has been there.",   tags: ["Wind", "Elemental", "Rare"] },
+      ];
+
+      function getKeeperRevealedCount() {
+        const now = Date.now();
+        if (now < KEEPER_REVEAL_START_UTC) return 0;
+        const elapsed = now - KEEPER_REVEAL_START_UTC;
+        return Math.min(Math.floor(elapsed / KEEPER_REVEAL_INTERVAL_MS) + 1, ANCIENT_KEEPERS.length);
+      }
+
+      function msUntilNextKeeperReveal() {
+        const now = Date.now();
+        if (now < KEEPER_REVEAL_START_UTC) return KEEPER_REVEAL_START_UTC - now;
+        const elapsed = now - KEEPER_REVEAL_START_UTC;
+        const nextWave = (Math.floor(elapsed / KEEPER_REVEAL_INTERVAL_MS) + 1) * KEEPER_REVEAL_INTERVAL_MS;
+        return Math.max(0, KEEPER_REVEAL_START_UTC + nextWave - now);
+      }
+
+      function msUntilKeeperWave(cardIndex) {
+        const waveTime = KEEPER_REVEAL_START_UTC + cardIndex * KEEPER_REVEAL_INTERVAL_MS;
+        return Math.max(0, waveTime - Date.now());
+      }
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  MIMU GODS — 2 total, 1 per wave (every 24 h)
+      //  The duality: Sky God & Underworld God
+      // ═══════════════════════════════════════════════════════════
+      const GOD_REVEAL_START_UTC   = new Date("2026-04-09T00:00:00Z").getTime();
+      const GOD_REVEAL_INTERVAL_MS = 24 * 60 * 60 * 1000;
+      const GOD_BATCH_SIZE         = 1;
+
+      const MIMU_GODS = [
+        {
+          idx: 24, id: "G-001", name: "Aetheria",
+          domain: "Sky",
+          desc: "God of the Sky. A floating world lives inside its body — cherry blossoms, ancient ruins, drifting clouds. A small MIMU stands at the gate, worshipping inward.",
+          tags: ["Sky", "Divine", "Rare"]
+        },
+        {
+          idx: 25, id: "G-002", name: "Infernus",
+          domain: "Underworld",
+          desc: "God of the Underworld. Lava for blood, obsidian for bone. Molten gold drips from its eyes. The armour was forged in a place with no name and no light.",
+          tags: ["Underworld", "Divine", "Rare"]
+        },
+      ];
+
+      function getGodRevealedCount() {
+        const now = Date.now();
+        if (now < GOD_REVEAL_START_UTC) return 0;
+        const elapsed = now - GOD_REVEAL_START_UTC;
+        return Math.min(Math.floor(elapsed / GOD_REVEAL_INTERVAL_MS) + 1, MIMU_GODS.length);
+      }
+
+      function msUntilNextGodReveal() {
+        const now = Date.now();
+        if (now < GOD_REVEAL_START_UTC) return GOD_REVEAL_START_UTC - now;
+        const elapsed = now - GOD_REVEAL_START_UTC;
+        const nextWave = (Math.floor(elapsed / GOD_REVEAL_INTERVAL_MS) + 1) * GOD_REVEAL_INTERVAL_MS;
+        return Math.max(0, GOD_REVEAL_START_UTC + nextWave - now);
+      }
+
+      function msUntilGodWave(cardIndex) {
+        const waveTime = GOD_REVEAL_START_UTC + cardIndex * GOD_REVEAL_INTERVAL_MS;
+        return Math.max(0, waveTime - Date.now());
+      }
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  CELESTIAL MIMU — 2 total, 1 per wave (every 24 h)
+      //  Galaxy & Biome — the cosmos within and the world without
+      // ═══════════════════════════════════════════════════════════
+      const CELESTIAL_REVEAL_START_UTC   = new Date("2026-04-09T00:00:00Z").getTime();
+      const CELESTIAL_REVEAL_INTERVAL_MS = 24 * 60 * 60 * 1000;
+      const CELESTIAL_BATCH_SIZE         = 1;
+
+      const CELESTIAL_MIMUS = [
+        {
+          idx: 26, id: "C-001", name: "Galaxia",
+          type: "Galaxy",
+          desc: "The universe compacted into one body. Nebulae bloom where its fur should be. It stares with eyes like collapsed stars — wide, white, and quietly infinite.",
+          tags: ["Cosmic", "Celestial", "Rare"]
+        },
+        {
+          idx: 27, id: "C-002", name: "Biome",
+          type: "Biome",
+          desc: "Every ecosystem at once — slime, teeth, eyes, fins, roots, and colour spilling from a single creature. The masks it wears are every creature it has ever absorbed.",
+          tags: ["Chaos", "Celestial", "Rare"]
+        },
+      ];
+
+      function getCelestialRevealedCount() {
+        const now = Date.now();
+        if (now < CELESTIAL_REVEAL_START_UTC) return 0;
+        const elapsed = now - CELESTIAL_REVEAL_START_UTC;
+        return Math.min(Math.floor(elapsed / CELESTIAL_REVEAL_INTERVAL_MS) + 1, CELESTIAL_MIMUS.length);
+      }
+
+      function msUntilNextCelestialReveal() {
+        const now = Date.now();
+        if (now < CELESTIAL_REVEAL_START_UTC) return CELESTIAL_REVEAL_START_UTC - now;
+        const elapsed = now - CELESTIAL_REVEAL_START_UTC;
+        const nextWave = (Math.floor(elapsed / CELESTIAL_REVEAL_INTERVAL_MS) + 1) * CELESTIAL_REVEAL_INTERVAL_MS;
+        return Math.max(0, CELESTIAL_REVEAL_START_UTC + nextWave - now);
+      }
+
+      function msUntilCelestialWave(cardIndex) {
+        const waveTime = CELESTIAL_REVEAL_START_UTC + cardIndex * CELESTIAL_REVEAL_INTERVAL_MS;
+        return Math.max(0, waveTime - Date.now());
+      }
+
+
+
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  REVEAL SYSTEM
+      //  UTC epoch used so all visitors reveal at the same instant.
+      //
+      //  CONFIGURATION — set your start time here (UTC):
+      //    REVEAL_START_UTC  = first batch reveal time (Unix ms, UTC)
+      //    REVEAL_INTERVAL   = ms between each wave (default 24 h)
+      //    BATCH_SIZE        = how many cards revealed per wave
+      //
+      //  The order of reveal follows the LEGENDS array order (index 0 first).
+      // ═══════════════════════════════════════════════════════════
+
+      // ── Set the first reveal moment here (UTC) ──────────────────
+      // Default: starts 24 h from the moment the file was built.
+      // Change this ISO string to any future UTC time you want.
+      const REVEAL_START_UTC   = new Date("2026-03-26T00:00:00Z").getTime(); // first batch reveals at this UTC moment
+      const REVEAL_INTERVAL_MS = 24 * 60 * 60 * 1000;   // 24 hours in ms
+      const BATCH_SIZE         = 3;                       // cards per wave
+
+      /** Returns how many cards should be revealed RIGHT NOW (UTC-based). */
+      function getRevealedCount() {
+        const now = Date.now(); // UTC ms — same everywhere
+        if (now < REVEAL_START_UTC) return 0;
+        const elapsed = now - REVEAL_START_UTC;
+        const wavesCompleted = Math.floor(elapsed / REVEAL_INTERVAL_MS) + 1;
+        return Math.min(wavesCompleted * BATCH_SIZE, LEGENDS.length);
+      }
+
+      /** Ms until the next wave fires (0 if all revealed). */
+      function msUntilNextReveal() {
+        const now = Date.now();
+        if (now < REVEAL_START_UTC) return REVEAL_START_UTC - now;
+        const elapsed = now - REVEAL_START_UTC;
+        const nextWave = (Math.floor(elapsed / REVEAL_INTERVAL_MS) + 1) * REVEAL_INTERVAL_MS;
+        return Math.max(0, REVEAL_START_UTC + nextWave - now);
+      }
+
+      function pad(n) { return String(n).padStart(2, "0"); }
+
+      function formatCountdown(ms) {
+        if (ms <= 0) return "00:00:00";
+        const totalSecs = Math.floor(ms / 1000);
+        const d = Math.floor(totalSecs / 86400);
+        const h = Math.floor(totalSecs / 3600) % 24;
+        const m = Math.floor(totalSecs / 60) % 60;
+        const s = totalSecs % 60;
+        if (d > 0) {
+          // Over 24 h — show days, hours, minutes only
+          return d + "d " + pad(h) + "h " + pad(m) + "m";
+        }
+        // Under 24 h — show hours, minutes, seconds
+        return pad(h) + ":" + pad(m) + ":" + pad(s);
+      }
+
+      // ── Build tag list for filters ───────────────────────────────
+      const allTags = [...new Set(LEGENDS.flatMap(l => l.tags))].sort();
+      const filterBar = document.getElementById('filterBar');
+      if (filterBar) {
+        allTags.forEach(tag => {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.dataset.filter = tag;
+          btn.textContent = tag;
+          filterBar.appendChild(btn);
+        });
+      }
+
+      let activeFilter = 'all';
+      const grid         = document.getElementById('galleryGrid');
+      const visCount     = document.getElementById('visCount');
+      const footerCount  = document.getElementById('footerCount');
+      const statusTag    = document.querySelector('.status-tag');
+
+      // ── Lock SVG icon ────────────────────────────────────────────
+      const LOCK_SVG = `<svg class="lock-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="16" width="24" height="16" rx="4" stroke="rgba(120,255,191,0.5)" stroke-width="1.5"/>
+        <path d="M11 16V11a7 7 0 0 1 14 0v5" stroke="rgba(120,255,191,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="18" cy="24" r="2" fill="rgba(120,255,191,0.5)"/>
+      </svg>`;
+
+      // ── Card renderer ─────────────────────────────────────────────
+      function buildCard(item, revealed, timeUntil) {
+        const src  = IMAGES[item.idx];
+        const card = document.createElement('div');
+        card.className = revealed ? 'card' : 'card locked';
+        card.dataset.legendId = item.id;
+
+        const lockOverlay = revealed ? '' : `
+          <div class="lock-overlay">
+            ${LOCK_SVG}
+            <span class="lock-label">Unrevealed</span>
+            <span class="lock-countdown" data-timer="${timeUntil}">${formatCountdown(timeUntil)}</span>
+            <span class="lock-sub">UTC Sync Active</span>
+          </div>`;
+
+        card.innerHTML = `
+          <div class="card-img">
+            <img src="${src}" alt="${revealed ? item.name : 'Classified'}" loading="lazy" />
+            <span class="edition-badge">1 / 1</span>
+            <span class="legend-badge">★ Legend</span>
+            ${lockOverlay}
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-name">${item.name}</span>
+              <span class="card-id">${item.id}</span>
+            </div>
+            <p class="card-desc">${item.desc}</p>
+            <div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            <div class="card-footer">
+              <span class="card-status">${revealed ? 'On Record' : 'Classified'}</span>
+              ${revealed ? '<span class="card-arrow">View ›</span>' : ''}
+            </div>
+          </div>`;
+
+        if (revealed) {
+          card.addEventListener('click', () => openLightbox(item));
+        }
+        return card;
+      }
+
+      // ── Main render ───────────────────────────────────────────────
+      function renderGallery(revealedCount) {
+        const msLeft = msUntilNextReveal();
+
+        // Work out per-wave timing for locked cards
+        // Wave N unlocks at: REVEAL_START_UTC + N * REVEAL_INTERVAL_MS
+        function msUntilWave(cardIndex) {
+          const wave = Math.ceil((cardIndex + 1) / BATCH_SIZE); // 1-based wave
+          const waveTime = REVEAL_START_UTC + (wave - 1) * REVEAL_INTERVAL_MS;
+          return Math.max(0, waveTime - Date.now());
+        }
+
+        const filtered = activeFilter === 'all'
+          ? LEGENDS
+          : LEGENDS.filter(l => l.tags.includes(activeFilter));
+
+        const revealedVisible = filtered.filter((l) => LEGENDS.indexOf(l) < revealedCount).length;
+
+        visCount.textContent = revealedCount;
+        footerCount.textContent = revealedCount + ' of 14 units revealed'; // updated below by global counter
+        if (statusTag) {
+          const grandTotal = LEGENDS.length + MEGA_MIMUS.length + ANCIENT_KEEPERS.length + MIMU_GODS.length + CELESTIAL_MIMUS.length;
+          const grandRevealed = getRevealedCount() + getMegaRevealedCount() + getKeeperRevealedCount() + getGodRevealedCount() + getCelestialRevealedCount();
+          statusTag.innerHTML = grandRevealed >= grandTotal
+            ? 'All ' + grandTotal + ' Units Revealed'
+            : grandRevealed + ' of ' + grandTotal + ' Units Revealed';
+          footerCount.textContent = grandRevealed + ' of ' + grandTotal + ' total 1/1s revealed';
+        }
+
+        grid.innerHTML = '';
+        filtered.forEach((item) => {
+          const globalIdx = LEGENDS.indexOf(item);
+          const revealed  = globalIdx < revealedCount;
+          const timeUntil = revealed ? 0 : msUntilWave(globalIdx);
+          grid.appendChild(buildCard(item, revealed, timeUntil));
+        });
+      }
+
+      // ── Filter bar ────────────────────────────────────────────────
+      if (filterBar) filterBar.addEventListener('click', e => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderGallery(getRevealedCount());
+      });
+
+      // ── Lightbox ──────────────────────────────────────────────────
+      const lightbox = document.getElementById('lightbox');
+      const lbImg    = document.getElementById('lbImg');
+      const lbInfo   = document.getElementById('lbInfo');
+
+      function openLightbox(item) {
+        const src = IMAGES[item.idx];
+        lbImg.innerHTML = `<img src="${src}" alt="${item.name}" />`;
+        lbInfo.innerHTML = `
+          <span class="lb-id">Unit ${item.id} // Classified Record</span>
+          <span class="lb-legend-tag">★ MIMU Legend</span>
+          <h2 class="lb-name">${item.name}</h2>
+          <span class="lb-edition">1 of 1 Edition</span>
+          <p class="lb-desc">${item.desc}</p>
+          <div class="lb-meta">
+            <div class="meta-row"><span class="meta-k">Series</span><span class="meta-v">MIMU Legends</span></div>
+            <div class="meta-row"><span class="meta-k">Edition</span><span class="meta-v">1 of 1</span></div>
+            <div class="meta-row"><span class="meta-k">Status</span><span class="meta-v">On Record</span></div>
+          </div>
+          <div class="lb-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        `;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('lbClose').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+      // ── Next-reveal bar ticker ────────────────────────────────────
+      const nextRevealTimer = document.getElementById('nextRevealTimer');
+      const nextRevealLabel = document.getElementById('nextRevealLabel');
+      const nextRevealBar   = document.getElementById('nextRevealBar');
+
+      function updateRevealBar(revealedCount) {
+        if (revealedCount >= LEGENDS.length) {
+          nextRevealBar.style.display = 'none';
+          return;
+        }
+        const ms = msUntilNextReveal();
+        const nextWave = Math.floor((revealedCount) / BATCH_SIZE) + 1;
+        const nextEnd  = Math.min(nextWave * BATCH_SIZE, LEGENDS.length);
+        nextRevealTimer.textContent = formatCountdown(ms);
+        nextRevealLabel.textContent = BATCH_SIZE + ' units unlock — wave ' + nextWave + ' of ' + Math.ceil(LEGENDS.length / BATCH_SIZE);
+      }
+
+      // ── Wave reveal banner ────────────────────────────────────────
+      const waveBanner     = document.getElementById('waveBanner');
+      const waveText       = document.getElementById('waveText');
+      const waveBannerClose = document.getElementById('waveBannerClose');
+      let lastRevealedCount = 0;
+
+      waveBannerClose.addEventListener('click', () => {
+        waveBanner.classList.remove('visible');
+      });
+
+      // ── Per-card countdown tick ───────────────────────────────────
+      function tickCardTimers() {
+        document.querySelectorAll('.lock-countdown').forEach(el => {
+          const ms = msUntilNextReveal(); // all locked cards in same wave for now
+          // More precisely: use data-timer attribute set at render time
+          // We store the exact wave unlock time as a UTC timestamp
+          const unlockAt = parseInt(el.dataset.unlockAt || '0');
+          const remaining = unlockAt ? Math.max(0, unlockAt - Date.now()) : ms;
+          el.textContent = formatCountdown(remaining);
+        });
+      }
+
+      // ── Main clock — checks for new reveals every second ──────────
+      let prevRevealed = getRevealedCount();
+      renderGallery(prevRevealed);
+      updateRevealBar(prevRevealed);
+
+      setInterval(() => {
+        const now = getRevealedCount();
+
+        // New batch just unlocked
+        if (now > prevRevealed) {
+          const diff = now - prevRevealed;
+          // Animate newly revealed cards
+          document.querySelectorAll('.card.locked').forEach((card, ci) => {
+            const globalPos = Array.from(grid.children).indexOf(card);
+            setTimeout(() => {
+              card.classList.remove('locked');
+              card.classList.add('revealing');
+              setTimeout(() => card.classList.remove('revealing'), 2000);
+            }, ci * 200);
+          });
+
+          // Re-render after brief delay to attach click handlers
+          setTimeout(() => {
+            renderGallery(now);
+            updateRevealBar(now);
+          }, 2200);
+
+          // Show wave banner
+          const waveNum = Math.ceil(now / BATCH_SIZE);
+          waveText.textContent = `★ Wave ${waveNum} Transmission Unlocked — ${Math.min(diff, BATCH_SIZE)} Legend${diff > 1 ? 's' : ''} Revealed`;
+          waveBanner.classList.add('visible');
+          setTimeout(() => waveBanner.classList.remove('visible'), 8000);
+
+          prevRevealed = now;
+        }
+
+        updateRevealBar(now);
+        tickCardTimers();
+
+        // Mega reveal check
+        const megaNow = getMegaRevealedCount();
+        if (megaNow > prevMegaRevealed) {
+          const megaDiff = megaNow - prevMegaRevealed;
+          document.querySelectorAll('.mega-card.locked').forEach((card, ci) => {
+            setTimeout(() => {
+              card.classList.remove('locked');
+              card.classList.add('revealing');
+              setTimeout(() => card.classList.remove('revealing'), 2200);
+            }, ci * 300);
+          });
+          setTimeout(() => {
+            renderMegaGallery(megaNow);
+            updateMegaRevealBar(megaNow);
+          }, 2600);
+          const megaWaveNum = Math.ceil(megaNow / MEGA_BATCH_SIZE);
+          waveText.textContent = `⚡ MEGA Wave ${megaWaveNum} — Mega MIMU ${megaNow} of ${MEGA_MIMUS.length} Revealed`;
+          waveBanner.classList.add('visible');
+          setTimeout(() => waveBanner.classList.remove('visible'), 9000);
+          prevMegaRevealed = megaNow;
+        }
+        updateMegaRevealBar(getMegaRevealedCount());
+        tickMegaCardTimers();
+
+        // Keeper reveal check
+        const keeperNow = getKeeperRevealedCount();
+        if (keeperNow > prevKeeperRevealed) {
+          document.querySelectorAll('.keeper-card.locked').forEach((card, ci) => {
+            setTimeout(() => {
+              card.classList.remove('locked');
+              card.classList.add('revealing');
+              setTimeout(() => card.classList.remove('revealing'), 2400);
+            }, ci * 350);
+          });
+          setTimeout(() => {
+            renderKeeperGallery(keeperNow);
+            updateKeeperRevealBar(keeperNow);
+          }, 2800);
+          const keeperItem = ANCIENT_KEEPERS[keeperNow - 1];
+          waveText.textContent = `✦ Keeper Unsealed — ${keeperItem ? keeperItem.name + ' · ' + keeperItem.element : 'Ancient Guardian'} Awakens`;
+          waveBanner.classList.add('visible');
+          setTimeout(() => waveBanner.classList.remove('visible'), 9000);
+          prevKeeperRevealed = keeperNow;
+        }
+        updateKeeperRevealBar(getKeeperRevealedCount());
+        tickKeeperCardTimers();
+
+        // Gods reveal check
+        const godNow = getGodRevealedCount();
+        if (godNow > prevGodRevealed) {
+          document.querySelectorAll('.god-card.locked').forEach((card, ci) => {
+            setTimeout(() => {
+              card.classList.remove('locked');
+              card.classList.add('revealing');
+              setTimeout(() => card.classList.remove('revealing'), 2600);
+            }, ci * 400);
+          });
+          setTimeout(() => {
+            renderGodsGallery(godNow);
+            updateGodsRevealBar(godNow);
+          }, 3200);
+          const godItem = MIMU_GODS[godNow - 1];
+          const glyph   = godItem ? (godItem.domain === 'Sky' ? '☁' : '🔥') : '✦';
+          waveText.textContent = `${glyph} ${godItem ? godItem.name + ' — ' + godItem.domain + ' God' : 'MIMU God'} Descends`;
+          waveBanner.classList.add('visible');
+          setTimeout(() => waveBanner.classList.remove('visible'), 10000);
+          prevGodRevealed = godNow;
+        }
+        updateGodsRevealBar(getGodRevealedCount());
+        tickGodCardTimers();
+
+        // Celestial reveal check
+        const celNow = getCelestialRevealedCount();
+        if (celNow > prevCelestialRevealed) {
+          document.querySelectorAll('.celestial-card.locked').forEach((card, ci) => {
+            setTimeout(() => {
+              card.classList.remove('locked');
+              card.classList.add('revealing');
+              setTimeout(() => card.classList.remove('revealing'), 2800);
+            }, ci * 400);
+          });
+          setTimeout(() => {
+            renderCelestialGallery(celNow);
+            updateCelestialRevealBar(celNow);
+          }, 3400);
+          const celItem = CELESTIAL_MIMUS[celNow - 1];
+          const glyph   = celItem ? (celItem.type === 'Galaxy' ? '✦' : '◈') : '✦';
+          waveText.textContent = `${glyph} ${celItem ? celItem.name + ' — ' + celItem.type + ' Celestial' : 'Celestial MIMU'} Manifests`;
+          waveBanner.classList.add('visible');
+          setTimeout(() => waveBanner.classList.remove('visible'), 10000);
+          prevCelestialRevealed = celNow;
+        }
+        updateCelestialRevealBar(getCelestialRevealedCount());
+        tickCelestialCardTimers();
+      }, 1000);
+
+      // ── Attach per-card unlock timestamps after first render ──────
+      // After renderGallery, set data-unlockAt on each lock-countdown span
+      function attachUnlockTimestamps() {
+        document.querySelectorAll('.card.locked').forEach(card => {
+          const id = card.dataset.legendId;
+          const item = LEGENDS.find(l => l.id === id);
+          if (!item) return;
+          const globalIdx = LEGENDS.indexOf(item);
+          const wave = Math.ceil((globalIdx + 1) / BATCH_SIZE);
+          const unlockAt = REVEAL_START_UTC + (wave - 1) * REVEAL_INTERVAL_MS;
+          const el = card.querySelector('.lock-countdown');
+          if (el) {
+            el.dataset.unlockAt = unlockAt;
+            el.textContent = formatCountdown(Math.max(0, unlockAt - Date.now()));
+          }
+        });
+      }
+
+      // Patch tickCardTimers to use unlockAt
+      function tickCardTimers() {
+        document.querySelectorAll('.lock-countdown').forEach(el => {
+          const unlockAt = parseInt(el.dataset.unlockAt || '0');
+          if (unlockAt) el.textContent = formatCountdown(Math.max(0, unlockAt - Date.now()));
+        });
+      }
+
+      attachUnlockTimestamps();
+
+      // ═══════════════════════════════════════════════════════════
+      //  CELESTIAL MIMU — RENDERING
+      // ═══════════════════════════════════════════════════════════
+
+      const CEL_CLASS = { Galaxy: 'galaxy', Biome: 'biome' };
+      const CEL_GLYPH = { Galaxy: '✦', Biome: '◈' };
+
+      function celLockSVG(type) {
+        const stroke = type === 'Galaxy' ? 'rgba(180,100,255,0.55)' : 'rgba(60,200,80,0.55)';
+        return `<svg class="cel-lock-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="16" width="24" height="16" rx="4" stroke="${stroke}" stroke-width="1.5"/>
+          <path d="M11 16V11a7 7 0 0 1 14 0v5" stroke="${stroke}" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="18" cy="24" r="2" fill="${stroke}"/>
+        </svg>`;
+      }
+
+      function buildCelestialCard(item, revealed, timeUntil) {
+        const src   = IMAGES[item.idx];
+        const cls   = CEL_CLASS[item.type] || 'galaxy';
+        const glyph = CEL_GLYPH[item.type] || '✦';
+        const card  = document.createElement('div');
+        card.className = `celestial-card ${cls}${revealed ? '' : ' locked'}`;
+        card.dataset.celId = item.id;
+
+        const lockOverlay = revealed ? '' : `
+          <div class="cel-lock-overlay">
+            ${celLockSVG(item.type)}
+            <span class="cel-lock-label">Dormant</span>
+            <span class="cel-lock-countdown" data-unlock-at="${Date.now() + timeUntil}">${formatCountdown(timeUntil)}</span>
+            <span class="cel-lock-sub">UTC Sync Active</span>
+          </div>`;
+
+        card.innerHTML = `
+          <div class="card-img">
+            <img src="${src}" alt="${revealed ? item.name : 'Dormant'}" loading="lazy" />
+            <span class="cel-edition-badge">1 / 1</span>
+            <span class="cel-type-badge">${glyph} ${item.type}</span>
+            ${lockOverlay}
+          </div>
+          <div class="cel-card-body">
+            <div class="cel-card-top">
+              <span class="cel-card-name">${item.name}</span>
+              <span class="cel-card-id">${item.id}</span>
+            </div>
+            <span class="cel-type-label">${item.type}</span>
+            <p class="cel-card-desc">${item.desc}</p>
+            <div class="cel-card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            <div class="cel-card-footer">
+              <span class="cel-card-status">${revealed ? 'Manifested' : 'Dormant'}</span>
+              ${revealed ? '<span class="cel-card-arrow">Witness ›</span>' : ''}
+            </div>
+          </div>`;
+
+        if (revealed) card.addEventListener('click', () => openCelestialLightbox(item));
+        return card;
+      }
+
+      function renderCelestialGallery(revealedCount) {
+        const cg = document.getElementById('celestialGrid');
+        cg.innerHTML = '';
+        document.getElementById('celVisCount').textContent = revealedCount;
+        document.getElementById('celUnrevealedCount').textContent = CELESTIAL_MIMUS.length - revealedCount;
+
+        CELESTIAL_MIMUS.forEach((item, i) => {
+          const revealed  = i < revealedCount;
+          const timeUntil = revealed ? 0 : msUntilCelestialWave(i);
+          cg.appendChild(buildCelestialCard(item, revealed, timeUntil));
+        });
+      }
+
+      function updateCelestialRevealBar(revealedCount) {
+        const bar = document.getElementById('celestialRevealBar');
+        if (revealedCount >= CELESTIAL_MIMUS.length) { bar.style.display = 'none'; return; }
+        const ms   = msUntilNextCelestialReveal();
+        const next = CELESTIAL_MIMUS[revealedCount];
+        document.getElementById('celestialRevealTimer').textContent = formatCountdown(ms);
+        document.getElementById('celestialRevealLabel').textContent =
+          (next ? next.type + ' manifests next' : 'Final celestial awakens');
+      }
+
+      function openCelestialLightbox(item) {
+        const src      = IMAGES[item.idx];
+        const tagClass = item.type === 'Galaxy' ? 'lb-cel-tag-galaxy' : 'lb-cel-tag-biome';
+        const glyph    = CEL_GLYPH[item.type] || '✦';
+        lbImg.innerHTML = `<img src="${src}" alt="${item.name}" />`;
+        lbInfo.innerHTML = `
+          <span class="lb-id">Unit ${item.id} // Celestial Record</span>
+          <span class="${tagClass}">${glyph} Celestial MIMU — ${item.type}</span>
+          <h2 class="lb-name">${item.name}</h2>
+          <span class="lb-edition">1 of 1 Edition</span>
+          <p class="lb-desc">${item.desc}</p>
+          <div class="lb-meta">
+            <div class="meta-row"><span class="meta-k">Series</span><span class="meta-v">Celestial MIMU</span></div>
+            <div class="meta-row"><span class="meta-k">Type</span><span class="meta-v">${item.type}</span></div>
+            <div class="meta-row"><span class="meta-k">Edition</span><span class="meta-v">1 of 1</span></div>
+            <div class="meta-row"><span class="meta-k">Rarity</span><span class="meta-v">Celestial</span></div>
+            <div class="meta-row"><span class="meta-k">Status</span><span class="meta-v">Manifested</span></div>
+          </div>
+          <div class="lb-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        `;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function tickCelestialCardTimers() {
+        document.querySelectorAll('.cel-lock-countdown').forEach(el => {
+          const unlockAt = parseInt(el.dataset.unlockAt || '0');
+          if (unlockAt) el.textContent = formatCountdown(Math.max(0, unlockAt - Date.now()));
+        });
+      }
+
+      // Initial render
+      let prevCelestialRevealed = getCelestialRevealedCount();
+      renderCelestialGallery(prevCelestialRevealed);
+      updateCelestialRevealBar(prevCelestialRevealed);
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  MIMU GODS — RENDERING
+      // ═══════════════════════════════════════════════════════════
+
+      const DOMAIN_CLASS = { Sky: 'sky', Underworld: 'underworld' };
+      const DOMAIN_GLYPH = { Sky: '☁', Underworld: '🔥' };
+
+      function godLockSVG(domain) {
+        const stroke = domain === 'Sky' ? 'rgba(100,200,255,0.55)' : 'rgba(255,120,40,0.55)';
+        return `<svg class="god-lock-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="16" width="24" height="16" rx="4" stroke="${stroke}" stroke-width="1.5"/>
+          <path d="M11 16V11a7 7 0 0 1 14 0v5" stroke="${stroke}" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="18" cy="24" r="2" fill="${stroke}"/>
+        </svg>`;
+      }
+
+      function buildGodCard(item, revealed, timeUntil) {
+        const src   = IMAGES[item.idx];
+        const cls   = DOMAIN_CLASS[item.domain] || 'sky';
+        const glyph = DOMAIN_GLYPH[item.domain] || '✦';
+        const card  = document.createElement('div');
+        card.className = `god-card ${cls}${revealed ? '' : ' locked'}`;
+        card.dataset.godId = item.id;
+
+        const lockOverlay = revealed ? '' : `
+          <div class="god-lock-overlay">
+            ${godLockSVG(item.domain)}
+            <span class="god-lock-label">Dormant</span>
+            <span class="god-lock-countdown" data-unlock-at="${Date.now() + timeUntil}">${formatCountdown(timeUntil)}</span>
+            <span class="god-lock-sub">UTC Sync Active</span>
+          </div>`;
+
+        card.innerHTML = `
+          <div class="card-img">
+            <img src="${src}" alt="${revealed ? item.name : 'Dormant'}" loading="lazy" />
+            <span class="god-edition-badge">1 / 1</span>
+            <span class="god-domain-badge">${glyph} ${item.domain} God</span>
+            ${lockOverlay}
+          </div>
+          <div class="god-card-body">
+            <div class="god-card-top">
+              <span class="god-card-name">${item.name}</span>
+              <span class="god-card-id">${item.id}</span>
+            </div>
+            <span class="god-domain-label">${item.domain}</span>
+            <p class="god-card-desc">${item.desc}</p>
+            <div class="god-card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            <div class="god-card-footer">
+              <span class="god-card-status">${revealed ? 'Descending' : 'Dormant'}</span>
+              ${revealed ? '<span class="god-card-arrow">Witness ›</span>' : ''}
+            </div>
+          </div>`;
+
+        if (revealed) card.addEventListener('click', () => openGodLightbox(item));
+        return card;
+      }
+
+      function renderGodsGallery(revealedCount) {
+        const gg = document.getElementById('godsGrid');
+        gg.innerHTML = '';
+        document.getElementById('godVisCount').textContent = revealedCount;
+        document.getElementById('godUnrevealedCount').textContent = MIMU_GODS.length - revealedCount;
+
+        MIMU_GODS.forEach((item, i) => {
+          const revealed  = i < revealedCount;
+          const timeUntil = revealed ? 0 : msUntilGodWave(i);
+          gg.appendChild(buildGodCard(item, revealed, timeUntil));
+        });
+      }
+
+      function updateGodsRevealBar(revealedCount) {
+        const bar = document.getElementById('godsRevealBar');
+        if (revealedCount >= MIMU_GODS.length) { bar.style.display = 'none'; return; }
+        const ms  = msUntilNextGodReveal();
+        const god = MIMU_GODS[revealedCount];
+        document.getElementById('godsRevealTimer').textContent = formatCountdown(ms);
+        document.getElementById('godsRevealLabel').textContent =
+          (god ? god.domain + ' God descends next' : 'Final god awakens next');
+      }
+
+      function openGodLightbox(item) {
+        const src  = IMAGES[item.idx];
+        const tagClass = item.domain === 'Sky' ? 'lb-god-tag-sky' : 'lb-god-tag-uw';
+        const glyph    = DOMAIN_GLYPH[item.domain] || '✦';
+        lbImg.innerHTML = `<img src="${src}" alt="${item.name}" />`;
+        lbInfo.innerHTML = `
+          <span class="lb-id">Unit ${item.id} // Divine Record</span>
+          <span class="${tagClass}">${glyph} MIMU God — ${item.domain}</span>
+          <h2 class="lb-name">${item.name}</h2>
+          <span class="lb-edition">1 of 1 Edition</span>
+          <p class="lb-desc">${item.desc}</p>
+          <div class="lb-meta">
+            <div class="meta-row"><span class="meta-k">Series</span><span class="meta-v">MIMU Gods</span></div>
+            <div class="meta-row"><span class="meta-k">Domain</span><span class="meta-v">${item.domain}</span></div>
+            <div class="meta-row"><span class="meta-k">Edition</span><span class="meta-v">1 of 1</span></div>
+            <div class="meta-row"><span class="meta-k">Rarity</span><span class="meta-v">Divine</span></div>
+            <div class="meta-row"><span class="meta-k">Status</span><span class="meta-v">Descending</span></div>
+          </div>
+          <div class="lb-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        `;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function tickGodCardTimers() {
+        document.querySelectorAll('.god-lock-countdown').forEach(el => {
+          const unlockAt = parseInt(el.dataset.unlockAt || '0');
+          if (unlockAt) el.textContent = formatCountdown(Math.max(0, unlockAt - Date.now()));
+        });
+      }
+
+      // Initial render
+      let prevGodRevealed = getGodRevealedCount();
+      renderGodsGallery(prevGodRevealed);
+      updateGodsRevealBar(prevGodRevealed);
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  THE ANCIENT KEEPERS — RENDERING
+      // ═══════════════════════════════════════════════════════════
+
+      const KEEPER_LOCK_SVG = `<svg class="keeper-lock-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="16" width="24" height="16" rx="4" stroke="rgba(180,130,255,0.55)" stroke-width="1.5"/>
+        <path d="M11 16V11a7 7 0 0 1 14 0v5" stroke="rgba(180,130,255,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="18" cy="24" r="2" fill="rgba(180,130,255,0.55)"/>
+      </svg>`;
+
+      // Element glyph map
+      const ELEMENT_GLYPH = { Fire: '🔥', Water: '💧', Wind: '🌀', Void: '✦' };
+
+      function buildKeeperCard(item, revealed, timeUntil) {
+        const src  = IMAGES[item.idx];
+        const card = document.createElement('div');
+        card.className = revealed ? 'keeper-card' : 'keeper-card locked';
+        card.dataset.keeperId = item.id;
+
+        const lockOverlay = revealed ? '' : `
+          <div class="keeper-lock-overlay">
+            ${KEEPER_LOCK_SVG}
+            <span class="keeper-lock-label">Sealed</span>
+            <span class="keeper-lock-countdown" data-unlock-at="${Date.now() + timeUntil}">${formatCountdown(timeUntil)}</span>
+            <span class="keeper-lock-sub">UTC Sync Active</span>
+          </div>`;
+
+        card.innerHTML = `
+          <div class="card-img">
+            <img src="${src}" alt="${revealed ? item.name : 'Sealed'}" loading="lazy" />
+            <span class="keeper-edition-badge">1 / 1</span>
+            <span class="keeper-badge">${ELEMENT_GLYPH[item.element] || '✦'} Keeper</span>
+            ${lockOverlay}
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-name">${item.name}</span>
+              <span class="card-id">${item.id}</span>
+            </div>
+            <span class="element-pill ${item.element}">${item.element}</span>
+            <p class="card-desc">${item.desc}</p>
+            <div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            <div class="card-footer">
+              <span class="card-status">${revealed ? 'Guardian Active' : 'Sealed'}</span>
+              ${revealed ? '<span class="card-arrow">View ›</span>' : ''}
+            </div>
+          </div>`;
+
+        if (revealed) card.addEventListener('click', () => openKeeperLightbox(item));
+        return card;
+      }
+
+      function renderKeeperGallery(revealedCount) {
+        const kg = document.getElementById('keeperGrid');
+        kg.innerHTML = '';
+        document.getElementById('keeperVisCount').textContent = revealedCount;
+        document.getElementById('keeperUnrevealedCount').textContent = ANCIENT_KEEPERS.length - revealedCount;
+
+        ANCIENT_KEEPERS.forEach((item, i) => {
+          const revealed  = i < revealedCount;
+          const timeUntil = revealed ? 0 : msUntilKeeperWave(i);
+          kg.appendChild(buildKeeperCard(item, revealed, timeUntil));
+        });
+      }
+
+      function updateKeeperRevealBar(revealedCount) {
+        const bar = document.getElementById('keeperRevealBar');
+        if (revealedCount >= ANCIENT_KEEPERS.length) { bar.style.display = 'none'; return; }
+        const ms = msUntilNextKeeperReveal();
+        const waveNum = revealedCount + 1;
+        document.getElementById('keeperRevealTimer').textContent = formatCountdown(ms);
+        document.getElementById('keeperRevealLabel').textContent =
+          'Keeper ' + waveNum + ' of ' + ANCIENT_KEEPERS.length + ' unsealed next';
+      }
+
+      function openKeeperLightbox(item) {
+        const src = IMAGES[item.idx];
+        lbImg.innerHTML = `<img src="${src}" alt="${item.name}" />`;
+        lbInfo.innerHTML = `
+          <span class="lb-id">Unit ${item.id} // Elemental Guardian Record</span>
+          <span class="lb-keeper-tag">${ELEMENT_GLYPH[item.element] || '✦'} Ancient Keeper — ${item.element}</span>
+          <h2 class="lb-name">${item.name}</h2>
+          <span class="lb-edition">1 of 1 Edition</span>
+          <p class="lb-desc">${item.desc}</p>
+          <div class="lb-meta">
+            <div class="meta-row"><span class="meta-k">Series</span><span class="meta-v">The Ancient Keepers</span></div>
+            <div class="meta-row"><span class="meta-k">Element</span><span class="meta-v">${item.element}</span></div>
+            <div class="meta-row"><span class="meta-k">Edition</span><span class="meta-v">1 of 1</span></div>
+            <div class="meta-row"><span class="meta-k">Status</span><span class="meta-v">Guardian Active</span></div>
+          </div>
+          <div class="lb-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        `;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function tickKeeperCardTimers() {
+        document.querySelectorAll('.keeper-lock-countdown').forEach(el => {
+          const unlockAt = parseInt(el.dataset.unlockAt || '0');
+          if (unlockAt) el.textContent = formatCountdown(Math.max(0, unlockAt - Date.now()));
+        });
+      }
+
+      // Initial render
+      let prevKeeperRevealed = getKeeperRevealedCount();
+      renderKeeperGallery(prevKeeperRevealed);
+      updateKeeperRevealBar(prevKeeperRevealed);
+
+
+      // ═══════════════════════════════════════════════════════════
+      //  MEGA MIMU RENDERING
+      // ═══════════════════════════════════════════════════════════
+
+      const MEGA_LOCK_SVG = `<svg class="mega-lock-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="16" width="24" height="16" rx="4" stroke="rgba(255,180,0,0.55)" stroke-width="1.5"/>
+        <path d="M11 16V11a7 7 0 0 1 14 0v5" stroke="rgba(255,180,0,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="18" cy="24" r="2" fill="rgba(255,180,0,0.55)"/>
+      </svg>`;
+
+      function buildMegaCard(item, revealed, timeUntil) {
+        const src  = IMAGES[item.idx];
+        const card = document.createElement('div');
+        card.className = revealed ? 'mega-card' : 'mega-card locked';
+        card.dataset.megaId = item.id;
+
+        const lockOverlay = revealed ? '' : `
+          <div class="mega-lock-overlay">
+            ${MEGA_LOCK_SVG}
+            <span class="mega-lock-label">Unrevealed</span>
+            <span class="mega-lock-countdown" data-unlock-at="${Date.now() + timeUntil}">${formatCountdown(timeUntil)}</span>
+            <span class="mega-lock-sub">UTC Sync Active</span>
+          </div>`;
+
+        card.innerHTML = `
+          <div class="card-img">
+            <img src="${src}" alt="${revealed ? item.name : 'Classified'}" loading="lazy" />
+            <span class="mega-edition-badge">1 / 1</span>
+            <span class="mega-badge">⚡ Mega</span>
+            ${lockOverlay}
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-name">${item.name}</span>
+              <span class="card-id">${item.id}</span>
+            </div>
+            <p class="card-desc">${item.desc}</p>
+            <div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            <div class="card-footer">
+              <span class="card-status">${revealed ? 'On Record' : 'Classified'}</span>
+              ${revealed ? '<span class="card-arrow">View ›</span>' : ''}
+            </div>
+          </div>`;
+
+        if (revealed) {
+          card.addEventListener('click', () => openMegaLightbox(item));
+        }
+        return card;
+      }
+
+      function renderMegaGallery(revealedCount) {
+        const megaGrid = document.getElementById('megaGrid');
+        megaGrid.innerHTML = '';
+        document.getElementById('megaVisCount').textContent = revealedCount;
+        document.getElementById('megaUnrevealedCount').textContent = MEGA_MIMUS.length - revealedCount;
+
+        MEGA_MIMUS.forEach((item, i) => {
+          const revealed  = i < revealedCount;
+          const timeUntil = revealed ? 0 : msUntilMegaWave(i);
+          megaGrid.appendChild(buildMegaCard(item, revealed, timeUntil));
+        });
+      }
+
+      function updateMegaRevealBar(revealedCount) {
+        const bar = document.getElementById('megaRevealBar');
+        if (revealedCount >= MEGA_MIMUS.length) { bar.style.display = 'none'; return; }
+        const ms = msUntilNextMegaReveal();
+        const waveNum = Math.floor(revealedCount / MEGA_BATCH_SIZE) + 1;
+        document.getElementById('megaRevealTimer').textContent = formatCountdown(ms);
+        document.getElementById('megaRevealLabel').textContent = '1 unit unlocks — mega wave ' + waveNum + ' of ' + MEGA_MIMUS.length;
+      }
+
+      function openMegaLightbox(item) {
+        const src = IMAGES[item.idx];
+        lbImg.innerHTML = `<img src="${src}" alt="${item.name}" />`;
+        lbInfo.innerHTML = `
+          <span class="lb-id">Unit ${item.id} // Ultra Rare Record</span>
+          <span class="lb-mega-tag">⚡ MEGA MIMU</span>
+          <h2 class="lb-name">${item.name}</h2>
+          <span class="lb-edition">1 of 1 Edition</span>
+          <p class="lb-desc">${item.desc}</p>
+          <div class="lb-meta">
+            <div class="meta-row"><span class="meta-k">Series</span><span class="meta-v">MEGA MIMU</span></div>
+            <div class="meta-row"><span class="meta-k">Edition</span><span class="meta-v">1 of 1</span></div>
+            <div class="meta-row"><span class="meta-k">Rarity</span><span class="meta-v">Ultra Rare</span></div>
+            <div class="meta-row"><span class="meta-k">Status</span><span class="meta-v">On Record</span></div>
+          </div>
+          <div class="lb-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        `;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // ── Mega tick & reveal detection ──────────────────────────────
+      let prevMegaRevealed = getMegaRevealedCount();
+      renderMegaGallery(prevMegaRevealed);
+      updateMegaRevealBar(prevMegaRevealed);
+
+      // Tick mega card timers
+      function tickMegaCardTimers() {
+        document.querySelectorAll('.mega-lock-countdown').forEach(el => {
+          const unlockAt = parseInt(el.dataset.unlockAt || '0');
+          if (unlockAt) el.textContent = formatCountdown(Math.max(0, unlockAt - Date.now()));
+        });
+      }
+
     </script>
   </body>
 </html>
