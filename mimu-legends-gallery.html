@@ -2547,6 +2547,13 @@
         .celestial-section { padding: 0 16px 60px; }
       }
 
+
+      /* Gods + Celestials locked — dark placeholder, no image shown */
+      .god-card.locked .card-img,
+      .celestial-card.locked .card-img {
+        background: linear-gradient(160deg, rgba(4,2,8,0.98), rgba(2,1,4,0.99));
+      }
+
     </style>
   </head>
   <body>
@@ -3464,7 +3471,7 @@
 
         card.innerHTML = `
           <div class="card-img">
-            <img src="${src}" alt="${revealed ? item.name : 'Dormant'}" loading="lazy" />
+            <img src="${revealed ? src : ''}" alt="${revealed ? item.name : 'Dormant'}" loading="lazy" style="${revealed ? '' : 'display:none;'}" />
             <span class="cel-edition-badge">1 / 1</span>
             <span class="cel-type-badge">${glyph} ${item.type}</span>
             ${lockOverlay}
@@ -3581,7 +3588,7 @@
 
         card.innerHTML = `
           <div class="card-img">
-            <img src="${src}" alt="${revealed ? item.name : 'Dormant'}" loading="lazy" />
+            <img src="${revealed ? src : ''}" alt="${revealed ? item.name : 'Dormant'}" loading="lazy" style="${revealed ? '' : 'display:none;'}" />
             <span class="god-edition-badge">1 / 1</span>
             <span class="god-domain-badge">${glyph} ${item.domain} God</span>
             ${lockOverlay}
