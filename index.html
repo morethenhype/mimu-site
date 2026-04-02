@@ -546,6 +546,81 @@
         .hero-subtitle { letter-spacing: 0.18em; }
         .btn { padding: 13px 22px; font-size: 10px; }
       }
+
+      /* ── Lightning crack overlay ── */
+      .crack-overlay {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 998;
+        overflow: hidden;
+      }
+
+      .crack-overlay svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+      }
+
+      /* Main crack line glow animation */
+      .crack-main {
+        stroke: rgba(220, 255, 240, 1);
+        stroke-width: 3.5;
+        fill: none;
+        filter: drop-shadow(0 0 8px rgba(120,255,191,1)) drop-shadow(0 0 24px rgba(120,255,191,0.9)) drop-shadow(0 0 60px rgba(120,255,191,0.5)) drop-shadow(0 0 100px rgba(120,255,191,0.25));
+        stroke-dasharray: 3000;
+        stroke-dashoffset: 3000;
+        animation: crackDraw 1.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+      }
+
+      .crack-branch {
+        stroke: rgba(180, 255, 220, 0.8);
+        stroke-width: 1.8;
+        fill: none;
+        filter: drop-shadow(0 0 6px rgba(120,255,191,1)) drop-shadow(0 0 16px rgba(120,255,191,0.7)) drop-shadow(0 0 30px rgba(120,255,191,0.4));
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        animation: crackDraw 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+      }
+
+      .crack-branch-1 { animation-delay: 1.2s; }
+      .crack-branch-2 { animation-delay: 1.35s; }
+      .crack-branch-3 { animation-delay: 1.5s; }
+      .crack-branch-4 { animation-delay: 1.6s; }
+      .crack-branch-5 { animation-delay: 1.72s; }
+      .crack-branch-6 { animation-delay: 1.82s; }
+      .crack-branch-7 { animation-delay: 1.92s; }
+
+      .crack-glow {
+        stroke: rgba(120, 255, 191, 0.15);
+        stroke-width: 12;
+        fill: none;
+        filter: blur(8px);
+        stroke-dasharray: 3000;
+        stroke-dashoffset: 3000;
+        animation: crackDraw 1.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+      }
+
+      @keyframes crackDraw {
+        to { stroke-dashoffset: 0; }
+      }
+
+      /* Subtle flicker after drawn */
+      .crack-main {
+        animation: crackDraw 1.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards,
+                   crackFlicker 4s 2.2s ease-in-out infinite;
+      }
+
+      @keyframes crackFlicker {
+        0%, 100% { opacity: 1; }
+        92%       { opacity: 1; }
+        93%       { opacity: 0.4; }
+        94%       { opacity: 1; }
+        97%       { opacity: 0.7; }
+        98%       { opacity: 1; }
+      }
+
     </style>
   </head>
   <body>
@@ -667,10 +742,80 @@
         window.location.href = '/bio-scan-select.html';
       });
 
-      document.getElementById('legendaryViewerBtn').addEventListener('click', () => {
-        window.location.href = '/legends';
-      });
-
+      const legendaryBtn = document.getElementById('legendaryViewerBtn');
+      if (legendaryBtn) {
+        legendaryBtn.addEventListener('click', () => {
+          window.location.href = '/legends';
+        });
+      }
     </script>
+
+    <!-- Lightning crack overlay -->
+    <div class="crack-overlay">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="crackGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="10" result="blur1"/>
+            <feGaussianBlur stdDeviation="22" result="blur2"/>
+            <feMerge>
+              <feMergeNode in="blur2"/>
+              <feMergeNode in="blur1"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="crackGlowOuter" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="40" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Deep outer atmospheric glow -->
+        <path
+          d="M-60,-20 L120,80 L60,200 L280,320 L220,450 L460,560 L400,670 L640,780 L600,880 L820,960 L1060,1020 L1480,980"
+          stroke="rgba(120,255,191,0.25)" stroke-width="60" fill="none"
+          filter="url(#crackGlowOuter)"
+          stroke-dasharray="3000" stroke-dashoffset="3000"
+          style="animation: crackDraw 1.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards" />
+
+        <!-- Mid glow layer -->
+        <path
+          d="M-60,-20 L120,80 L60,200 L280,320 L220,450 L460,560 L400,670 L640,780 L600,880 L820,960 L1060,1020 L1480,980"
+          stroke="rgba(120,255,191,0.5)" stroke-width="28" fill="none"
+          filter="url(#crackGlow)"
+          stroke-dasharray="3000" stroke-dashoffset="3000"
+          style="animation: crackDraw 1.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards" />
+
+        <!-- Inner bright glow -->
+        <path
+          d="M-60,-20 L120,80 L60,200 L280,320 L220,450 L460,560 L400,670 L640,780 L600,880 L820,960 L1060,1020 L1480,980"
+          stroke="rgba(200,255,235,0.85)" stroke-width="7" fill="none"
+          filter="url(#crackGlow)"
+          stroke-dasharray="3000" stroke-dashoffset="3000"
+          style="animation: crackDraw 1.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards" />
+
+        <!-- Main crack sharp edge -->
+        <path class="crack-main"
+          d="M-60,-20 L120,80 L60,200 L280,320 L220,450 L460,560 L400,670 L640,780 L600,880 L820,960 L1060,1020 L1480,980" />
+
+        <!-- Branch cracks with glow -->
+        <path class="crack-branch crack-branch-1"
+          d="M120,80 L220,30 L310,50 L370,20" />
+        <path class="crack-branch crack-branch-2"
+          d="M280,320 L400,270 L480,290 L560,250 L620,265" />
+        <path class="crack-branch crack-branch-3"
+          d="M220,450 L100,500 L40,480 L-20,510" />
+        <path class="crack-branch crack-branch-4"
+          d="M460,560 L580,520 L660,540 L740,510 L800,525" />
+        <path class="crack-branch crack-branch-5"
+          d="M400,670 L300,720 L220,700 L140,730" />
+        <path class="crack-branch crack-branch-6"
+          d="M640,780 L760,740 L840,760 L920,730 L990,748" />
+        <path class="crack-branch crack-branch-7"
+          d="M820,960 L920,910 L1000,930 L1080,900" />
+      </svg>
+    </div>
+
   </body>
 </html>
