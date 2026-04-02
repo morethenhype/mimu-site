@@ -620,6 +620,7 @@
             <div class="actions">
               <button class="btn btn-primary" id="enterSiteBtn">Enter Access Terminal</button>
               <button class="btn btn-secondary" id="bioScanBtn">Bio Scan Select</button>
+              <button class="btn btn-secondary" id="legendaryViewerBtn">MIMU Legendary Viewer</button>
             </div>
 
             <div class="note" id="statusNote">Countdown synced by visitor region. Terminal access remains restricted.</div>
@@ -665,6 +666,11 @@
       document.getElementById('bioScanBtn').addEventListener('click', () => {
         window.location.href = '/bio-scan-select.html';
       });
+
+      document.getElementById('legendaryViewerBtn').addEventListener('click', () => {
+        window.location.href = '/legends';
+      });
+
     </script>
   </body>
 </html>
