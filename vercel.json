@@ -8,6 +8,10 @@
     {
       "source": "/legends",
       "destination": "/mimu-legends-gallery"
+    },
+    {
+      "source": "/allocation",
+      "destination": "/mint-allocation"
     }
   ]
 }
