@@ -2572,9 +2572,12 @@
             <span class="brand-sep"></span>
             <span>MIMUONAPE.XYZ // The 1 of 1 Editions</span>
           </div>
-          <div class="status-tag">
-            <span class="pulse-dot"></span>
-            All 14 Units Revealed
+          <div style="display:flex;align-items:center;gap:20px;">
+            <div class="status-tag">
+              <span class="pulse-dot"></span>
+              <span id="globalRevealedStatus">Loading...</span>
+            </div>
+            <a href="/" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--green-soft)'" onmouseout="this.style.color='var(--muted)'">← Gateway</a>
           </div>
         </header>
 
