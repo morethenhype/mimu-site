@@ -11,7 +11,7 @@
     },
     {
       "source": "/allocation",
-      "destination": "/mint-allocation"
+      "destination": "/allocation"
     }
   ]
 }
