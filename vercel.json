@@ -6,6 +6,10 @@
       "destination": "/bio-scan-select"
     },
     {
+      "source": "/about",
+      "destination": "/bio-scan-select"
+    },
+    {
       "source": "/legends",
       "destination": "/mimu-legends-gallery"
     },
