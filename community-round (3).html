@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MIMU // Community Round</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg-0: #000a05; --bg-1: #010302; --bg-2: #04130d; --bg-3: #082117;
+        --green: #78ffbf; --green-dim: #3dcc88; --green-soft: #d3ffe8;
+        --muted: rgba(211,255,232,0.52); --muted-hi: rgba(211,255,232,0.72);
+        --line: rgba(120,255,191,0.13); --line-hi: rgba(120,255,191,0.22);
+        --font-mono: 'Share Tech Mono', monospace;
+        --font-display: 'Bebas Neue', sans-serif;
+        --font-body: 'DM Sans', sans-serif;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        width: 100%; min-height: 100%;
+        font-family: var(--font-body); color: var(--green-soft);
+        background: var(--bg-0); overflow-x: hidden;
+      }
+
+      body::after {
+        content: ""; position: fixed; inset: 0;
+        background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.18) 3px, rgba(0,0,0,0.18) 4px);
+        pointer-events: none; z-index: 1000; opacity: 0.45;
+      }
+
+      body::before {
+        content: ""; position: fixed; inset: -50%; width: 200%; height: 200%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        opacity: 0.028; pointer-events: none;
+        animation: grain 0.8s steps(1) infinite; z-index: 999;
+      }
+
+      @keyframes grain {
+        0%{transform:translate(0,0)} 10%{transform:translate(-3%,-4%)} 20%{transform:translate(-6%,2%)}
+        30%{transform:translate(3%,-1%)} 40%{transform:translate(-1%,5%)} 50%{transform:translate(-5%,1%)}
+        60%{transform:translate(2%,-4%)} 70%{transform:translate(-2%,6%)} 80%{transform:translate(4%,3%)}
+        90%{transform:translate(-3%,-3%)} 100%{transform:translate(0,0)}
+      }
+
+      .page {
+        min-height: 100vh; padding: 20px;
+        display: flex; align-items: flex-start; justify-content: center;
+        background:
+          radial-gradient(ellipse 60% 40% at 50% -10%, rgba(120,255,191,0.09) 0%, transparent 70%),
+          radial-gradient(ellipse 40% 30% at 15% 85%, rgba(120,255,191,0.06) 0%, transparent 60%),
+          linear-gradient(170deg, var(--bg-3) 0%, var(--bg-2) 35%, var(--bg-1) 70%, var(--bg-0) 100%);
+      }
+
+      .shell {
+        width: min(1200px, 100%); border-radius: 24px;
+        border: 1px solid var(--line);
+        background: linear-gradient(170deg, rgba(5,18,12,0.97) 0%, rgba(2,9,6,0.96) 50%, rgba(1,5,3,0.97) 100%);
+        overflow: hidden; position: relative;
+        display: flex; flex-direction: column;
+        animation: shellIn 1s ease both;
+      }
+
+      @keyframes shellIn {
+        from { opacity:0; transform:scale(0.985) translateY(12px); }
+        to   { opacity:1; transform:none; }
+      }
+
+      .shell::before {
+        content:""; position:absolute; inset:1px; border-radius:23px;
+        border:1px solid rgba(120,255,191,0.06); pointer-events:none; z-index:1;
+      }
+
+      .shell::after {
+        content:""; position:absolute; top:0; left:0; width:320px; height:320px;
+        background:radial-gradient(circle at top left, rgba(120,255,191,0.06), transparent 65%);
+        pointer-events:none; z-index:0;
+      }
+
+      .grid-bg {
+        position:absolute; inset:0;
+        background-image:
+          linear-gradient(rgba(120,255,191,0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(120,255,191,0.035) 1px, transparent 1px);
+        background-size:48px 48px;
+        mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 80%);
+        pointer-events:none; z-index:0;
+      }
+
+      /* Topbar */
+      .topbar {
+        position:relative; z-index:10;
+        display:flex; justify-content:space-between; align-items:center;
+        gap:16px; padding:18px 28px;
+        border-bottom:1px solid var(--line);
+        background:rgba(2,10,6,0.7); backdrop-filter:blur(6px);
+      }
+
+      .brand { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; color:var(--muted); }
+      .brand-logo { font-family:var(--font-display); font-size:22px; letter-spacing:0.12em; color:var(--green); line-height:1; text-shadow:0 0 16px rgba(120,255,191,0.5); }
+      .brand-sep { width:1px; height:16px; background:var(--line-hi); }
+
+      /* Content */
+      .content {
+        position:relative; z-index:2;
+        padding:52px 48px 64px;
+        display:flex; flex-direction:column; align-items:center;
+        gap:16px;
+      }
+
+      /* Header */
+      .page-header {
+        text-align:center; margin-bottom:16px; width:100%;
+        animation: fadeUp 0.7s 0.4s ease both;
+      }
+
+      @keyframes fadeUp {
+        from { opacity:0; transform:translateY(16px); }
+        to   { opacity:1; transform:none; }
+      }
+
+      .page-eyebrow {
+        font-family:var(--font-mono); font-size:9.5px;
+        letter-spacing:0.36em; text-transform:uppercase; color:var(--muted);
+        margin-bottom:14px;
+        display:flex; align-items:center; justify-content:center; gap:12px;
+      }
+
+      .page-eyebrow::before, .page-eyebrow::after {
+        content:""; display:block; height:1px; width:40px;
+        background:linear-gradient(90deg, transparent, var(--line-hi));
+      }
+      .page-eyebrow::after { background:linear-gradient(270deg, transparent, var(--line-hi)); }
+
+      .page-title {
+        font-family:var(--font-display);
+        font-size:clamp(3rem,7vw,6rem); letter-spacing:0.08em;
+        text-transform:uppercase; line-height:0.9; margin-bottom:10px;
+        background:linear-gradient(170deg, #fff 0%, var(--green-soft) 40%, var(--green) 100%);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        filter:drop-shadow(0 0 24px rgba(120,255,191,0.2));
+        animation:titleIn 0.9s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+      }
+
+      @keyframes titleIn {
+        from { opacity:0; transform:translateY(28px) scaleY(0.92); }
+        to   { opacity:1; transform:none; }
+      }
+
+      .page-sub {
+        font-family:var(--font-display); font-size:clamp(1rem,2vw,1.6rem);
+        letter-spacing:0.3em; text-transform:uppercase;
+        color:var(--green-dim); text-shadow:0 0 14px rgba(61,204,136,0.4);
+        animation:fadeUp 0.7s 0.7s ease both;
+      }
+
+      .header-divider {
+        width:100%; max-width:500px; height:1px; margin:20px auto 0;
+        background:linear-gradient(90deg, transparent, var(--line-hi) 20%, var(--green) 50%, var(--line-hi) 80%, transparent);
+        animation:fadeUp 0.6s 0.8s ease both;
+      }
+
+      /* Note */
+      .phase-note {
+        font-family:var(--font-mono); font-size:9.5px;
+        letter-spacing:0.24em; text-transform:uppercase;
+        color:rgba(211,255,232,0.35); text-align:center;
+        margin-bottom:8px;
+        animation:fadeUp 0.6s 0.9s ease both;
+      }
+
+      /* Rounds grid */
+      .rounds-grid {
+        width:100%;
+        display:grid;
+        grid-template-columns:repeat(3, 1fr);
+        gap:16px;
+        animation:fadeUp 0.8s 1s ease both;
+      }
+
+      /* Round card */
+      .round-card {
+        border:1px solid var(--line); border-radius:20px;
+        background:linear-gradient(160deg, rgba(6,20,13,0.9), rgba(2,9,6,0.92));
+        overflow:hidden; position:relative;
+        display:flex; flex-direction:column;
+        transition:border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .round-card::before {
+        content:""; position:absolute; top:0; left:10%; right:10%; height:1px;
+        background:linear-gradient(90deg, transparent, rgba(120,255,191,0.25), transparent);
+      }
+
+      .round-card:hover {
+        border-color:var(--line-hi);
+        box-shadow:0 0 30px rgba(120,255,191,0.06);
+      }
+
+      /* Round header */
+      .round-header {
+        padding:18px 20px 14px;
+        border-bottom:1px solid var(--line);
+        display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+      }
+
+      .round-num {
+        font-family:var(--font-display); font-size:2.2rem;
+        letter-spacing:0.06em; line-height:1;
+        background:linear-gradient(160deg, #fff 0%, var(--green) 100%);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        filter:drop-shadow(0 0 8px rgba(120,255,191,0.3));
+      }
+
+      .round-meta { display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
+
+      .round-time {
+        font-family:var(--font-display); font-size:1.3rem;
+        letter-spacing:0.04em; color:var(--green-dim);
+        text-shadow:0 0 10px rgba(61,204,136,0.35);
+      }
+
+      .round-local {
+        font-family:var(--font-mono); font-size:8.5px;
+        letter-spacing:0.16em; color:rgba(211,255,232,0.32);
+      }
+
+      .round-label {
+        font-family:var(--font-mono); font-size:8px;
+        letter-spacing:0.28em; text-transform:uppercase;
+        color:var(--muted); align-self:flex-end; padding-bottom:3px;
+      }
+
+      /* Project list */
+      .project-list {
+        padding:14px 20px 18px;
+        display:flex; flex-direction:column; gap:0;
+        flex:1;
+      }
+
+      .project-item {
+        display:flex; align-items:center; gap:10px;
+        padding:8px 0;
+        border-bottom:1px solid rgba(120,255,191,0.06);
+        font-family:var(--font-mono); font-size:10px;
+        letter-spacing:0.14em; text-transform:uppercase;
+        color:var(--muted-hi);
+        transition:color 0.2s;
+      }
+
+      .project-item:last-child { border-bottom:none; }
+      .project-item:hover { color:var(--green-soft); }
+
+      .project-item::before {
+        content:""; display:block; width:4px; height:4px;
+        border-radius:50%; background:var(--green-dim);
+        box-shadow:0 0 4px var(--green-dim); flex-shrink:0;
+      }
+
+      /* Status badge on active round */
+      .round-card.live { border-color:rgba(120,255,191,0.3); }
+      .round-card.completed { opacity:0.45; }
+
+      .round-status {
+        font-family:var(--font-mono); font-size:8px;
+        letter-spacing:0.2em; text-transform:uppercase;
+        padding:3px 10px; border-radius:999px; align-self:flex-end;
+      }
+
+      .status-live { color:var(--green); border:1px solid rgba(120,255,191,0.3); background:rgba(120,255,191,0.06); }
+      .status-done { color:rgba(211,255,232,0.25); border:1px solid rgba(120,255,191,0.08); }
+      .status-up   { color:var(--muted); border:1px solid var(--line); }
+
+      /* Footer */
+      .shell-footer {
+        position:relative; z-index:10;
+        display:flex; justify-content:space-between; align-items:center;
+        padding:15px 28px; border-top:1px solid var(--line);
+        background:rgba(2,10,6,0.7); backdrop-filter:blur(6px);
+      }
+
+      .footer-text {
+        font-family:var(--font-mono); font-size:9px;
+        letter-spacing:0.24em; text-transform:uppercase;
+        color:rgba(211,255,232,0.3);
+      }
+
+      @media (max-width:900px) {
+        .rounds-grid { grid-template-columns:repeat(2,1fr); }
+        .content { padding:32px 18px 44px; }
+        .topbar { flex-direction:row; align-items:center; gap:10px; padding:14px 16px; flex-wrap:nowrap; }
+      }
+
+      @media (max-width:560px) {
+        .rounds-grid { grid-template-columns:1fr; }
+        .page { padding:10px; }
+        .shell { border-radius:18px; }
+      }
+
+      .round-projects-header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 8px 20px 6px;
+        border-bottom: 1px solid rgba(120,255,191,0.08);
+      }
+
+      .col-label {
+        font-family: var(--font-mono); font-size: 8px;
+        letter-spacing: 0.28em; text-transform: uppercase;
+        color: rgba(120,255,191,0.35);
+      }
+
+      .project-item {
+        display: flex; justify-content: space-between; align-items: center;
+      }
+
+      .project-name { flex: 1; }
+
+      .project-alloc {
+        font-family: var(--font-mono); font-size: 10px;
+        letter-spacing: 0.1em; color: rgba(211,255,232,0.25);
+        position: relative; white-space: nowrap;
+        padding-left: 12px; flex-shrink: 0;
+      }
+
+      .project-alloc::after {
+        content: "";
+        position: absolute;
+        left: 12px; right: 0;
+        top: 50%; transform: translateY(-50%);
+        height: 1.5px;
+        background: rgba(120,255,191,0.45);
+      }
+
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="shell">
+        <div class="grid-bg"></div>
+
+        <header class="topbar">
+          <div class="brand">
+            <span class="brand-logo">MIMU</span>
+            <span class="brand-sep"></span>
+            <span>COMMUNITY ROUND</span>
+          </div>
+          <a href="/" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--line-hi);border-radius:999px;padding:7px 18px;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(120,255,191,0.4)';this.style.color='var(--green-soft)'" onmouseout="this.style.borderColor='var(--line-hi)';this.style.color='var(--muted)'">← Home</a>
+        </header>
+
+        <section class="content">
+
+          <div class="page-header">
+            <div class="page-eyebrow">Phase 2 // April 13, 2026</div>
+            <h1 class="page-title">Community<br/>Round</h1>
+            <div class="page-sub">6 Rounds · 12 Projects Each</div>
+            <div class="header-divider"></div>
+          </div>
+
+          <p class="phase-note">⚠ &nbsp;All times shown in your local timezone. 12 projects per round. FCFS basis.</p>
+
+          <div class="rounds-grid" id="roundsGrid">
+
+            <!-- Round 1 -->
+            <div class="round-card" id="rc-1">
+              <div class="round-header">
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span class="round-num">01</span>
+                  <span class="round-label">Round</span>
+                </div>
+                <div class="round-meta">
+                  <span class="round-time" id="rt-1">--:--</span>
+                  <span class="round-local" id="rl-1"></span>
+                  <span class="round-status status-up" id="rs-1">Upcoming</span>
+                </div>
+              </div>
+              <div class="round-projects-header">
+              <span class="col-label">Project</span>
+              <span class="col-label">Allocation</span>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                <span class="project-name">Alpha Dogs</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Ape Droidz</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Bae Apes</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">BGG OG</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Crypto Cats</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Dojo Kids</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">DSNRS</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Fiendz</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Geez</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Night Glyders</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Rillaz</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Sloooths</span>
+                <span class="project-alloc">———</span>
+              </div>
+              </div>
+            </div>
+
+            <!-- Round 2 -->
+            <div class="round-card" id="rc-2">
+              <div class="round-header">
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span class="round-num">02</span>
+                  <span class="round-label">Round</span>
+                </div>
+                <div class="round-meta">
+                  <span class="round-time" id="rt-2">--:--</span>
+                  <span class="round-local" id="rl-2"></span>
+                  <span class="round-status status-up" id="rs-2">Upcoming</span>
+                </div>
+              </div>
+              <div class="round-projects-header">
+              <span class="col-label">Project</span>
+              <span class="col-label">Allocation</span>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                <span class="project-name">Bullies On Ape</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Doruzu</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Flingers</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Foxy Fam</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Gimboz</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Gobs</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Hop Starz</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">JNKY</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Mars Cats</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Monos</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Other Pets</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Prime8s</span>
+                <span class="project-alloc">———</span>
+              </div>
+              </div>
+            </div>
+
+            <!-- Round 3 -->
+            <div class="round-card" id="rc-3">
+              <div class="round-header">
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span class="round-num">03</span>
+                  <span class="round-label">Round</span>
+                </div>
+                <div class="round-meta">
+                  <span class="round-time" id="rt-3">--:--</span>
+                  <span class="round-local" id="rl-3"></span>
+                  <span class="round-status status-up" id="rs-3">Upcoming</span>
+                </div>
+              </div>
+              <div class="round-projects-header">
+              <span class="col-label">Project</span>
+              <span class="col-label">Allocation</span>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                <span class="project-name">Ape Hands</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Apes by Accident</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Balloons</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">BAYC</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">BGG Classic</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">DashKids</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">DoodRillas</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Fade</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Froglings</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Goblin Saga</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">HV-MTL Evo 2</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Mintotaurs</span>
+                <span class="project-alloc">———</span>
+              </div>
+              </div>
+            </div>
+
+            <!-- Round 4 -->
+            <div class="round-card" id="rc-4">
+              <div class="round-header">
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span class="round-num">04</span>
+                  <span class="round-label">Round</span>
+                </div>
+                <div class="round-meta">
+                  <span class="round-time" id="rt-4">--:--</span>
+                  <span class="round-local" id="rl-4"></span>
+                  <span class="round-status status-up" id="rs-4">Upcoming</span>
+                </div>
+              </div>
+              <div class="round-projects-header">
+              <span class="col-label">Project</span>
+              <span class="col-label">Allocation</span>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                <span class="project-name">Bani the Mad Bunny</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Based Ape</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Chumpz</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Dengs</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Drunkees</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Frostbyte</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">GCG</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">KODA</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Lil Mutants</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">LT3</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">MAYC</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Trenchettes</span>
+                <span class="project-alloc">———</span>
+              </div>
+              </div>
+            </div>
+
+            <!-- Round 5 -->
+            <div class="round-card" id="rc-5">
+              <div class="round-header">
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span class="round-num">05</span>
+                  <span class="round-label">Round</span>
+                </div>
+                <div class="round-meta">
+                  <span class="round-time" id="rt-5">--:--</span>
+                  <span class="round-local" id="rl-5"></span>
+                  <span class="round-status status-up" id="rs-5">Upcoming</span>
+                </div>
+              </div>
+              <div class="round-projects-header">
+              <span class="col-label">Project</span>
+              <span class="col-label">Allocation</span>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                <span class="project-name">Boggy</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Bounty Hunter</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Bush Babies</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Monkees</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Nibbles</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">NPC</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Other Egg</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Pixl Pals</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">RogueBots</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Skid City</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Skul Kritters</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Token Gators</span>
+                <span class="project-alloc">———</span>
+              </div>
+              </div>
+            </div>
+
+            <!-- Round 6 -->
+            <div class="round-card" id="rc-6">
+              <div class="round-header">
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span class="round-num">06</span>
+                  <span class="round-label">Round</span>
+                </div>
+                <div class="round-meta">
+                  <span class="round-time" id="rt-6">--:--</span>
+                  <span class="round-local" id="rl-6"></span>
+                  <span class="round-status status-up" id="rs-6">Upcoming</span>
+                </div>
+              </div>
+              <div class="round-projects-header">
+              <span class="col-label">Project</span>
+              <span class="col-label">Allocation</span>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                <span class="project-name">Dawn of the Ducks</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Mulls On Ape</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Nekito</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Otterful Otters</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Psilly Mutants</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">StarGirl Salon</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">TJ Art Pass</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Trenchers</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Turtlez</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Typical Tigers</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Yuppie Apes</span>
+                <span class="project-alloc">———</span>
+              </div>
+                <div class="project-item">
+                <span class="project-name">Zards</span>
+                <span class="project-alloc">———</span>
+              </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <footer class="shell-footer">
+          <span class="footer-text">MIMU // Community Round // © 2026 All Rights Reserved</span>
+        </footer>
+      </section>
+    </main>
+
+    <script>
+      // Round start times (UTC) — April 13 2026, EDT = UTC-4
+      const ROUNDS = [
+        { id:1, start: new Date('2026-04-13T16:30:00Z'), end: new Date('2026-04-13T17:30:00Z') },
+        { id:2, start: new Date('2026-04-13T17:30:00Z'), end: new Date('2026-04-13T18:30:00Z') },
+        { id:3, start: new Date('2026-04-13T18:30:00Z'), end: new Date('2026-04-13T19:30:00Z') },
+        { id:4, start: new Date('2026-04-13T19:30:00Z'), end: new Date('2026-04-13T20:30:00Z') },
+        { id:5, start: new Date('2026-04-13T20:30:00Z'), end: new Date('2026-04-13T21:30:00Z') },
+        { id:6, start: new Date('2026-04-13T21:30:00Z'), end: new Date('2026-04-13T22:30:00Z') },
+      ];
+
+      const timeOpts = { hour:'numeric', minute:'2-digit', timeZoneName:'short' };
+
+      // Set local times on each round — fully dynamic, no hardcoded ET
+      ROUNDS.forEach(r => {
+        const localEl = document.getElementById('rl-' + r.id);
+        const timeEl  = document.getElementById('rt-' + r.id);
+        const localFull = r.start.toLocaleTimeString(undefined, timeOpts);
+        const localShort = r.start.toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
+        if (timeEl)  timeEl.textContent = localShort;
+        if (localEl) localEl.textContent = localFull;
+      });
+
+      function updateRounds() {
+        const now = Date.now();
+        ROUNDS.forEach(r => {
+          const card   = document.getElementById('rc-' + r.id);
+          const badge  = document.getElementById('rs-' + r.id);
+          const started = now >= r.start.getTime();
+          const ended   = now >= r.end.getTime();
+
+          if (ended) {
+            card.classList.add('completed');
+            badge.className = 'round-status status-done';
+            badge.textContent = 'Completed';
+          } else if (started) {
+            card.classList.add('live');
+            badge.className = 'round-status status-live';
+            badge.textContent = '● Live';
+          } else {
+            badge.className = 'round-status status-up';
+            badge.textContent = 'Upcoming';
+          }
+        });
+      }
+
+      updateRounds();
+      setInterval(updateRounds, 10000);
+    </script>
+  </body>
+</html>
