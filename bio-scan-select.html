@@ -3,472 +3,491 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MIMU // Bio Scan Select</title>
+    <title>MIMU // About</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg-0:       #060e0a;
-        --bg-panel:   #0a1812;
-        --bg-card:    #0d1f16;
-        --green:      #4aff9a;
-        --green-head: #3de08a;
-        --green-dim:  #2a9962;
-        --text:       #9fd4b8;
-        --text-dim:   #5d957a;
-        --border:     #1a3d2a;
-        --border-hi:  #1f4a32;
-        --font:       'Share Tech Mono', monospace;
+        --bg-0: #000a05; --bg-1: #010302; --bg-2: #04130d; --bg-3: #082117;
+        --green: #78ffbf; --green-dim: #3dcc88; --green-soft: #d3ffe8;
+        --muted: rgba(211,255,232,0.52); --muted-hi: rgba(211,255,232,0.72);
+        --line: rgba(120,255,191,0.13); --line-hi: rgba(120,255,191,0.22);
+        --font-mono: 'Share Tech Mono', monospace;
+        --font-display: 'Bebas Neue', sans-serif;
+        --font-body: 'DM Sans', sans-serif;
       }
 
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
 
-      body {
-        font-family: var(--font);
-        background: var(--bg-0);
-        color: var(--text);
-        min-height: 100vh;
-        overflow-x: hidden;
+      html, body {
+        width: 100%; min-height: 100%;
+        font-family: var(--font-body); color: var(--green-soft);
+        background: var(--bg-0); overflow-x: hidden;
       }
 
-      /* scanlines */
       body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: repeating-linear-gradient(
-          0deg,
-          transparent, transparent 3px,
-          rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px
-        );
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.45;
+        content: ""; position: fixed; inset: 0;
+        background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.18) 3px, rgba(0,0,0,0.18) 4px);
+        pointer-events: none; z-index: 1000; opacity: 0.45;
       }
 
-      /* ── top nav ── */
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 28px;
-        border-bottom: 1px solid var(--border);
-        background: var(--bg-0);
-        position: sticky;
-        top: 0;
-        z-index: 100;
+      body::before {
+        content: ""; position: fixed; inset: -50%; width: 200%; height: 200%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        opacity: 0.028; pointer-events: none;
+        animation: grain 0.8s steps(1) infinite; z-index: 999;
       }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: var(--text-dim);
-        font-size: 11px;
-        letter-spacing: 0.18em;
+      @keyframes grain {
+        0%{transform:translate(0,0)} 10%{transform:translate(-3%,-4%)} 20%{transform:translate(-6%,2%)}
+        30%{transform:translate(3%,-1%)} 40%{transform:translate(-1%,5%)} 50%{transform:translate(-5%,1%)}
+        60%{transform:translate(2%,-4%)} 70%{transform:translate(-2%,6%)} 80%{transform:translate(4%,3%)}
+        90%{transform:translate(-3%,-3%)} 100%{transform:translate(0,0)}
       }
 
-      .brand-dot {
-        width: 8px; height: 8px;
-        border-radius: 50%;
-        background: var(--green);
-        box-shadow: 0 0 8px var(--green);
-        animation: blink 2.5s ease-in-out infinite;
-        flex-shrink: 0;
-      }
-
-      @keyframes blink {
-        0%,100% { opacity: 1; }
-        50%      { opacity: 0.3; }
-      }
-
-      .back-link {
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        color: var(--text-dim);
-        text-decoration: none;
-        border: 1px solid var(--border-hi);
-        padding: 7px 16px;
-        transition: color 0.2s, border-color 0.2s;
-      }
-
-      .back-link:hover { color: var(--green); border-color: var(--green-dim); }
-
-      /* ── page wrapper ── */
       .page {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 24px 64px;
+        min-height: 100vh; padding: 20px;
+        display: flex; align-items: flex-start; justify-content: center;
+        background:
+          radial-gradient(ellipse 60% 40% at 50% -10%, rgba(120,255,191,0.09) 0%, transparent 70%),
+          radial-gradient(ellipse 40% 30% at 15% 85%, rgba(120,255,191,0.06) 0%, transparent 60%),
+          linear-gradient(170deg, var(--bg-3) 0%, var(--bg-2) 35%, var(--bg-1) 70%, var(--bg-0) 100%);
       }
 
-      /* ── shared section block ── */
-      .section {
-        border: 1px solid var(--border);
-        background: var(--bg-panel);
-        margin-top: 20px;
-        padding: 28px 28px 32px;
+      .shell {
+        width: min(1100px, 100%); border-radius: 24px;
+        border: 1px solid var(--line);
+        background: linear-gradient(170deg, rgba(5,18,12,0.97) 0%, rgba(2,9,6,0.96) 50%, rgba(1,5,3,0.97) 100%);
+        overflow: hidden; position: relative;
+        display: flex; flex-direction: column;
+        animation: shellIn 1s ease both;
       }
+
+      @keyframes shellIn {
+        from { opacity:0; transform:scale(0.985) translateY(12px); }
+        to   { opacity:1; transform:none; }
+      }
+
+      .shell::before {
+        content:""; position:absolute; inset:1px; border-radius:23px;
+        border:1px solid rgba(120,255,191,0.06); pointer-events:none; z-index:1;
+      }
+
+      .shell::after {
+        content:""; position:absolute; top:0; left:0; width:320px; height:320px;
+        background:radial-gradient(circle at top left, rgba(120,255,191,0.06), transparent 65%);
+        pointer-events:none; z-index:0;
+      }
+
+      .grid-bg {
+        position:absolute; inset:0;
+        background-image:
+          linear-gradient(rgba(120,255,191,0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(120,255,191,0.035) 1px, transparent 1px);
+        background-size:48px 48px;
+        mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 80%);
+        pointer-events:none; z-index:0;
+      }
+
+      /* Topbar */
+      .topbar {
+        position:relative; z-index:10;
+        display:flex; justify-content:space-between; align-items:center;
+        gap:16px; padding:18px 28px;
+        border-bottom:1px solid var(--line);
+        background:rgba(2,10,6,0.7); backdrop-filter:blur(6px);
+      }
+
+      .brand { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; color:var(--muted); }
+      .brand-logo { font-family:var(--font-display); font-size:22px; letter-spacing:0.12em; color:var(--green); line-height:1; text-shadow:0 0 16px rgba(120,255,191,0.5); }
+      .brand-sep { width:1px; height:16px; background:var(--line-hi); }
+
+      /* Content */
+      .content {
+        position:relative; z-index:2;
+        padding:52px 48px 64px;
+        display:flex; flex-direction:column; gap:56px;
+      }
+
+      /* Section */
+      .section { display:flex; flex-direction:column; gap:20px; }
 
       .section-eyebrow {
-        font-size: 11px;
-        letter-spacing: 0.2em;
-        color: var(--text-dim);
-        margin-bottom: 8px;
-        text-transform: uppercase;
+        font-family:var(--font-mono); font-size:9.5px;
+        letter-spacing:0.36em; text-transform:uppercase; color:var(--muted);
+        display:flex; align-items:center; gap:12px;
+      }
+
+      .section-eyebrow::before {
+        content:""; display:block; height:1px; width:32px;
+        background:linear-gradient(90deg, transparent, var(--line-hi));
       }
 
       .section-title {
-        font-size: 20px;
-        letter-spacing: 0.18em;
-        color: var(--green-head);
-        margin-bottom: 22px;
-        text-transform: uppercase;
+        font-family:var(--font-display);
+        font-size:clamp(2.2rem,5vw,4rem); letter-spacing:0.08em;
+        text-transform:uppercase; line-height:0.95;
+        background:linear-gradient(160deg, #fff 0%, var(--green-soft) 50%, var(--green) 100%);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        filter:drop-shadow(0 0 18px rgba(120,255,191,0.15));
       }
 
-      /* ── standard card ── */
-      .card {
-        border: 1px solid var(--border-hi);
-        background: var(--bg-card);
-        padding: 18px 20px;
-        margin-bottom: 8px;
-      }
-      .card:last-child { margin-bottom: 0; }
-
-      .card-title {
-        font-size: 13px;
-        letter-spacing: 0.2em;
-        color: var(--green);
-        margin-bottom: 8px;
-        text-transform: uppercase;
+      .section-divider {
+        height:1px; width:100%;
+        background:linear-gradient(90deg, var(--line-hi), transparent);
+        margin-bottom:4px;
       }
 
-      .card-body {
-        font-size: 13px;
-        line-height: 1.75;
-        color: var(--text);
+      /* Lore text */
+      .lore-text {
+        font-family:var(--font-body); font-size:14px;
+        line-height:1.8; font-weight:300; color:var(--muted-hi);
+        max-width:760px;
       }
 
-      /* ── lore prose ── */
-      .lore-intro {
-        font-size: 13px;
-        line-height: 1.85;
-        color: var(--text);
-        margin-bottom: 16px;
+      /* Info cards (lore cards) */
+      .cards-grid {
+        display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+        gap:14px;
       }
 
-      /* ── roadmap phases ── */
-      .phase-row {
-        display: grid;
-        grid-template-columns: 96px 1fr;
-        border: 1px solid var(--border-hi);
-        background: var(--bg-card);
-        margin-bottom: 8px;
-      }
-      .phase-row:last-child { margin-bottom: 0; }
-
-      .phase-label {
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        color: var(--text-dim);
-        padding: 18px 16px;
-        border-right: 1px solid var(--border-hi);
-        display: flex;
-        align-items: flex-start;
-        white-space: nowrap;
-        text-transform: uppercase;
+      .info-card {
+        border:1px solid var(--line); border-radius:16px;
+        background:linear-gradient(160deg, rgba(6,20,13,0.88), rgba(2,9,6,0.92));
+        padding:20px 22px; position:relative; overflow:hidden;
+        transition:border-color 0.2s;
       }
 
-      .phase-content { padding: 18px 20px; }
-
-      .phase-title {
-        font-size: 13px;
-        letter-spacing: 0.2em;
-        color: var(--green);
-        margin-bottom: 8px;
-        text-transform: uppercase;
+      .info-card::before {
+        content:""; position:absolute; top:0; left:10%; right:10%; height:1px;
+        background:linear-gradient(90deg, transparent, rgba(120,255,191,0.2), transparent);
       }
 
-      .phase-desc {
-        font-size: 13px;
-        line-height: 1.75;
-        color: var(--text);
+      .info-card:hover { border-color:var(--line-hi); }
+
+      .info-card-title {
+        font-family:var(--font-mono); font-size:9.5px;
+        letter-spacing:0.28em; text-transform:uppercase;
+        color:var(--green-dim); margin-bottom:8px;
       }
 
-      /* ── 3-col grid ── */
-      .col3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+      .info-card-body {
+        font-family:var(--font-body); font-size:13px;
+        line-height:1.7; font-weight:300; color:var(--muted-hi);
       }
 
-      /* ── team cards ── */
+      /* Roadmap phases */
+      .roadmap { display:flex; flex-direction:column; gap:0; }
+
+      .roadmap-row {
+        display:grid; grid-template-columns:120px 1fr;
+        gap:24px; padding:20px 0;
+        border-bottom:1px solid var(--line);
+      }
+
+      .roadmap-row:last-child { border-bottom:none; }
+
+      .roadmap-label {
+        font-family:var(--font-mono); font-size:9px;
+        letter-spacing:0.28em; text-transform:uppercase;
+        color:var(--muted); padding-top:3px;
+      }
+
+      .roadmap-title {
+        font-family:var(--font-display); font-size:1.5rem;
+        letter-spacing:0.06em; text-transform:uppercase;
+        color:var(--green-soft); margin-bottom:6px;
+      }
+
+      .roadmap-desc {
+        font-family:var(--font-body); font-size:13px;
+        line-height:1.7; font-weight:300; color:var(--muted);
+      }
+
+      /* FAQ */
+      .faq { display:flex; flex-direction:column; gap:12px; }
+
+      .faq-item {
+        border:1px solid var(--line); border-radius:14px;
+        background:linear-gradient(160deg, rgba(6,18,12,0.85), rgba(2,9,6,0.9));
+        overflow:hidden; cursor:pointer;
+        transition:border-color 0.2s;
+      }
+
+      .faq-item:hover { border-color:var(--line-hi); }
+
+      .faq-q {
+        display:flex; justify-content:space-between; align-items:center;
+        padding:16px 20px; gap:16px;
+        font-family:var(--font-mono); font-size:10px;
+        letter-spacing:0.22em; text-transform:uppercase; color:var(--green-soft);
+      }
+
+      .faq-arrow { color:var(--green-dim); transition:transform 0.25s; flex-shrink:0; font-size:14px; }
+      .faq-item.open .faq-arrow { transform:rotate(90deg); }
+
+      .faq-a {
+        max-height:0; overflow:hidden;
+        transition:max-height 0.3s ease, padding 0.2s;
+        font-family:var(--font-body); font-size:13px;
+        line-height:1.7; font-weight:300; color:var(--muted-hi);
+        padding:0 20px;
+      }
+
+      .faq-item.open .faq-a { max-height:200px; padding:0 20px 16px; }
+
+      /* Team */
+      .team-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px; }
+
       .team-card {
-        border: 1px solid var(--border-hi);
-        background: var(--bg-card);
-        padding: 18px 20px;
+        border:1px solid var(--line); border-radius:16px;
+        background:linear-gradient(160deg, rgba(6,20,13,0.88), rgba(2,9,6,0.92));
+        padding:22px 22px 20px; position:relative; overflow:hidden;
+      }
+
+      .team-card::before {
+        content:""; position:absolute; top:0; left:10%; right:10%; height:1px;
+        background:linear-gradient(90deg, transparent, rgba(120,255,191,0.2), transparent);
       }
 
       .team-role {
-        font-size: 11px;
-        letter-spacing: 0.2em;
-        color: var(--text-dim);
-        margin-bottom: 5px;
-        text-transform: uppercase;
+        font-family:var(--font-mono); font-size:9px;
+        letter-spacing:0.3em; text-transform:uppercase;
+        color:var(--green-dim); margin-bottom:6px;
       }
 
       .team-name {
-        font-size: 14px;
-        letter-spacing: 0.18em;
-        color: var(--green);
-        margin-bottom: 5px;
-        text-transform: uppercase;
+        font-family:var(--font-display); font-size:2rem;
+        letter-spacing:0.06em; text-transform:uppercase;
+        color:var(--green-soft); line-height:1; margin-bottom:4px;
       }
 
       .team-handle {
-        font-size: 12px;
-        color: var(--text-dim);
-        margin-bottom: 10px;
-        letter-spacing: 0.06em;
-        display: block;
+        font-family:var(--font-mono); font-size:9px;
+        letter-spacing:0.18em; color:var(--muted);
+        display:block; margin-bottom:10px;
       }
 
       .team-bio {
-        font-size: 12px;
-        line-height: 1.65;
-        color: var(--text);
+        font-family:var(--font-body); font-size:12.5px;
+        line-height:1.65; font-weight:300; color:var(--muted);
       }
 
-      /* ── mint detail cards ── */
+      /* Mint details */
+      .mint-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:14px; }
+
       .mint-card {
-        border: 1px solid var(--border-hi);
-        background: var(--bg-card);
-        padding: 18px 20px;
+        border:1px solid var(--line); border-radius:16px;
+        background:linear-gradient(160deg, rgba(6,20,13,0.88), rgba(2,9,6,0.92));
+        padding:22px;
       }
 
       .mint-key {
-        font-size: 11px;
-        letter-spacing: 0.2em;
-        color: var(--text-dim);
-        margin-bottom: 7px;
-        text-transform: uppercase;
+        font-family:var(--font-mono); font-size:9px;
+        letter-spacing:0.3em; text-transform:uppercase;
+        color:var(--green-dim); margin-bottom:8px;
       }
 
       .mint-val {
-        font-size: 13px;
-        line-height: 1.65;
-        color: var(--text);
+        font-family:var(--font-body); font-size:14px;
+        line-height:1.6; font-weight:300; color:var(--muted-hi);
       }
 
       .mint-val strong {
-        color: var(--green);
-        font-weight: normal;
+        font-weight:500; color:var(--green-soft);
       }
 
-      /* ── responsive ── */
-      @media (max-width: 760px) {
-        .col3 { grid-template-columns: 1fr; }
-        .phase-row { grid-template-columns: 1fr; }
-        .phase-label { border-right: none; border-bottom: 1px solid var(--border-hi); }
-        .section { padding: 20px 16px 24px; }
-        .topbar { padding: 12px 16px; }
+      /* Footer */
+      .shell-footer {
+        position:relative; z-index:10;
+        display:flex; justify-content:space-between; align-items:center;
+        padding:15px 28px; border-top:1px solid var(--line);
+        background:rgba(2,10,6,0.7); backdrop-filter:blur(6px);
       }
 
-      /* ── MIMU brand (matches home page) ── */
-      .mimu-brand {
-        display: flex; align-items: center; gap: 10px;
-        font-family: 'Share Tech Mono', monospace;
-        font-size: 11px; letter-spacing: 0.18em;
-        color: rgba(211,255,232,0.52);
-        text-decoration: none;
-      }
-      .mimu-brand-logo {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 22px; letter-spacing: 0.12em;
-        color: #78ffbf; line-height: 1;
-        text-shadow: 0 0 16px rgba(120,255,191,0.5);
-      }
-      .mimu-brand-sep {
-        width: 1px; height: 16px;
-        background: rgba(120,255,191,0.22);
+      .footer-text {
+        font-family:var(--font-mono); font-size:9px;
+        letter-spacing:0.24em; text-transform:uppercase;
+        color:rgba(211,255,232,0.3);
       }
 
+      @media (max-width:700px) {
+        .page { padding:10px; }
+        .shell { border-radius:18px; }
+        .content { padding:28px 18px 44px; gap:40px; }
+        .topbar { flex-direction:row; align-items:center; gap:10px; padding:14px 16px; flex-wrap:nowrap; }
+        .roadmap-row { grid-template-columns:1fr; gap:8px; }
+        .roadmap-label { padding-top:0; }
+      }
     </style>
   </head>
   <body>
+    <main class="page">
+      <section class="shell">
+        <div class="grid-bg"></div>
 
-    <nav class="topbar">
-      <a href="/" class="mimu-brand">
-        <span class="mimu-brand-logo">MIMU</span>
-        <span class="mimu-brand-sep"></span>
-        <span>ABOUT</span>
-      </a>
-      <a href="/" style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(211,255,232,0.52);text-decoration:none;border:1px solid rgba(120,255,191,0.22);border-radius:999px;padding:7px 18px;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(120,255,191,0.4)';this.style.color='#d3ffe8'" onmouseout="this.style.borderColor='rgba(120,255,191,0.22)';this.style.color='rgba(211,255,232,0.52)'">← Home</a>
-    </nav>
-
-    <div class="page">
-
-      <!-- ══ LORE ══ -->
-      <div class="section">
-        <div class="section-eyebrow">ARCHIVE FILE // LORE</div>
-        <div class="section-title">SIGNAL ORIGIN</div>
-
-        <p class="lore-intro">MIMU began as a dormant bio-signal hidden behind fragmented transmissions, sealed inside an encrypted egg chamber and buried inside a corrupted control system. Every unlock sequence, trace command, and genome fragment reveals another layer of a living intelligence waking up inside the network.</p>
-        <p class="lore-intro">Born as translucent beings, MIMUs enter existence as blank echoes of potential — soft, glowing silhouettes drifting between dimensions. They have no fixed identity, no set form, no predetermined fate. But that changes the moment they begin to explore. Every interaction leaves a mark. Every environment writes a piece of who they become. No two MIMUs are ever the same.</p>
-
-        <div class="card">
-          <div class="card-title">THE CHAMBER</div>
-          <div class="card-body">A sealed incubation node where the first MIMU signal was detected. Only verified users can push the chamber beyond standby mode.</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">THE SIGNAL</div>
-          <div class="card-body">A repeating anomaly that appears as biological data wrapped in machine code, suggesting MIMU is both lifeform and protocol.</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">THE AWAKENING</div>
-          <div class="card-body">Each community action unlocks another sequence, bringing the chamber closer to fracture, reveal, and full chain activation.</div>
-        </div>
-      </div>
-
-      <!-- ══ ROADMAP ══ -->
-      <div class="section">
-        <div class="section-eyebrow">MISSION LOG // ROADMAP</div>
-        <div class="section-title">ACTIVATION TIMELINE</div>
-
-        <div class="phase-row">
-          <div class="phase-label">PHASE 01</div>
-          <div class="phase-content">
-            <div class="phase-title">SIGNAL DISCOVERY</div>
-            <div class="phase-desc">Launch teaser drops, ARG clues, access terminal rollout, and GTD hunt activation across community channels.</div>
+        <header class="topbar">
+          <div class="brand">
+            <span class="brand-logo">MIMU</span>
+            <span class="brand-sep"></span>
+            <span>ABOUT</span>
           </div>
-        </div>
+          <a href="/" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--line-hi);border-radius:999px;padding:7px 18px;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(120,255,191,0.4)';this.style.color='var(--green-soft)'" onmouseout="this.style.borderColor='var(--line-hi)';this.style.color='var(--muted)'">← Home</a>
+        </header>
 
-        <div class="phase-row">
-          <div class="phase-label">PHASE 02</div>
-          <div class="phase-content">
-            <div class="phase-title">GENOME DECRYPT</div>
-            <div class="phase-desc">Reveal deeper lore, unlock egg-stage interactions, expand puzzles, and activate whitelist or GTD verification logic.</div>
-          </div>
-        </div>
+        <section class="content">
 
-        <div class="phase-row">
-          <div class="phase-label">PHASE 03</div>
-          <div class="phase-content">
-            <div class="phase-title">MINT INITIATION</div>
-            <div class="phase-desc">Open mint access, connect wallets, verify allocations, and transform the terminal from discovery mode into mint mode.</div>
-          </div>
-        </div>
-
-        <div class="phase-row">
-          <div class="phase-label">PHASE 04</div>
-          <div class="phase-content">
-            <div class="phase-title">POST-MINT EXPANSION</div>
-            <div class="phase-desc">Progress into reveal experiences, faction systems, holder-only access, missions, and future ecosystem layers.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══ FAQ ══ -->
-      <div class="section">
-        <div class="section-eyebrow">SYSTEM QUERIES // FAQ</div>
-        <div class="section-title">FREQUENTLY ASKED QUESTIONS</div>
-
-        <div class="card">
-          <div class="card-title">WHAT IS MIMU?</div>
-          <div class="card-body">MIMU is a lore-driven collectible experience wrapped in an ARG-style terminal interface with staged unlocks, hidden signals, and a mint reveal sequence.</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">HOW DO I ACCESS MINT?</div>
-          <div class="card-body">You will need to connect the wallet associated to your GTD spot to unlock mint phase.</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">WHAT IS THE MINT DATE?</div>
-          <div class="card-body">April 13, 2026 at 11:00 AM ET. GTD holders receive priority allocation access.</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">WHAT TYPE OF WALLET CAN BE USED?</div>
-          <div class="card-body">This mint will be EVM and on APE. You will need $APE to be able to pay for gas fees.</div>
-        </div>
-      </div>
-
-      <!-- ══ TEAM ══ -->
-      <div class="section">
-        <div class="section-eyebrow">OPERATOR INDEX // TEAM</div>
-        <div class="section-title">CORE PERSONNEL</div>
-
-        <div class="col3">
-          <div class="team-card">
-            <div class="team-role">FOUNDER</div>
-            <div class="team-name">HYPE</div>
-            <span class="team-handle">@morethenhype</span>
-            <div class="team-bio">Architect of the MIMU brand with extensive experience in web3 as a founder for over 4 years.</div>
+          <!-- LORE -->
+          <div class="section">
+            <div class="section-eyebrow">Archive File // Lore</div>
+            <h2 class="section-title">Signal Origin</h2>
+            <div class="section-divider"></div>
+            <p class="lore-text">MIMU began as a dormant bio-signal hidden behind fragmented transmissions, sealed inside an encrypted egg chamber and buried inside a corrupted control system. Every unlock sequence, trace command, and genome fragment reveals another layer of a living intelligence waking up inside the network.</p>
+            <p class="lore-text">Born as translucent beings, MIMUs enter existence as blank echoes of potential — soft, glowing silhouettes drifting between dimensions. They have no fixed identity, no set form, no predetermined fate. But that changes the moment they begin to explore. Every interaction leaves a mark. Every environment writes a piece of who they become. No two MIMUs are ever the same.</p>
+            <div class="cards-grid">
+              <div class="info-card">
+                <div class="info-card-title">The Chamber</div>
+                <div class="info-card-body">A sealed incubation node where the first MIMU signal was detected. Only verified users can push the chamber beyond standby mode.</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-title">The Signal</div>
+                <div class="info-card-body">A repeating anomaly that appears as biological data wrapped in machine code, suggesting MIMU is both lifeform and protocol.</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-title">The Awakening</div>
+                <div class="info-card-body">Each community action unlocks another sequence, bringing the chamber closer to fracture, reveal, and full chain activation.</div>
+              </div>
+            </div>
           </div>
 
-          <div class="team-card">
-            <div class="team-role">2D ARTIST</div>
-            <div class="team-name">JOUBREL</div>
-            <span class="team-handle">@iamMRJOUBREL</span>
-            <div class="team-bio">2D visual architect behind the MIMU aesthetic, creature design, and signal imagery.</div>
+          <!-- ROADMAP -->
+          <div class="section">
+            <div class="section-eyebrow">Mission Log // Roadmap</div>
+            <h2 class="section-title">Activation Timeline</h2>
+            <div class="section-divider"></div>
+            <div class="roadmap">
+              <div class="roadmap-row">
+                <div class="roadmap-label">Phase 01</div>
+                <div>
+                  <div class="roadmap-title">Signal Discovery</div>
+                  <div class="roadmap-desc">Launch teaser drops, ARG clues, access terminal rollout, and GTD hunt activation across community channels.</div>
+                </div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">Phase 02</div>
+                <div>
+                  <div class="roadmap-title">Genome Decrypt</div>
+                  <div class="roadmap-desc">Reveal deeper lore, unlock egg-stage interactions, expand puzzles, and activate whitelist or GTD verification logic.</div>
+                </div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">Phase 03</div>
+                <div>
+                  <div class="roadmap-title">Mint Initiation</div>
+                  <div class="roadmap-desc">Open mint access, connect wallets, verify allocations, and transform the terminal from discovery mode into mint mode.</div>
+                </div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">Phase 04</div>
+                <div>
+                  <div class="roadmap-title">Post-Mint Expansion</div>
+                  <div class="roadmap-desc">Progress into reveal experiences, faction systems, holder-only access, missions, and future ecosystem layers.</div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="team-card">
-            <div class="team-role">3D ARTIST</div>
-            <div class="team-name">DITTO</div>
-            <span class="team-handle">@dittxr</span>
-            <div class="team-bio">Responsible for the 3D MIMU creation. An extensive background in 3D modeling and producing various other collections in the ApeChain ecosystem.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══ MINT DETAILS ══ -->
-      <div class="section">
-        <div class="section-eyebrow">CHAIN ACCESS // MINT</div>
-        <div class="section-title">MINT DETAILS</div>
-
-        <div class="col3">
-          <div class="mint-card">
-            <div class="mint-key">SUPPLY</div>
-            <div class="mint-val"><strong>5,555</strong> unique MIMU entities sealed in the egg chamber.</div>
-          </div>
-
-          <div class="mint-card">
-            <div class="mint-key">PRICE</div>
-            <div class="mint-val"><strong>Free Mint</strong> — GTD holders receive priority access to allocation.</div>
+          <!-- MINT DETAILS -->
+          <div class="section">
+            <div class="section-eyebrow">Chain Access // Mint</div>
+            <h2 class="section-title">Mint Details</h2>
+            <div class="section-divider"></div>
+            <div class="mint-grid">
+              <div class="mint-card">
+                <div class="mint-key">Supply</div>
+                <div class="mint-val"><strong>5,555</strong> unique MIMU entities sealed in the egg chamber.</div>
+              </div>
+              <div class="mint-card">
+                <div class="mint-key">Price</div>
+                <div class="mint-val"><strong>Free Mint</strong> — GTD holders receive priority access to allocation.</div>
+              </div>
+              <div class="mint-card">
+                <div class="mint-key">Chain</div>
+                <div class="mint-val"><strong>ApeChain.</strong> Wallet connect integration ready to activate.</div>
+              </div>
+            </div>
           </div>
 
-          <div class="mint-card">
-            <div class="mint-key">CHAIN</div>
-            <div class="mint-val"><strong>ApeChain.</strong> Wallet connect integration ready to activate.</div>
+          <!-- FAQ -->
+          <div class="section">
+            <div class="section-eyebrow">System Queries // FAQ</div>
+            <h2 class="section-title">Frequently Asked</h2>
+            <div class="section-divider"></div>
+            <div class="faq">
+              <div class="faq-item">
+                <div class="faq-q">What is MIMU? <span class="faq-arrow">›</span></div>
+                <div class="faq-a">MIMU is a lore-driven collectible experience wrapped in an ARG-style terminal interface with staged unlocks, hidden signals, and a mint reveal sequence.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q">How do I access mint? <span class="faq-arrow">›</span></div>
+                <div class="faq-a">You will need to connect the wallet associated to your GTD spot to unlock mint phase.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q">What is the mint date? <span class="faq-arrow">›</span></div>
+                <div class="faq-a">April 13, 2026 at 11:00 AM ET. GTD holders receive priority allocation access.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q">What type of wallet can be used? <span class="faq-arrow">›</span></div>
+                <div class="faq-a">This mint will be EVM and on APE. You will need $APE to be able to pay for gas fees.</div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div style="height:8px;"></div>
-
-        <div class="col3">
-          <div class="mint-card">
-            <div class="mint-key">START DATE</div>
-            <div class="mint-val"><strong>April 13, 2026</strong></div>
+          <!-- TEAM -->
+          <div class="section">
+            <div class="section-eyebrow">Operator Index // Team</div>
+            <h2 class="section-title">Core Personnel</h2>
+            <div class="section-divider"></div>
+            <div class="team-grid">
+              <div class="team-card">
+                <div class="team-role">Founder</div>
+                <div class="team-name">HYPE</div>
+                <a href="https://x.com/morethenhype" target="_blank" rel="noopener" class="team-handle" style="text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#78ffbf'" onmouseout="this.style.color=''">@morethenhype ↗</a>
+                <div class="team-bio">Architect of the MIMU brand with extensive experience in web3 as a founder for over 4 years.</div>
+              </div>
+              <div class="team-card">
+                <div class="team-role">2D Artist</div>
+                <div class="team-name">JOUBREL</div>
+                <a href="https://x.com/iamMRJOUBREL" target="_blank" rel="noopener" class="team-handle" style="text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#78ffbf'" onmouseout="this.style.color=''">@iamMRJOUBREL ↗</a>
+                <div class="team-bio">2D visual architect behind the MIMU aesthetic, creature design, and signal imagery.</div>
+              </div>
+              <div class="team-card">
+                <div class="team-role">3D Artist</div>
+                <div class="team-name">DITTO</div>
+                <a href="https://x.com/dittxr" target="_blank" rel="noopener" class="team-handle" style="text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#78ffbf'" onmouseout="this.style.color=''">@dittxr ↗</a>
+                <div class="team-bio">Responsible for the 3D MIMU creation. An extensive background in 3D modeling and producing various other collections in the ApeChain ecosystem.</div>
+              </div>
+            </div>
           </div>
 
-          <div class="mint-card">
-            <div class="mint-key">START TIME</div>
-            <div class="mint-val"><strong>11:00 AM ET</strong></div>
-          </div>
+        </section>
 
-          <div class="mint-card">
-            <div class="mint-key">STATUS</div>
-            <div class="mint-val"><strong>PENDING ACTIVATION</strong></div>
-          </div>
-        </div>
-      </div>
+        <footer class="shell-footer">
+          <span class="footer-text">MIMU // About // © 2026 All Rights Reserved</span>
+        </footer>
+      </section>
+    </main>
 
-    </div>
+    <script>
+      // FAQ accordion
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.querySelector('.faq-q').addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
+        });
+      });
+    </script>
   </body>
 </html>
