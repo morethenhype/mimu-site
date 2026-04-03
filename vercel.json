@@ -5,6 +5,7 @@
     { "source": "/about", "destination": "/bio-scan-select" },
     { "source": "/legends", "destination": "/mimu-legends-gallery" },
     { "source": "/allocation", "destination": "/mint-allocation" },
-    { "source": "/mint", "destination": "/mint-phases" }
+    { "source": "/mint", "destination": "/mint-phases" },
+    { "source": "/community", "destination": "/community-round" }
   ]
 }
